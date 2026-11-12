@@ -17,8 +17,8 @@ export const pricingFaqs = [
     a: "No. A flat fee by scope means we have no incentive to tell you to spend more than the market supports.",
   },
   {
-    q: "Do you work with competing clinics in the same city?",
-    a: "We discuss potential competitive conflicts during discovery. Any exclusivity arrangements have to be documented in the agreement; don't assume every city or service area is exclusive.",
+    q: "What do you need from us to build a strategy?",
+    a: "We start with your priority treatments, locations, current marketing, lead handling and booking software. Understanding what actually happens after an inquiry matters more than simply taking over an ad account.",
   },
   {
     q: "Do you guarantee results?",
