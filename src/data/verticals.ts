@@ -20,31 +20,31 @@ export const verticals: Vertical[] = [
   {
     slug: "medspas",
     name: "Medspas",
-    short: "Injectables, lasers, body and skin. New patients in, and existing ones rebooked on time.",
-    title: "Medspa marketing that fills the [[provider schedule]].",
+    short: "Injectables, lasers, body and skin. Bring in the right new patients and make repeat visits easier.",
+    title: "Medspa marketing built around [[injectables and repeat visits]].",
     metaDescription:
       "Google Ads, Meta, SEO and GoHighLevel automations for medspas. New-patient offers, speed to lead, and rebooking that keeps provider schedules full.",
-    lead: "Medspa growth comes from two places: a steady flow of new patients at a cost that makes sense, and existing patients coming back on schedule. Most marketing only works on the first. We work on both.",
+    lead: "A Botox lead, a filler consultation and a laser package are not the same sale. Each has its own price sensitivity, booking questions and repeat-visit pattern. We start with the services your practice wants to grow, then connect acquisition to follow-up and rebooking.",
     illo: "front-desk",
     realities: [
       {
-        title: "Your best patients are your existing ones",
-        body: "Tox every three to four months, filler annually, skin on a series. Rebooking automation is usually the cheapest revenue in the practice.",
+        title: "Retention starts after the first visit",
+        body: "Some injectables have repeat treatment cycles; a laser series works differently from an individual filler appointment. We build reminders around provider guidance and the actual service received, not one generic schedule.",
       },
       {
-        title: "New-patient offers need a second visit",
-        body: "A first-visit offer only works if the follow-up converts patients to full price. We build the offer and the path to the next appointment together.",
+        title: "A cheap first appointment is not always a good offer",
+        body: "Before discounting a popular treatment, consider its margin, appointment time, whether the patient is likely to return and what they'll experience at the first visit.",
       },
       {
-        title: "Meta is where demand is created",
-        body: "Most medspa patients don't search for a provider until they've seen one. Meta creative and offers do the heavy lifting; Google captures the intent.",
+        title: "Google and Meta capture different kinds of intent",
+        body: "Someone searching 'Botox near me' already knows what they want. Someone seeing a provider explain an injectable on Instagram may just be exploring. They need different copy and different next steps.",
       },
     ],
     focus: [
       "New-patient offers for tox, filler and skin",
       "Speed-to-lead texting that books consults",
       "Treatment-interval rebooking and reactivation",
-      "Zenoti and GoHighLevel connected, so show data is real",
+      "Booking and CRM status mapped to what your software supports",
     ],
     services: ["meta-ads", "google-ads", "crm-automations", "seo"],
     integrations: ["zenoti", "gohighlevel"],
@@ -53,15 +53,15 @@ export const verticals: Vertical[] = [
     slug: "longevity-clinics",
     name: "Longevity Clinics",
     short: "Hormones, peptides, IV and diagnostics. Higher-ticket programs with a longer decision.",
-    title: "Longevity programs need [[patient education]], not discounts.",
+    title: "Marketing for programs patients need to [[understand before booking]].",
     metaDescription:
       "Marketing for longevity and functional medicine clinics. Hormone therapy, peptides and IV, LegitScript certification, and nurture that converts high-ticket programs.",
-    lead: "Longevity patients research for weeks before booking. They want to understand the program, the provider and the price. The marketing has to answer those questions honestly, and the follow-up has to stay useful for as long as the decision takes.",
+    lead: "Hormone therapy, functional care and wellness programs often involve more questions than a single treatment appointment. Patients want to know what the consult includes, who provides care, expected steps and pricing. That education belongs on the page and in the follow-up.",
     illo: "owner-results",
     realities: [
       {
         title: "Restricted categories",
-        body: "Hormone therapy and peptides often need LegitScript certification before Google and Meta will run your ads. Plan for it before launch, not after the first disapproval.",
+        body: "Prescription-related campaigns may need platform verification or certification, depending on the service and jurisdiction. We check eligibility and current policy before making promises.",
       },
       {
         title: "A longer path to the first consult",
@@ -76,26 +76,26 @@ export const verticals: Vertical[] = [
       "LegitScript certification for restricted treatments",
       "Search campaigns for hormone, IV and program terms",
       "Education-led nurture in GoHighLevel",
-      "Cerbo and OptiMantra connected for real patient data",
+      "Cerbo and OptiMantra workflows reviewed for available event data",
     ],
     services: ["google-ads", "legitscript-certification", "seo", "crm-automations"],
     integrations: ["cerbo", "providi", "gohighlevel"],
     legitscript:
-      "Hormone therapy, peptides and some weight-loss programs are restricted on Google and Meta. LegitScript certification is usually the first step.",
+      "Prescription and weight-loss advertising can have special requirements. We verify the relevant platform policy and certification category before recommending a launch.",
   },
   {
     slug: "telehealth-providers",
     name: "Telehealth Providers",
     short: "GLP-1, TRT, sexual wellness and hair loss. Multi-state, policy-heavy, and volume-driven.",
-    title: "Telehealth growth that stays [[inside ad policy]].",
+    title: "Telehealth marketing that respects [[the full intake journey]].",
     metaDescription:
       "Marketing for telehealth providers in GLP-1, TRT, sexual wellness and hair loss. LegitScript certification, policy-safe Google and Meta campaigns, and intake follow-up.",
-    lead: "Telehealth lives and dies on two things: staying approved on the ad platforms, and getting people from a click through intake without dropping off. We handle certification, build campaigns that stay inside policy, and tighten the intake funnel.",
+    lead: "A telehealth landing page has to do more than generate a contact form. It needs to explain availability, eligibility, the provider relationship and the next step in intake. Campaigns also need to respect the rules governing each treatment and location.",
     illo: "text-booking",
     realities: [
       {
         title: "Certification is the gate",
-        body: "Prescription telehealth almost always needs LegitScript certification for Google and Meta. Every claim on the site and in the ads has to hold up.",
+        body: "Prescription telehealth can require certifications and verification, but the pathway differs by treatment and platform. We check the applicable rules before investing in creative or media.",
       },
       {
         title: "Intake is the funnel",
@@ -115,21 +115,21 @@ export const verticals: Vertical[] = [
     services: ["legitscript-certification", "google-ads", "meta-ads", "crm-automations"],
     integrations: ["gohighlevel", "cerbo"],
     legitscript:
-      "GLP-1s, testosterone and sexual wellness prescriptions are restricted categories on Google and Meta. We get you certified before we spend.",
+      "Prescription weight loss, testosterone and sexual wellness advertising may be restricted. We confirm eligibility and any certification requirements before recommending paid campaigns.",
   },
   {
     slug: "aesthetic-surgeons",
     name: "Aesthetic Surgeons",
     short: "Breast, body and face. Fewer, higher-value cases with a long consult process.",
-    title: "Fewer leads, more [[surgical consults]].",
+    title: "Aesthetic surgery marketing for [[qualified consultations]].",
     metaDescription:
       "Marketing for aesthetic and plastic surgeons. Google Ads, SEO and consult follow-up built around high-value procedures and a longer decision cycle.",
-    lead: "A surgical practice doesn't need hundreds of leads. It needs the right fifty, a fast and personal response, and a coordinator workflow that moves consults to scheduled cases. We build for that.",
+    lead: "Surgical patients often compare credentials, results and the consult experience long before committing. We prioritize service-specific search intent, clear provider information and coordinator follow-up over maximizing form volume.",
     illo: "owner-results",
     realities: [
       {
         title: "High value per case",
-        body: "One booked procedure can pay for months of marketing. That changes how much you can bid, and how much attention each lead deserves.",
+        body: "Procedure value changes acquisition economics, but revenue, close rate and margin still matter. We evaluate cost per consultation alongside the practice's actual patient journey.",
       },
       {
         title: "The consult is the sale",
@@ -137,7 +137,7 @@ export const verticals: Vertical[] = [
       },
       {
         title: "Reputation drives search",
-        body: "Before-and-after galleries, surgeon credentials and reviews do more for organic and paid performance than anything else on the site.",
+        body: "Provider credentials, authentic patient education, compliant galleries where appropriate and a strong consultation experience are important trust signals.",
       },
     ],
     focus: [

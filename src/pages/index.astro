@@ -10,7 +10,6 @@ import ReportPanel from "../components/ReportPanel.astro";
 import CaseCard from "../components/CaseCard.astro";
 import PostCard from "../components/PostCard.astro";
 import PlatformStrip from "../components/PlatformStrip.astro";
-import Testimonial from "../components/Testimonial.astro";
 import FounderQuote from "../components/motion/FounderQuote";
 import { services } from "../data/services";
 import { verticals } from "../data/verticals";
@@ -22,10 +21,10 @@ const posts = (await getCollection("blog", ({ data }) => !data.draft))
 
 const svc = Object.fromEntries(services.map((s) => [s.slug, s]));
 const path = [
-  { n: "01", t: "Ad click", b: "Google, Meta or organic. The GCLID and source are captured on every form, so the click is never lost." },
-  { n: "02", t: "Answered in minutes", b: "An instant text in your voice, a call task for the front desk, and escalation if nobody picks it up." },
-  { n: "03", t: "Consult booked", b: "Booked straight into Zenoti, Cerbo, OptiMantra or your calendar, and the CRM stage updates itself." },
-  { n: "04", t: "Patient, reported", b: "Show and close data goes back to Google Ads and into a monthly report with context, not a raw dashboard." },
+  { n: "01", t: "The right offer", b: "We choose a treatment patients actually want and a page that answers the question behind the ad. Not the same generic booking page for every service." },
+  { n: "02", t: "A useful first reply", b: "When a lead asks about price or availability, your team should answer that question, not paste a calendar link and hope." },
+  { n: "03", t: "Appointment recorded", b: "We map the booking handoff. Where integrations permit, status updates the CRM; otherwise we design a reliable process for staff." },
+  { n: "04", t: "Learn from outcomes", b: "We compare lead quality and booked visits with spend. If the data supports offline conversions, we use them to improve bidding." },
 ];
 ---
 <Base title="NexaMed">
@@ -33,14 +32,13 @@ const path = [
   <section class="home-hero section--white">
     <div class="container">
       <div class="hh-copy">
-        <h1 class="display">More <mark>booked patients</mark>.<br /> One practice per market.</h1>
+        <h1 class="display">Better patient acquisition.<br /> <mark>Fewer missed opportunities.</mark></h1>
         <p class="lead">
-          Google Ads, Meta, SEO, and the CRM follow-up that turns leads into booked consults. Built for medspas and
-          cash-pay clinics by a team that started inside one.
+          We help med spas and cash-pay clinics attract the right patients, answer them properly, and understand what actually booked. Google Ads, Meta, SEO, CRM automation, and the connections between them.
         </p>
         <div class="btn-row btn-row--center">
           <a href="/book/" class="btn">Book a strategy call</a>
-          <a href="/book/" class="btn btn--outline">Check if your market is open</a>
+          <a href="/how-it-works/" class="btn btn--outline">See how we work</a>
         </div>
       </div>
       <div class="hh-art">
@@ -54,8 +52,8 @@ const path = [
     <div class="container">
       <ProofStats
         stats={[
-          { value: "1", label: "Practice per market" },
-          { value: "$1M+", label: "Practices we partner with" },
+          { value: "890", label: "Meta leads in Beautiful U case study" },
+          { value: "500", label: "Of those leads who replied" },
           { value: "12–15%", label: "Avg. conversion rate · Pure Hydration" },
           { value: "56%", label: "Of leads replied · Beautiful U" },
         ]}
@@ -67,30 +65,28 @@ const path = [
   <section class="section section--mist">
     <div class="container">
       <div class="section-head section-head--split">
-        <h2>Built for owners who already know <mark>what's broken</mark>.</h2>
+        <h2>For owners who need more than another <mark>ad dashboard</mark>.</h2>
         <p class="lead">
-          You've worked with an agency before. You know what a GCLID is, or at least that your old reports didn't add
-          up. You want a partner who'll talk in booked patients and cost per consult, and who'll tell you when
-          something isn't working.
+          You might have plenty of leads but not enough appointments. Or a packed CRM that nobody follows up in. We start by finding where the handoff breaks, then decide whether the answer is better ads, a better offer, or a better process.
         </p>
       </div>
       <div class="grid grid--2">
         <div class="card" data-reveal>
           <h3>We're a good fit if</h3>
           <ul class="checks" style="margin-top:1.25rem">
-            <li>You're an established cash-pay practice with a real front desk and providers with open time.</li>
-            <li>You'll share CRM and booking data so we can report on patients, not leads.</li>
-            <li>You want a small number of things done properly over a long list of deliverables.</li>
-            <li>You make decisions on numbers and expect us to do the same.</li>
+            <li>You run an established med spa or cash-pay clinic and know which services you want to grow.</li>
+            <li>You're willing to look beyond the ad account at how leads are contacted and booked.</li>
+            <li>You'd rather test a strong service offer than advertise every item on the menu at once.</li>
+            <li>You want clear reporting and candid feedback, including when a campaign isn't ready to scale.</li>
           </ul>
         </div>
         <div class="card" data-reveal>
           <h3>We're not a fit if</h3>
           <ul class="checks checks--x" style="margin-top:1.25rem">
-            <li>You're looking for the cheapest cost per lead and will judge us on it.</li>
-            <li>Nobody can follow up with a lead the same day.</li>
-            <li>You want guaranteed numbers before we've seen your account.</li>
-            <li>A practice in your market already works with us.</li>
+            <li>You're only interested in the lowest cost per form submission.</li>
+            <li>Nobody owns inbound inquiries or is willing to improve follow-up.</li>
+            <li>You expect a guaranteed number of patients before we've seen your market and process.</li>
+            <li>You want to launch restricted medical claims without checking platform policy.</li>
           </ul>
         </div>
       </div>
@@ -101,10 +97,9 @@ const path = [
   <section class="section section--white">
     <div class="container">
       <div class="section-head section-head--center">
-        <h2>Everything between the click and the <mark>booked patient</mark>.</h2>
+        <h2>Marketing only works when the next step <mark>actually happens</mark>.</h2>
         <p class="lead">
-          Each service works on its own, but they're built to connect, so nothing falls through between your ads and
-          your front desk.
+          Some clinics need better demand. Others need to stop losing the demand they already have. We look at the whole path, then focus on the part holding growth back.
         </p>
       </div>
       <div class="bento">
@@ -127,7 +122,7 @@ const path = [
         </a>
         <a href="/services/seo/" class="card card--link b-sm" data-reveal>
           <div class="b-top"><h3>SEO &amp; AEO</h3><span class="arrow"><Icon name="arrow" /></span></div>
-          <p>Rank in Google and get cited by AI answer engines for the treatments you most want to sell.</p>
+          <p>Build useful treatment pages, local visibility, and trustworthy answers to the questions prospective patients search.</p>
         </a>
         <a href="/services/legitscript-certification/" class="card card--ink card--link b-sm" data-reveal>
           <div class="b-top"><h3>LegitScript certification</h3><span class="arrow arrow--ink"><Icon name="arrow" /></span></div>
@@ -141,23 +136,23 @@ const path = [
   <section class="section section--ink">
     <div class="container split split--wide-right">
       <div>
-        <h2>Every lead, tracked to a <mark>booked patient</mark>.</h2>
+        <h2>Know which marketing brings in <mark>real appointments</mark>.</h2>
         <p class="lead" style="margin-top:1.25rem">
-          We connect your ads, CRM and EMR so every lead is tracked from first click to closed treatment.
+          An ad platform might call a page view a conversion. Your front desk calls a booked consultation a conversion. We work to reconcile those numbers using data your systems can safely share.
         </p>
         <ul class="feature-rows" role="list">
           <li>
             <span class="arrow fr-on"><Icon name="arrow-up-right" /></span>
             <div>
               <h3>See which ads book patients</h3>
-              <p>Leads, consults and closed treatments tie back to the campaign, keyword and ad that drove them.</p>
+              <p>Where tracking and booking records allow it, we connect a lead source with the consultation it produced. When they do not, we explain the gap.</p>
             </div>
           </li>
           <li>
             <span class="arrow arrow--ink"><Icon name="arrow-up-right" /></span>
             <div>
               <h3>Conversions sent back to Google Ads</h3>
-              <p>Booked and closed patients imported as offline conversions, so bidding learns from real outcomes.</p>
+              <p>When clean matching is possible and data is appropriate to share, offline conversion events can help Google optimize beyond form submissions.</p>
             </div>
           </li>
           <li>
@@ -180,8 +175,8 @@ const path = [
   <section class="section section--white">
     <div class="container">
       <div class="section-head section-head--center">
-        <h2>One path from ad click to <mark>booked patient</mark>.</h2>
-        <p class="lead">We run the ads, follow up with every lead, book the consult, and report on who actually showed up.</p>
+        <h2>What happens after the <mark>click matters</mark>.</h2>
+        <p class="lead">Good campaigns need a clear offer, useful replies, a booking handoff and feedback from the people answering the phone.</p>
       </div>
       <div class="path-art"><InlineIllo name="patient-path" /></div>
       <ol class="steps" role="list">
@@ -202,17 +197,13 @@ const path = [
     <div class="container">
       <div class="section-head section-head--split">
         <h2>Results from <mark>live accounts</mark>.</h2>
-        <p class="lead">Numbers from client accounts, shared with permission. Each one says exactly what was counted.</p>
+        <p class="lead">Campaign examples with the metric defined. A reply rate or form conversion is not the same as a booked or attended appointment.</p>
       </div>
       <div class="grid grid--2">
         {cases.map((c, i) => <CaseCard slug={c.id} data={c.data} dark={i === 0} />)}
       </div>
       <div class="results-foot">
-        <Testimonial
-          quote="[One-sentence quote about results, from Todd Smith or Dr. Houlis.]"
-          name="Todd Smith"
-          role="CEO, Evolve Health"
-        />
+        <p class="lead">Judge the numbers by what they measure. The examples above show lead response and ad conversion, not a claim that every lead became a paying patient.</p>
         <div class="btn-row">
           <a href="/case-studies/" class="btn btn--outline">See case studies</a>
         </div>
@@ -224,10 +215,9 @@ const path = [
   <section class="section section--white">
     <div class="container">
       <div class="section-head">
-        <h2>Healthcare only. <mark>Cash-pay</mark> only.</h2>
+        <h2>Built around the realities of <mark>cash-pay healthcare</mark>.</h2>
         <p class="lead">
-          If most of your revenue runs through insurance, we're not the right agency. Staying narrow is how we know
-          what a good cost per consult looks like in your category.
+          Med spas are our core focus, especially injectables and skin services. We also work with longevity, wellness, telehealth and aesthetic practices where the patient journey differs from traditional insurance-based care.
         </p>
       </div>
       <div class="grid grid--4">
@@ -265,9 +255,9 @@ const path = [
   <section class="section section--mist">
     <div class="container">
       <div class="section-head section-head--split">
-        <h2>Written by the people <mark>running the accounts</mark>.</h2>
+        <h2>Practical answers from <mark>real account work</mark>.</h2>
         <div>
-          <p class="lead">Guides on tracking, follow-up and ad policy for practice owners and their teams.</p>
+          <p class="lead">No recycled list of generic marketing tips. We write about landing-page intent, campaign tracking, intake, patient follow-up and ad policy.</p>
           <p style="margin-top:1rem"><a class="link-arrow" href="/learn/">Everything in Learn <Icon name="arrow" class="i16" /></a></p>
         </div>
       </div>
