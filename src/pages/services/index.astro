@@ -35,7 +35,7 @@ const top = services.filter((s) => !s.parent);
                   <p class="kid"><a href={`/services/${k.slug}/`} class="link-arrow">Includes {k.name}: {k.short} <Icon name="arrow" class="i16" /></a></p>
                 ))}
               </div>
-              <div class="svc-art"><Illo name={s.illo} decorative /></div>
+              <div class="svc-art illustration-drift"><Illo name={s.illo} decorative /></div>
               <span class:list={["arrow", { "arrow--ink": i % 3 === 1 }]} aria-hidden="true"><Icon name="arrow" /></span>
             </li>
           );
@@ -53,7 +53,7 @@ const top = services.filter((s) => !s.parent);
         </p>
         <div class="btn-row" style="margin-top:2rem"><a class="btn" href="/book/">Schedule My Call</a></div>
       </div>
-      <div class="service-outro-art"><Illo name="connected-stack" /></div>
+      <div class="service-outro-art illustration-drift"><Illo name="connected-stack" /></div>
     </div>
   </section>
 
