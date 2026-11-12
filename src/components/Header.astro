@@ -9,7 +9,7 @@ const sectionActive = (item: (typeof nav)[number]) =>
   (item.label === "Services" && path.startsWith("/integrations/")) ||
   (item.label === "Learn" && (path.startsWith("/blog/") || path.startsWith("/guides/") || path.startsWith("/videos/")));
 ---
-<header class="site-header">
+<header class:list={["site-header", { "home-header": path === "/" }]}>
   <div class="container">
     <div class="bar">
       <a href="/" class="brand" aria-label="NexaMed home"><Logo /></a>
@@ -150,6 +150,14 @@ const sectionActive = (item: (typeof nav)[number]) =>
     /* No background: only the floating bar is visible, so dark sections show through. */
     pointer-events: none;
   }
+  .home-header:not(.scrolled) { background: #0b1220; }
+  .home-header:not(.scrolled) .bar { background: rgba(11,18,32,.96); border-color: rgba(255,255,255,.12); box-shadow: none; }
+  .home-header:not(.scrolled) .brand, .home-header:not(.scrolled) .nav-link { color: #f5f8ff; }
+  .home-header:not(.scrolled) .nav-link:hover, .home-header:not(.scrolled) .nav-item.open .nav-link { background: rgba(255,255,255,.08); }
+  .home-header:not(.scrolled) .nav-link.active { color: #85b7ff; }
+  .home-header:not(.scrolled) .dropdown { color: #0b1220; }
+  .home-header:not(.scrolled) .menu-btn { background: rgba(255,255,255,.08); color:#fff; border-color: rgba(255,255,255,.2); }
+  .home-header:not(.scrolled) .book-btn { --btn-bg: #fff; --btn-fg: #0b1220; --btn-bd: #fff; }
   .site-header .bar,
   .site-header .mobile-nav {
     pointer-events: auto;
