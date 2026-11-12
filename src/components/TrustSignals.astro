@@ -1,0 +1,139 @@
+---
+import { verifiedCredentials } from "../data/trust";
+
+const experience = [
+  {
+    eyebrow: "MED SPA CASE STUDY",
+    name: "Beautiful U Med Spa",
+    detail: "Meta campaigns & lead conversations",
+    href: "/case-studies/beautiful-u-med-spa/",
+  },
+  {
+    eyebrow: "GOOGLE ADS CASE STUDY",
+    name: "Pure Hydration",
+    detail: "Campaign structure & better measurement",
+    href: "/case-studies/pure-hydration/",
+  },
+  {
+    eyebrow: "PRACTICE OPERATIONS",
+    name: "CRM + EMR workflows",
+    detail: "GoHighLevel, Cerbo & OptiMantra",
+    href: "/integrations/",
+  },
+];
+---
+<section class="trust-section" aria-labelledby="trust-heading">
+  <div class="container">
+    <div class="trust-top">
+      <div>
+        <p class="trust-eyebrow">A little proof behind the pitch</p>
+        <h2 id="trust-heading">Work that speaks for itself.</h2>
+      </div>
+      <a class="trust-link" href="/case-studies/">Explore the work <span aria-hidden="true">↗</span></a>
+    </div>
+    {verifiedCredentials.length > 0 && (
+      <div class="verified-badges" aria-label="Verified credentials and reviews">
+        {verifiedCredentials.map((credential) => (
+          <a href={credential.url} target="_blank" rel="noopener noreferrer" class="verified-badge" aria-label={credential.detail ? `${credential.label}: ${credential.detail}` : credential.label}>
+            <img src={credential.image} alt={credential.label} loading="lazy" />
+            {credential.detail && <span>{credential.detail}</span>}
+          </a>
+        ))}
+      </div>
+    )}
+    <div class="trust-items">
+      {experience.map((item) => (
+        <a class="trust-item" href={item.href}>
+          <span class="trust-item-eyebrow">{item.eyebrow}</span>
+          <strong>{item.name}</strong>
+          <span class="trust-item-detail">{item.detail}</span>
+          <span class="trust-arrow" aria-hidden="true">↗</span>
+        </a>
+      ))}
+    </div>
+  </div>
+</section>
+<style>
+  .trust-section {
+    padding-block: clamp(2.5rem, 4vw, 4rem);
+    background: #fff;
+    border-bottom: 1px solid var(--line);
+  }
+  .trust-top {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 1.5rem;
+    margin-bottom: 1.75rem;
+  }
+  .trust-eyebrow {
+    color: var(--azure);
+    font: 700 .76rem/1.3 var(--font-body);
+    letter-spacing: .11em;
+    text-transform: uppercase;
+    margin-bottom: .5rem;
+  }
+  .trust-top h2 {
+    font-size: clamp(1.75rem, 2.9vw, 2.5rem);
+    letter-spacing: 0;
+  }
+  .trust-link {
+    display: inline-flex;
+    gap: .5rem;
+    align-items: center;
+    flex: none;
+    color: #1d6fe0;
+    text-decoration: none;
+    font: 700 .95rem/1.3 var(--font-body);
+  }
+  .trust-link:hover { text-decoration: underline; }
+  .trust-items {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    overflow: hidden;
+    background: var(--white);
+  }
+  .trust-item {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    gap: .35rem;
+    padding: 1.4rem 1.5rem;
+    text-decoration: none;
+    transition: background-color .2s ease;
+  }
+  .trust-item + .trust-item { border-left: 1px solid var(--line); }
+  .trust-item:hover { background: var(--mist); }
+  .trust-item-eyebrow {
+    font: 700 .68rem/1.3 var(--font-body);
+    letter-spacing: .07em;
+    text-transform: uppercase;
+    color: var(--text-3);
+    margin-bottom: .4rem;
+  }
+  .trust-item strong { font: 700 clamp(1.05rem, 1.45vw, 1.32rem)/1.2 var(--font-head); letter-spacing: 0; }
+  .trust-item-detail { color: var(--text-2); font-size: .87rem; line-height: 1.35; }
+  .trust-arrow { position: absolute; top: 1.3rem; right: 1.2rem; color: var(--azure); font-size: 1.1rem; }
+  .verified-badges {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    gap: 1.4rem;
+    flex-wrap: wrap;
+    margin-bottom: 1.5rem;
+    padding: 1.3rem 1rem;
+    border: 1px solid var(--line);
+    border-radius: 14px;
+  }
+  .verified-badge { display: flex; align-items: center; flex-direction: column; gap: .4rem; max-width: 180px; font: 600 .75rem/1.3 var(--font-body); text-decoration: none; color: var(--text-2); text-align: center; }
+  .verified-badge img { width: auto; max-height: 64px; max-width: 170px; object-fit: contain; }
+  @media (max-width: 760px) {
+    .trust-top { align-items: flex-start; flex-direction: column; }
+    .trust-items { grid-template-columns: 1fr; }
+    .trust-item { padding: 1.15rem 1.3rem; }
+    .trust-item + .trust-item { border-left: 0; border-top: 1px solid var(--line); }
+  }
+</style>
