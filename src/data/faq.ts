@@ -6,7 +6,7 @@ export const pricingFaqs = [
   },
   {
     q: "Is there a long-term contract?",
-    a: "There's an initial term of [X months], because tracking, testing and offline conversion data take time to pay off. After that it's month to month with 30 days' notice.",
+    a: "The initial term and cancellation terms are specified in your proposal and service agreement. We review these before any work begins rather than relying on a universal term.",
   },
   {
     q: "Why is there a setup fee?",
@@ -17,8 +17,8 @@ export const pricingFaqs = [
     a: "No. A flat fee by scope means we have no incentive to tell you to spend more than the market supports.",
   },
   {
-    q: "What does 'one practice per market' mean?",
-    a: "We don't take on a directly competing practice in the same service area for the same treatments. If your market is already taken, we'll tell you on the first call.",
+    q: "Do you work with competing clinics in the same city?",
+    a: "We discuss potential competitive conflicts during discovery. Any exclusivity arrangements have to be documented in the agreement; don't assume every city or service area is exclusive.",
   },
   {
     q: "Do you guarantee results?",
@@ -37,15 +37,15 @@ export const generalFaqs = [
   },
   {
     q: "How quickly can you start?",
-    a: "Usually within two weeks of signing. Onboarding takes about a week of access requests and a kickoff call.",
+    a: "Start dates depend on the current project queue, the scope and how quickly required access is available. We'll give you an actual start window in the proposal.",
   },
   {
     q: "Who will I actually work with?",
-    a: "A strategist who runs your account day to day and a specialist for CRM and automations. You'll have a direct line to both, not a ticket queue.",
+    a: "You'll know who owns your strategy and implementation. The specific people and meeting cadence are outlined in your scope so you aren't guessing who to contact.",
   },
   {
     q: "How do you handle HIPAA?",
-    a: "We keep protected health information out of ad platforms and marketing tools. Clinical details stay in your EMR. We'll review what's being tracked during onboarding and recommend you confirm BAA coverage with each vendor.",
+    a: "We design marketing workflows to minimize exposure of protected health information, review tracking and consent requirements and keep clinical records in approved systems. Any platform used with PHI must be reviewed for suitability, configuration and required agreements; a marketing integration alone does not establish HIPAA compliance.",
   },
   {
     q: "Do you build websites?",
@@ -53,6 +53,6 @@ export const generalFaqs = [
   },
   {
     q: "Can we keep our current CRM?",
-    a: "Maybe. We build on GoHighLevel because it covers speed to lead, pipelines and reporting in one place. If you're on something else, we'll tell you whether switching is worth it.",
+    a: "Possibly. We often use GoHighLevel, but we evaluate whether an existing system can support the required communications, booking handoff and reporting before recommending a switch.",
   },
 ];
