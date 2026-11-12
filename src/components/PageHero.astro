@@ -13,10 +13,11 @@ interface Props {
   secondary?: { label: string; href: string };
   tone?: "white" | "mist";
   center?: boolean;
+  roomy?: boolean;
 }
-const { title, lead, crumbs, illo, primary, secondary, tone = "white", center = false } = Astro.props;
+const { title, lead, crumbs, illo, primary, secondary, tone = "white", center = false, roomy = false } = Astro.props;
 ---
-<section class:list={["hero", `section--${tone}`, { center, "has-illo": !!illo }]}>
+<section class:list={["hero", `section--${tone}`, { center, roomy, "has-illo": !!illo }]}>
   <div class="container">
     {crumbs && <Breadcrumbs items={crumbs} />}
     <div class="hero-grid">
@@ -77,4 +78,20 @@ const { title, lead, crumbs, illo, primary, secondary, tone = "white", center = 
   .hero-art :global(img) {
     width: 100%;
   }
+  @media (min-width: 960px) {
+    .has-illo.roomy .hero-grid {
+      grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr);
+      gap: clamp(3.5rem, 6vw, 6.5rem);
+    }
+    .roomy .hero-art {
+      min-width: 0;
+    }
+    .roomy .hero-art :global(img) {
+      width: 100%;
+      max-width: 660px;
+      margin-inline: auto;
+      transform: scale(1.06);
+    }
+  }
+
 </style>
