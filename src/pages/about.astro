@@ -7,17 +7,17 @@ import { team } from "../data/team";
 import FounderQuote from "../components/motion/FounderQuote";
 
 const principles = [
-  { t: "Booked patients are the number", b: "Not leads, not clicks, not impressions. If we can't tie it to a booked consult, we say so." },
-  { t: "One practice per market", b: "We don't run your competitor's ads. Your account gets our full attention and our best thinking." },
-  { t: "Say the uncomfortable thing early", b: "If the offer is weak, the front desk is slow, or the market's too small, you'll hear it from us first." },
-  { t: "You own everything", b: "Ad accounts, CRM, pages and data stay in your name. No hostage situations." },
+  { t: "A lead is the start, not the result", b: "We look for booked and attended appointments when the data exists, and never present a form submission as a paying patient." },
+  { t: "Learn the practice before writing the ads", b: "We ask which services are profitable, how people book, and what past campaigns missed before recommending a channel." },
+  { t: "Fix the obvious problem first", b: "A better first reply or a clearer service page can matter more than another automation. We start where the evidence points." },
+  { t: "Work in your systems", b: "We aim to keep you in control of your accounts and assets, and explain integration and software dependencies up front." },
 ];
 const initials = (n: string) => n.replace(/[\[\]]/g, "").split(" ").map((w) => w[0]).join("").slice(0, 2);
 ---
 <Base title="About" description="NexaMed is a healthcare-only marketing team for cash-pay practices, started by people who worked inside one.">
   <PageHero
-    title="We started [[inside a practice]]."
-    lead="NexaMed was started by people who ran marketing and operations from inside a cash-pay clinic. We saw how much revenue was lost between the ad click and the front desk, and how few agencies looked past the lead. So we built the agency we would have hired."
+    title="We understand the gap between [[a lead and a patient]]."
+    lead="NexaMed works with med spas and cash-pay practices on both sides of growth: attracting the right people and making sure those people get useful answers. That means caring about the front desk, booking software and follow-up as much as the ad campaign."
     crumbs={[{ label: "About" }]}
     illo="owner-results"
     secondary={{ label: "How we work", href: "/how-it-works/" }}
