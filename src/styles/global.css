@@ -1,20 +1,17 @@
 /* NexaMed brand tokens — from the brand asset kit */
+/* Fonts from the Fontshare kit (ITF, SIL Open Font License; see public/fonts/*-OFL.txt) */
 @font-face {
-  font-family: "Switzer";
-  src: url("/fonts/switzer-latin-500-normal.woff2") format("woff2");
-  font-weight: 500;
-  font-display: swap;
-}
-@font-face {
-  font-family: "Switzer";
-  src: url("/fonts/switzer-latin-600-normal.woff2") format("woff2");
-  font-weight: 600;
-  font-display: swap;
-}
-@font-face {
-  font-family: "Switzer";
-  src: url("/fonts/switzer-latin-700-normal.woff2") format("woff2");
+  font-family: "Khand";
+  src: url("/fonts/Khand-Bold.woff2") format("woff2"), url("/fonts/Khand-Bold.woff") format("woff");
   font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Hind";
+  src: url("/fonts/Hind-Regular.woff2") format("woff2"), url("/fonts/Hind-Regular.woff") format("woff");
+  font-weight: 400;
+  font-style: normal;
   font-display: swap;
 }
 
@@ -40,15 +37,16 @@
   --azure-on-ink: #5b9bf0;
 
   /* Type */
-  --font-head: "Switzer", "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
-  --font-body: "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-head: "Khand", "Arial Narrow", ui-sans-serif, system-ui, sans-serif;
+  --font-body: "Hind", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-ui: var(--font-head); /* buttons, labels, small bold UI text */
 
-  --fs-display: clamp(2.6rem, 1.4rem + 4.6vw, 5.5rem); /* 64–88 on desktop */
-  --fs-h1: clamp(2.3rem, 1.4rem + 3.4vw, 4.5rem);
-  --fs-h2: clamp(2rem, 1.3rem + 2.4vw, 3.5rem); /* 44–56 section titles */
-  --fs-h3: clamp(1.35rem, 1.1rem + 0.8vw, 1.75rem);
-  --fs-h4: 1.2rem;
-  --fs-lead: clamp(1.1rem, 1rem + 0.35vw, 1.25rem);
+  --fs-display: clamp(3rem, 1.6rem + 5.4vw, 6.25rem);
+  --fs-h1: clamp(2.6rem, 1.6rem + 3.9vw, 5.25rem);
+  --fs-h2: clamp(2.25rem, 1.5rem + 2.8vw, 4rem);
+  --fs-h3: clamp(1.5rem, 1.25rem + 0.9vw, 2rem);
+  --fs-h4: 1.35rem;
+  --fs-lead: clamp(1.125rem, 1.02rem + 0.4vw, 1.3rem);
   --fs-body: 1.0625rem; /* 17px */
   --fs-small: 0.9375rem;
   --fs-xs: 0.8125rem;
@@ -105,9 +103,9 @@ h2,
 h3,
 h4 {
   font-family: var(--font-head);
-  font-weight: 600;
-  letter-spacing: -0.03em;
-  line-height: 1.04;
+  font-weight: 700;
+  letter-spacing: -0.005em;
+  line-height: 0.95;
   margin: 0;
   text-wrap: balance;
 }
@@ -119,17 +117,17 @@ h2 {
 }
 h3 {
   font-size: var(--fs-h3);
-  letter-spacing: -0.02em;
-  line-height: 1.15;
+  letter-spacing: 0;
+  line-height: 1.02;
 }
 h4 {
   font-size: var(--fs-h4);
-  letter-spacing: -0.015em;
-  line-height: 1.25;
+  letter-spacing: 0;
+  line-height: 1.1;
 }
 .display {
   font-size: var(--fs-display);
-  line-height: 1;
+  line-height: 0.9;
 }
 
 p {
@@ -180,7 +178,8 @@ a {
   color: var(--white);
   padding: 0.75rem 1rem;
   border-radius: var(--radius-btn);
-  font-weight: 600;
+  font-family: var(--font-ui);
+  font-weight: 700;
 }
 .skip-link:focus {
   top: 1rem;
@@ -300,13 +299,16 @@ a {
 mark,
 .hl {
   color: inherit;
-  background: linear-gradient(
+  background-image: linear-gradient(
     to bottom,
-    transparent 0.52em,
-    var(--hl, var(--marker)) 0.52em,
-    var(--hl, var(--marker)) 1.02em,
-    transparent 1.02em
+    transparent 50%,
+    var(--hl, var(--marker)) 50%,
+    var(--hl, var(--marker)) 84%,
+    transparent 84%
   );
+  background-color: transparent;
+  background-repeat: no-repeat;
+  background-size: var(--hl-size, 100%) 100%;
   -webkit-box-decoration-break: clone;
   box-decoration-break: clone;
   padding-inline: 0.04em;
@@ -342,10 +344,10 @@ mark,
   border: 2px solid var(--btn-bd);
   background: var(--btn-bg);
   color: var(--btn-fg);
-  font-family: var(--font-body);
-  font-size: 0.875rem;
+  font-family: var(--font-ui);
+  font-size: 1.0625rem;
   font-weight: 700;
-  letter-spacing: 0.06em;
+  letter-spacing: 0.05em;
   text-transform: uppercase;
   text-decoration: none;
   line-height: 1.1;
@@ -398,7 +400,7 @@ mark,
 .btn--sm {
   min-height: 44px;
   padding: 0.6rem 1.1rem;
-  font-size: 0.8125rem;
+  font-size: 0.95rem;
 }
 .btn-row {
   display: flex;
@@ -448,7 +450,10 @@ mark,
   display: inline-flex;
   align-items: center;
   gap: 0.4rem;
-  font-weight: 600;
+  font-family: var(--font-ui);
+  font-weight: 700;
+  font-size: 1.1rem;
+  letter-spacing: 0.01em;
   color: var(--azure);
   text-decoration: none;
 }
@@ -510,10 +515,10 @@ mark,
 
 .num {
   font-family: var(--font-head);
-  font-weight: 600;
+  font-weight: 700;
   color: var(--azure);
-  font-size: var(--fs-small);
-  letter-spacing: 0;
+  font-size: 1.05rem;
+  letter-spacing: 0.04em;
 }
 
 /* Tags (for filtering/metadata, not headline kickers) */
@@ -525,9 +530,11 @@ mark,
   border-radius: 6px;
   background: var(--ice);
   color: #154fa3;
-  font-size: var(--fs-xs);
-  font-weight: 500;
-  line-height: 1.4;
+  font-family: var(--font-ui);
+  font-size: 0.9rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  line-height: 1.3;
 }
 .on-ink .tag,
 .section--ink .tag,
@@ -581,7 +588,9 @@ mark,
 }
 .checks strong {
   display: block;
-  font-weight: 600;
+  font-family: var(--font-ui);
+  font-weight: 700;
+  font-size: 1.15em;
 }
 .checks span {
   color: var(--text-2);
@@ -614,13 +623,12 @@ mark,
   margin-top: 1.25em;
 }
 .prose h2 {
-  font-size: clamp(1.6rem, 1.3rem + 1vw, 2.1rem);
-  margin-top: 2.2em;
-  letter-spacing: -0.025em;
-  line-height: 1.15;
+  font-size: clamp(1.9rem, 1.5rem + 1.2vw, 2.5rem);
+  margin-top: 2em;
+  line-height: 1;
 }
 .prose h3 {
-  font-size: 1.35rem;
+  font-size: 1.6rem;
   margin-top: 1.8em;
 }
 .prose ul,
@@ -661,24 +669,91 @@ mark,
   border-bottom: 1px solid var(--line);
 }
 .prose th {
-  font-weight: 600;
+  font-family: var(--font-ui);
+  font-weight: 700;
   background: var(--mist);
 }
 
-/* Reveal on scroll (progressive; content visible without JS) */
-@media (prefers-reduced-motion: no-preference) {
-  .js [data-reveal] {
-    opacity: 0;
-    transform: translateY(14px);
-    transition:
-      opacity 600ms var(--ease),
-      transform 600ms var(--ease);
-  }
-  .js [data-reveal].is-in {
+/* ---------- Motion (see src/scripts/motion.ts) ----------
+   Pre-hide only while .motion is set and the script hasn't started; the failsafe
+   animation reveals everything after 1.6s if the script never runs. */
+@keyframes nx-failsafe {
+  to {
     opacity: 1;
-    transform: none;
   }
 }
+.motion:not(.motion-run)
+  :is(
+    main h1,
+    main .section h2:not(.prose h2, .card h2, .faq h2),
+    main .section-head h2,
+    .cta-band h2,
+    [data-reveal],
+    main .grid > *,
+    main .bento > *,
+    main .steps > li,
+    main .timeline > li,
+    main .svc-list > li,
+    main .glist > li,
+    main .feature-rows > li,
+    main .cadence > div,
+    main .split > ul.checks > li,
+    main .data-panel,
+    main .proof,
+    main .strip,
+    main .faq,
+    main .ba > *,
+    main .ba-result,
+    .home-hero .lead,
+    .home-hero .btn-row,
+    .hero .lead,
+    .hero .btn-row,
+    .hero-art,
+    [data-illo="owner-leads"] :is(.a-card, .a-row)
+  ) {
+  opacity: 0;
+  animation: nx-failsafe 0.01s linear 1.6s forwards;
+}
+/* SplitText word masks */
+.nw {
+  white-space: nowrap;
+}
+.sw {
+  will-change: transform;
+}
+
+/* Micro-interactions */
+.btn {
+  will-change: transform;
+}
+.btn:hover {
+  transform: translateY(-1px);
+}
+.arrow svg,
+.link-arrow svg,
+.dd-all svg {
+  transition: transform 220ms var(--ease);
+}
+.card--link:hover .arrow svg,
+a:hover > .arrow svg,
+.link-arrow:hover svg,
+.dd-all:hover svg {
+  transform: translateX(3px);
+}
+
+/* Cross-page fade (native view transitions; ignored where unsupported) */
+@view-transition {
+  navigation: auto;
+}
+.site-header {
+  view-transition-name: site-header;
+}
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: 220ms;
+  animation-timing-function: var(--ease);
+}
+
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,

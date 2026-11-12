@@ -28,7 +28,7 @@ const { Content } = await render(g);
           <ul class="checks" role="list">{d.bullets.map((b: string) => <li>{b}</li>)}</ul>
         </div>
         <div class="g-side">
-          {d.illo && <div class="g-art"><Illo name={d.illo as IlloName} eager decorative sizes="480px" /></div>}
+          {d.illo && <div class="g-art"><Illo name={d.illo as IlloName} eager decorative /></div>}
           <div class="card g-form">
             <h2>Get the guide</h2>
             <p>We'll email it to you. No sequence of ten follow-ups.</p>

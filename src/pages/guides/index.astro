@@ -19,7 +19,7 @@ const guides = (await getCollection("guides")).sort((a, b) => a.data.order - b.d
       <ul class="glist" role="list">
         {guides.map((g, i) => (
           <li class:list={["card gl", { "card--ink on-ink": i % 2 === 1 }]}>
-            <div class="gl-art">{g.data.illo && <Illo name={g.data.illo as IlloName} decorative sizes="420px" />}</div>
+            <div class="gl-art">{g.data.illo && <Illo name={g.data.illo as IlloName} decorative />}</div>
             <div>
               <span class="tag">{g.data.format}</span>
               <h2><a href={`/guides/${g.id}/`} set:html={hl(g.data.title)} /></h2>

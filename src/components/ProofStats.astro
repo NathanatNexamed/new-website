@@ -1,5 +1,6 @@
 ---
-// Dark proof bar from the brand kit.
+// Dark proof bar from the brand kit. Numbers count up as they scroll in (react-bits CountUp).
+import StatNumber from "./motion/StatNumber";
 interface Props { stats: { value: string; label: string }[] }
 const { stats } = Astro.props;
 ---
@@ -8,7 +9,7 @@ const { stats } = Astro.props;
     {stats.map((s) => (
       <div>
         <dt>{s.label}</dt>
-        <dd>{s.value}</dd>
+        <dd><StatNumber client:visible={{ rootMargin: "160px" }} value={s.value} /></dd>
       </div>
     ))}
   </dl>
@@ -40,8 +41,8 @@ const { stats } = Astro.props;
   }
   dd {
     margin: 0;
-    font: 600 clamp(2.2rem, 1.6rem + 2.2vw, 3.4rem)/1 var(--font-head);
-    letter-spacing: -0.04em;
+    font: 700 clamp(2.2rem, 1.6rem + 2.2vw, 3.4rem)/1 var(--font-head);
+    letter-spacing: 0;
   }
   dt {
     margin-top: 0.75rem;

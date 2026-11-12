@@ -1,0 +1,13 @@
+---
+// Inline SVG version of an illustration, with named groups (a-card, a-row, a-stop…)
+// so src/scripts/motion.ts can animate parts of it. Static if JS or motion is off.
+import ownerLeads from "../assets/illustrations/owner-leads.svg?raw";
+import patientPath from "../assets/illustrations/patient-path.svg?raw";
+const files = { "owner-leads": ownerLeads, "patient-path": patientPath } as const;
+interface Props { name: keyof typeof files; class?: string }
+const { name, class: cls = "" } = Astro.props;
+---
+<div class={`illo-inline ${cls}`} data-illo={name} set:html={files[name]} />
+<style>
+  .illo-inline :global(svg) { display: block; width: 100%; height: auto; overflow: visible; }
+</style>

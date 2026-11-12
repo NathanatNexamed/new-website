@@ -4,6 +4,7 @@ import PageHero from "../components/PageHero.astro";
 import Icon from "../components/Icon.astro";
 import MedPlus from "../components/MedPlus.astro";
 import { team } from "../data/team";
+import FounderQuote from "../components/motion/FounderQuote";
 
 const principles = [
   { t: "Booked patients are the number", b: "Not leads, not clicks, not impressions. If we can't tie it to a booked consult, we say so." },
@@ -57,7 +58,7 @@ const initials = (n: string) => n.replace(/[\[\]]/g, "").split(" ").map((w) => w
   <section class="section dots-ink on-ink about-q">
     <div class="container">
       <MedPlus size={72} flat />
-      <p class="aq">We'd rather tell you we're <mark>not a fit</mark> than take a retainer we can't earn.</p>
+      <div class="aq"><FounderQuote client:visible text="We’d rather tell you we’re not a fit than take a retainer we can’t earn." markWords={[5, 7]} /></div>
       <p class="aq-by">Nathan Smith, Founder &amp; CEO</p>
     </div>
   </section>
@@ -66,14 +67,15 @@ const initials = (n: string) => n.replace(/[\[\]]/g, "").split(" ").map((w) => w
   .person { display: grid; gap: 0.35rem; align-content: start; }
   .avatar {
     aspect-ratio: 1; border-radius: var(--radius-lg); background: var(--ice); color: var(--azure);
-    display: grid; place-items: center; font: 600 2.5rem/1 var(--font-head); margin-bottom: 1rem;
+    display: grid; place-items: center; font: 700 2.5rem/1 var(--font-head); margin-bottom: 1rem;
   }
   .person h3 { font-size: 1.25rem; }
-  .role { color: var(--azure); font-weight: 600; font-size: var(--fs-small); }
+  .role { color: var(--azure); font-family: var(--font-ui); font-weight: 700; font-size: var(--fs-small); }
   .short { color: var(--text-2); font-size: var(--fs-small); }
   .person .link-arrow { margin-top: 0.5rem; font-size: var(--fs-small); }
   .about-q { color: #fff; }
-  .aq { margin-top: 2rem; max-width: 22ch; font: 600 clamp(2rem, 1.4rem + 2.6vw, 3.75rem)/1.06 var(--font-head); letter-spacing: -0.03em; }
+  .aq :global(.fq) { margin: 0; font: inherit; }
+  .aq { margin-top: 2rem; max-width: 22ch; font: 700 clamp(2rem, 1.4rem + 2.6vw, 3.75rem)/1.06 var(--font-head); letter-spacing: 0; }
   .aq-by { margin-top: 1.5rem; color: var(--on-ink-2); }
   :global(.i16) { width: 16px; height: 16px; }
 </style>

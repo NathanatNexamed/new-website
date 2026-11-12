@@ -87,6 +87,11 @@ const sectionActive = (item: (typeof nav)[number]) =>
 </header>
 
 <script>
+  const header = document.querySelector<HTMLElement>(".site-header");
+  const onScroll = () => header?.classList.toggle("scrolled", window.scrollY > 8);
+  onScroll();
+  window.addEventListener("scroll", onScroll, { passive: true });
+
   const items = document.querySelectorAll<HTMLElement>("[data-nav-item]");
   const closeAll = (except?: Element) =>
     items.forEach((it) => {
@@ -142,7 +147,12 @@ const sectionActive = (item: (typeof nav)[number]) =>
     top: 0;
     z-index: 50;
     padding-top: 12px;
-    background: linear-gradient(to bottom, rgb(255 255 255 / 0.96) 60%, rgb(255 255 255 / 0));
+    /* No background: only the floating bar is visible, so dark sections show through. */
+    pointer-events: none;
+  }
+  .site-header .bar,
+  .site-header .mobile-nav {
+    pointer-events: auto;
   }
   .bar {
     display: flex;
@@ -155,6 +165,11 @@ const sectionActive = (item: (typeof nav)[number]) =>
     border: 1px solid var(--line);
     border-radius: 14px;
     box-shadow: 0 6px 24px -18px rgb(11 18 32 / 0.35);
+    transition: box-shadow 250ms var(--ease), border-color 250ms var(--ease);
+  }
+  .site-header.scrolled .bar {
+    border-color: rgb(11 18 32 / 0.08);
+    box-shadow: 0 14px 40px -20px rgb(11 18 32 / 0.45);
   }
   .brand {
     display: inline-flex;
@@ -187,7 +202,7 @@ const sectionActive = (item: (typeof nav)[number]) =>
     border: 0;
     background: none;
     border-radius: 8px;
-    font: 500 0.95rem/1 var(--font-body);
+    font: 400 1.02rem/1 var(--font-body);
     color: var(--ink);
     text-decoration: none;
     cursor: pointer;
@@ -264,7 +279,7 @@ const sectionActive = (item: (typeof nav)[number]) =>
   }
   .dd-label {
     display: block;
-    font-weight: 600;
+    font-family: var(--font-ui); font-weight: 700;
     font-size: 0.95rem;
   }
   .dd-note {
@@ -281,7 +296,7 @@ const sectionActive = (item: (typeof nav)[number]) =>
     padding: 0.7rem 0.75rem;
     border-top: 1px solid var(--line);
     font-size: 0.875rem;
-    font-weight: 600;
+    font-family: var(--font-ui); font-weight: 700;
     color: var(--azure);
     text-decoration: none;
   }
@@ -338,8 +353,8 @@ const sectionActive = (item: (typeof nav)[number]) =>
     align-items: center;
     justify-content: space-between;
     min-height: 56px;
-    font: 600 1.15rem/1.2 var(--font-head);
-    letter-spacing: -0.01em;
+    font: 700 1.15rem/1.2 var(--font-head);
+    letter-spacing: 0;
     text-decoration: none;
     cursor: pointer;
     list-style: none;

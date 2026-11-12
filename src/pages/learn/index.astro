@@ -22,7 +22,7 @@ const guides = (await getCollection("guides")).sort((a, b) => a.data.order - b.d
       <div class="grid grid--2">
         {guides.map((g) => (
           <a href={`/guides/${g.id}/`} class="card card--link gcard">
-            <div class="g-art">{g.data.illo && <Illo name={g.data.illo as IlloName} decorative sizes="300px" />}</div>
+            <div class="g-art">{g.data.illo && <Illo name={g.data.illo as IlloName} decorative />}</div>
             <div>
               <span class="tag">{g.data.format}</span>
               <h3 set:html={hl(g.data.title)} />

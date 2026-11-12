@@ -1,17 +1,16 @@
 ---
 import { illustrations, type IlloName } from "../lib/illustrations";
-interface Props { name: IlloName; eager?: boolean; class?: string; alt?: string; decorative?: boolean; sizes?: string }
-const { name, eager = false, class: cls = "", alt, decorative = false, sizes = "(min-width: 960px) 600px, 100vw" } = Astro.props;
+interface Props { name: IlloName; eager?: boolean; class?: string; alt?: string; decorative?: boolean }
+const { name, eager = false, class: cls = "", alt, decorative = false } = Astro.props;
 const i = illustrations[name];
 ---
 <img
-  src={`/illustrations/${name}.webp`}
+  src={`/illustrations/${name}.svg`}
   width={i.w}
   height={i.h}
   alt={decorative ? "" : (alt ?? i.alt)}
   loading={eager ? "eager" : "lazy"}
   fetchpriority={eager ? "high" : undefined}
   decoding="async"
-  sizes={sizes}
   class={`illo ${cls}`}
 />

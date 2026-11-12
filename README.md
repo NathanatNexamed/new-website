@@ -24,7 +24,15 @@ Deploys anywhere that serves static files (Netlify, Vercel, Cloudflare Pages, S3
 | Blog posts | `src/content/blog/*.md` → `/blog/[slug]/` |
 | Guides (lead magnets) | `src/content/guides/*.md` → `/guides/[slug]/` + `/thank-you/[slug]/` |
 | Case studies | `src/content/case-studies/*.md` → `/case-studies/[slug]/` |
-| Illustrations (cut from the brand kit) | `public/illustrations/` |
+| Illustrations (vector SVGs from the brand kit) | `public/illustrations/` |
+| Animation-ready copies of the hero + patient-path SVGs | `src/assets/illustrations/` |
+| Site motion (GSAP) | `src/scripts/motion.ts` |
+| react-bits components (CountUp, ScrollReveal, LogoLoop) | `src/components/react-bits/`, wrapped in `src/components/motion/` |
+| Fonts (Khand Bold, Hind Regular from Fontshare) | `public/fonts/` |
+
+**Fonts:** Khand Bold for headlines, buttons and labels; Hind Regular for body. Only those two files were in the kit, so any bold body text (form labels, inline **bold**) is browser-synthesized. Drop more Hind weights into `public/fonts/` and add `@font-face` rules in `src/styles/global.css` to get true weights.
+
+**Motion:** headlines rise in word by word and the highlighter sweeps under the marked phrase; cards and lists fade up as they scroll in; the hero activity card and patient-path stops animate; stats count up (react-bits CountUp); the founder quote sharpens on scroll (react-bits ScrollReveal); platforms loop (react-bits LogoLoop); pages cross-fade. All of it is off for visitors with "reduce motion" set, and everything is visible without JavaScript. react-bits is MIT + Commons Clause: fine to use on this site, not to resell as a component library.
 
 **Highlighter:** wrap the one phrase that matters in double brackets in any headline string: `"More [[booked patients]]."`
 
@@ -38,5 +46,4 @@ Deploys anywhere that serves static files (Netlify, Vercel, Cloudflare Pages, S3
 - [ ] Guide PDFs: hook the guide form to an automation that emails the file.
 - [ ] Legal review of `/privacy/` and `/terms/`, and of HIPAA / LegitScript wording in service FAQs.
 - [ ] Confirm the Providi / OptiMantra / Cerbo naming on the integration pages.
-- [ ] Switzer is self-hosted from `public/fonts/` (Fontshare's free licence); swap in files downloaded from Fontshare directly if you prefer.
 - [ ] Blog URLs: existing post slugs must match the old `/blog/[slug]` URLs exactly.

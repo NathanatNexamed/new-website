@@ -35,7 +35,7 @@ const top = services.filter((s) => !s.parent);
                   <p class="kid"><a href={`/services/${k.slug}/`} class="link-arrow">Includes {k.name}: {k.short} <Icon name="arrow" class="i16" /></a></p>
                 ))}
               </div>
-              <div class="svc-art"><Illo name={s.illo} decorative sizes="420px" /></div>
+              <div class="svc-art"><Illo name={s.illo} decorative /></div>
               <span class:list={["arrow", { "arrow--ink": i % 3 === 1 }]} aria-hidden="true"><Icon name="arrow" /></span>
             </li>
           );
@@ -80,7 +80,7 @@ const top = services.filter((s) => !s.parent);
   .svc-copy > p { margin-top: 0.75rem; max-width: 55ch; }
   .svc-points { list-style: none; padding: 0; margin: 1.25rem 0 0; display: flex; flex-wrap: wrap; gap: 0.5rem; }
   .svc-points li {
-    font-size: var(--fs-xs); font-weight: 500; padding: 0.3rem 0.65rem;
+    font-size: var(--fs-xs); font-weight: 400; padding: 0.3rem 0.65rem;
     border: 1px solid var(--line); border-radius: 6px; color: var(--text-2);
   }
   .on-ink .svc-points li { border-color: var(--ink-line); color: var(--on-ink-2); }

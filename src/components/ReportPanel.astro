@@ -31,12 +31,12 @@ const area = (p: number[][]) => `${smooth(p)} L${W},${H} L0,${H} Z`;
     </div>
     <svg viewBox={`-6 -8 ${W + 12} ${H + 14}`} role="img" aria-label="Example chart: leads and booked consults both trending up over eight months">
       {[0.25, 0.5, 0.75].map((f) => <line x1="0" x2={W} y1={H * f} y2={H * f} stroke="#E3E9F2" stroke-width="1" />)}
-      <path d={area(lp)} fill="#DCE8FB" />
-      <path d={area(bp)} fill="#B3CDF4" />
-      <path d={smooth(lp)} fill="none" stroke="#6FA0EA" stroke-width="2.5" />
-      <path d={smooth(bp)} fill="none" stroke="#1D6FE0" stroke-width="2.5" />
-      {lp.map(([x, y]) => <circle cx={x} cy={y} r="3.5" fill="#6FA0EA" stroke="#fff" stroke-width="1.5" />)}
-      {bp.map(([x, y]) => <circle cx={x} cy={y} r="3.5" fill="#1D6FE0" stroke="#fff" stroke-width="1.5" />)}
+      <path class="rp-area" d={area(lp)} fill="#DCE8FB" />
+      <path class="rp-area" d={area(bp)} fill="#B3CDF4" />
+      <path class="rp-line" d={smooth(lp)} fill="none" stroke="#6FA0EA" stroke-width="2.5" />
+      <path class="rp-line" d={smooth(bp)} fill="none" stroke="#1D6FE0" stroke-width="2.5" />
+      {lp.map(([x, y]) => <circle class="rp-dot" cx={x} cy={y} r="3.5" fill="#6FA0EA" stroke="#fff" stroke-width="1.5" />)}
+      {bp.map(([x, y]) => <circle class="rp-dot" cx={x} cy={y} r="3.5" fill="#1D6FE0" stroke="#fff" stroke-width="1.5" />)}
     </svg>
   </div>
 </DataPanel>
@@ -45,7 +45,7 @@ const area = (p: number[][]) => `${smooth(p)} L${W},${H} L0,${H} Z`;
   .rp-metrics :global(.m-value) { font-size: clamp(1.6rem, 1.2rem + 1.6vw, 2.6rem); }
   .rp-chart { margin-top: 1.25rem; }
   .rp-head { display: flex; justify-content: space-between; align-items: center; gap: 1rem; flex-wrap: wrap; margin-bottom: 0.75rem; }
-  .rp-title { font: 600 1.05rem/1.2 var(--font-head); letter-spacing: -0.02em; }
+  .rp-title { font: 700 1.05rem/1.2 var(--font-head); letter-spacing: 0; }
   .rp-legend { display: flex; gap: 1rem; list-style: none; margin: 0; padding: 0; font-size: var(--fs-xs); color: var(--text-2); }
   .rp-legend li { display: flex; align-items: center; gap: 0.4rem; }
   .sw { width: 8px; height: 8px; border-radius: 99px; }
