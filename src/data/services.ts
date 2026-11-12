@@ -26,34 +26,34 @@ export const services: Service[] = [
     slug: "google-ads",
     name: "Google Ads",
     short: "Search campaigns built around high-intent treatments, with conversions tied to booked and closed patients.",
-    title: "Google Ads that optimize for [[patients]], not form fills.",
+    title: "Google Ads built for [[real patient intent]].",
     metaDescription:
       "Google Ads for medspas and cash-pay clinics. Clean conversion tracking, offline conversions from your CRM, and campaigns built around the treatments you want to sell.",
-    lead: "Most accounts we audit are bidding toward the wrong signal. We rebuild tracking first, send booked and closed patients back to Google, and let the bidding learn from people who actually show up.",
+    lead: "A clinic can have a great-looking Google Ads dashboard and still have an empty appointment book. We look at what the account counts as a conversion, which searches drive useful inquiries, and how those inquiries turn into visits. Then we fix the weakest part first.",
     illo: "connected-stack",
     problemTitle: "What we usually find in the audit",
     problem: [
-      "Every conversion action set to primary, so the reported conversion rate is meaningless. We've seen accounts reporting over 100%.",
-      "Performance Max spending a real share of budget with no way to see which queries or placements produced a patient.",
+      "Page views, form submissions and phone clicks all counted as primary conversions. Multiple actions from one visitor can inflate the reported conversion rate, sometimes past 100%.",
+      "Performance Max consuming budget before the account has a reliable way to judge lead quality or appointment outcomes.",
       "Ads pointed at the homepage, three or four clicks away from a booking.",
-      "Broad match keywords overlapping across campaigns and bidding against each other.",
+      "Broad searches bringing in information seekers or unrelated treatment inquiries that front-desk staff can't convert.",
     ],
     work: [
       {
         title: "Tracking before spend",
-        body: "One or two primary conversion actions that mean something: a qualified call or a submitted consult request. Everything else is secondary. GCLID captured on every form so a booked patient can be matched back to the click.",
+        body: "Agree on meaningful conversion actions, usually qualified calls and real consult inquiries. Check duplicate counting, use appropriate click identifiers where available, and keep softer actions out of bidding goals.",
       },
       {
         title: "Offline conversions from your CRM",
-        body: "Booked and closed stages in GoHighLevel (or your EMR) get imported back into Google Ads, with values where you have them. That is what lets Target CPA and Target ROAS bid on patients instead of leads.",
+        body: "Where consent, platform policy and the available CRM data permit, we configure offline conversion imports for meaningful downstream events. Not every EMR exposes the same fields, and we verify the connection before promising it.",
       },
       {
         title: "Campaigns split by treatment and location",
-        body: "Tight ad groups by theme, search-first, with a dedicated landing page per service line. Performance Max only where there's enough conversion data for it to learn on, and never as a black box.",
+        body: "Organize campaigns around the services and locations the practice wants to grow. Match each important search intent with a useful treatment page; decide on broad match or Performance Max only after seeing the data.",
       },
       {
         title: "Policy-aware builds",
-        body: "Hormone therapy, GLP-1s and sexual wellness are restricted categories. We plan the account around what Google will actually approve, and get you LegitScript-certified when you need it.",
+        body: "Prescription treatments, weight loss and sexual wellness can face special advertiser requirements. We check current platform rules, licensing and whether certification applies before making launch promises.",
       },
     ],
     measureTitle: "What the monthly report shows",
@@ -95,10 +95,10 @@ export const services: Service[] = [
     slug: "meta-ads",
     name: "Meta Ads",
     short: "Creative-tested campaigns for injectables, weight loss and memberships, with question-first lead follow-up.",
-    title: "Meta leads that [[start a conversation]].",
+    title: "Meta ads that give patients [[a reason to inquire]].",
     metaDescription:
       "Meta (Facebook and Instagram) ads for medspas and cash-pay clinics. New-patient offers, tested creative, and follow-up that gets leads replying.",
-    lead: "Meta is a demand-creation channel. The offer and the first message matter more than the targeting. We build new-patient offers worth answering, test creative weekly, and make sure every lead gets a human-sounding text within minutes.",
+    lead: "A Meta ad can get hundreds of cheap leads without producing many appointments. We look at whether the offer makes sense, whether someone understands the service, and whether the first reply answers what they asked. Getting a message is only the first step.",
     illo: "text-booking",
     problemTitle: "Where Meta budgets leak",
     problem: [
@@ -110,19 +110,19 @@ export const services: Service[] = [
     work: [
       {
         title: "Offers built for a first visit",
-        body: "A specific, honest new-patient offer for one treatment, priced so the second visit is where the practice makes its money. Not a discount on everything.",
+        body: "Work backward from the procedure, margins, available provider time and likely repeat visits. A first-visit offer needs a credible reason to book without training patients to expect permanent discounts.",
       },
       {
         title: "Creative testing on a schedule",
-        body: "New concepts every two weeks, tested against the current winner. Provider-led video, before-and-after where policy allows, and plain static that explains the offer.",
+        body: "Test different angles rather than recycling the same graphic. Provider explanations, practice footage and plain pricing context can outperform flashy creative. Clinical claims and images need policy review.",
       },
       {
         title: "Messaging ads and landing pages, tested head to head",
-        body: "Some markets reply better in Messenger or Instagram DMs, some convert better on a page. We test both and keep the one that books.",
+        body: "Choose between messaging, lead forms and landing pages based on service complexity and how the team handles inquiries. Test formats against appointment quality, not just cheap submissions.",
       },
       {
         title: "Question-first follow-up",
-        body: "The first text asks something the lead can answer in one word. It sounds like your front desk, not a bot. Replies route to a person.",
+        body: "Write first replies around the service and likely patient question. Simple offers may need a short question; complex services need an explanation first. Replies should reach someone who can help.",
       },
     ],
     measureTitle: "What we track",
@@ -153,22 +153,22 @@ export const services: Service[] = [
     slug: "seo",
     name: "SEO",
     short: "Treatment and location pages that rank in Google for the services you most want to sell.",
-    title: "Rank for the [[treatments you want to sell]].",
+    title: "Show up for the [[services patients actually search]].",
     metaDescription:
       "SEO for medspas and cash-pay clinics. Treatment pages, local search, and technical fixes focused on the services with the best margins.",
-    lead: "SEO for a practice is mostly local, and mostly about having a genuinely useful page for each treatment you offer. We start with the services that have the margin and the search demand, then build outward.",
+    lead: "A practice can rank for its name and still be invisible when someone searches for a specific treatment nearby. We choose priority services using demand, margins, current patient interest and geography, then build pages that answer real questions.",
     illo: "reporting-screen",
     problemTitle: "Why most practice sites don't rank",
     problem: [
-      "One 'Services' page that lists everything, so nothing ranks for anything.",
-      "Copy written to sound nice, with no answers to the questions patients actually search.",
+      "A general services page, but very little useful detail about individual treatments or locations.",
+      "Copy full of benefits and buzzwords that never explains what the appointment is like or who offers it.",
       "A Google Business Profile that hasn't been touched since it was claimed.",
       "Slow, template-heavy sites with no structured data.",
     ],
     work: [
       {
-        title: "A page per treatment, per location",
-        body: "Each core treatment gets its own page with pricing context, candidacy, recovery, provider credentials and real FAQs. Multi-location practices get location pages that aren't copies of each other.",
+        title: "Treatment pages that match real search demand",
+        body: "Prioritize treatment pages based on business value and demand. Explain appointments, realistic pricing context and relevant clinical details reviewed by the provider. Give each location genuinely distinct information.",
       },
       {
         title: "Local search and Google Business Profile",
@@ -179,8 +179,8 @@ export const services: Service[] = [
         body: "Speed, indexation, internal linking, and schema for medical business, services, FAQs and reviews.",
       },
       {
-        title: "Content that earns links",
-        body: "A small number of pieces a local journalist or another provider would actually reference, instead of weekly filler posts.",
+        title: "Content worth referring to",
+        body: "Build useful content, original practice insights and appropriate third-party mentions rather than publishing dozens of interchangeable articles. Relevant links and reputation work support the core treatment pages.",
       },
     ],
     measureTitle: "What we report on",
@@ -197,7 +197,7 @@ export const services: Service[] = [
     faqs: [
       {
         q: "How long before SEO shows results?",
-        a: "Expect early movement on lower-competition treatment pages in two to three months and meaningful lead volume in six to twelve, depending on your market and starting point.",
+        a: "It depends on competition, your existing site and the work required. Technical fixes may show effects sooner, while competitive treatment searches can take months. We establish a baseline instead of promising a fixed timeline.",
       },
       {
         q: "Do you write the content?",
@@ -211,10 +211,10 @@ export const services: Service[] = [
     name: "AEO",
     parent: "seo",
     short: "Get your practice cited when patients ask ChatGPT, Perplexity or Google's AI answers about a treatment.",
-    title: "Be the practice [[AI answers cite]].",
+    title: "Give AI search [[a reliable source to reference]].",
     metaDescription:
       "Answer engine optimization (AEO) for medical practices. Structure your treatment content so ChatGPT, Perplexity and Google AI Overviews cite and recommend you.",
-    lead: "Patients increasingly ask an assistant before they search. Answer engines pull from pages that state facts clearly, are consistent across the web, and come from a source they can verify. AEO is an extension of good SEO, not a replacement.",
+    lead: "AI search does not have a magic ranking switch. Clear treatment answers, consistent clinic information, credible third-party references and solid SEO give assistants useful source material. None of that guarantees a mention.",
     illo: "reporting-screen",
     problemTitle: "Why practices get left out of AI answers",
     problem: [
@@ -234,7 +234,7 @@ export const services: Service[] = [
       },
       {
         title: "Schema and citations",
-        body: "Medical business, physician, service and FAQ schema, plus the third-party mentions that give a model a reason to trust you.",
+        body: "Use structured data when it accurately reflects visible content, then build relevant references such as professional profiles and local coverage.",
       },
       {
         title: "Monitoring",
@@ -264,10 +264,10 @@ export const services: Service[] = [
     slug: "crm-automations",
     name: "CRM & Automations",
     short: "GoHighLevel builds connected to Zenoti, OptiMantra and Cerbo for speed to lead, rebooking and reactivation.",
-    title: "Leads aren't the goal. [[Booked patients]] are.",
+    title: "Your CRM should help the team [[book the next appointment]].",
     metaDescription:
       "GoHighLevel CRM and automations for medspas and clinics. Speed to lead, rebooking, reactivation, and integrations with Zenoti, OptiMantra and Cerbo.",
-    lead: "Most practices don't have a lead problem. They have a follow-up problem. We build the CRM and automations that answer every lead in minutes, keep the pipeline honest, and bring past patients back on schedule.",
+    lead: "A clinic can have dozens of inquiries in GoHighLevel and still be unable to answer who contacted them, what they asked and whether they booked. We build workflows that help the front desk and reflect what is actually happening.",
     illo: "front-desk",
     problemTitle: "What breaks between the ad and the appointment",
     problem: [
@@ -279,19 +279,19 @@ export const services: Service[] = [
     work: [
       {
         title: "Speed to lead",
-        body: "Instant text and email on every new lead, a call task for the front desk, and escalation if nobody touches it in 15 minutes. Written in your voice.",
+        body: "Use an immediate relevant acknowledgment when appropriate, assign a real owner and add reminders when a lead needs attention. The message should help, not just repeat a booking link.",
       },
       {
         title: "A pipeline that reflects reality",
-        body: "New, contacted, consult booked, showed, closed. Stages your front desk can actually keep current, and that feed reporting and Google Ads.",
+        body: "Build stages around the clinic's real process: inquiry, conversation, consult, attendance and verified outcomes. Automate only changes the systems can reliably support.",
       },
       {
         title: "Rebooking and reactivation",
-        body: "Treatment-specific rebook reminders on the right interval (tox, filler, IV, hormones) and campaigns for patients who haven't been in for six months or more.",
+        body: "Rebooking should fit the treatment, clinical guidance and patient preferences. Avoid generic reminders that ignore consent or timing.",
       },
       {
         title: "Integrations with your EMR and booking",
-        body: "GoHighLevel connected to Zenoti, OptiMantra, Cerbo and others, so appointments and show status flow back into the CRM without double entry.",
+        body: "Assess which booking and patient-status fields each platform actually exposes. Use supported APIs, webhooks or staff handoffs where appropriate while keeping clinical information in the EMR.",
       },
     ],
     measureTitle: "What we track",
@@ -320,11 +320,11 @@ export const services: Service[] = [
   {
     slug: "legitscript-certification",
     name: "LegitScript Certification",
-    short: "Get certified so you can advertise restricted treatments like hormone therapy and GLP-1s.",
-    title: "Marketing that [[gets approved]].",
+    short: "Guidance for healthcare advertisers navigating certification and platform restrictions.",
+    title: "Understand the rules before [[you launch ads]].",
     metaDescription:
       "LegitScript certification for clinics and telehealth providers advertising hormone therapy, GLP-1s, peptides and sexual wellness on Google and Meta.",
-    lead: "Google and Meta require LegitScript certification for many healthcare categories: prescription drugs, telehealth, addiction treatment, and often hormone therapy, weight loss medication and sexual wellness. We prepare the application, fix what would get it rejected, and build the ad account to stay inside policy.",
+    lead: "Some prescription, telehealth and regulated healthcare advertising requires third-party certification or platform verification. Requirements vary by treatment, jurisdiction and platform. We review your specific category before recommending an application or campaign.",
     illo: "compliance-shield",
     problemTitle: "Why applications stall",
     problem: [
@@ -344,14 +344,14 @@ export const services: Service[] = [
       },
       {
         title: "Policy-safe ad build",
-        body: "Once certified, campaigns and landing pages are written to stay inside Google and Meta policy for your category.",
+        body: "Where certification applies and is granted, we write ads and pages against current category rules. Approval remains the platform's decision and policies can change.",
       },
     ],
     measureTitle: "What you get",
     measure: [
       "A clear list of issues to fix before applying",
       "A submitted application and someone managing it",
-      "Ad accounts set up to stay approved",
+      "Campaigns reviewed against current ad policy",
     ],
     notFit: [
       "You're selling compounded products or claims that won't pass review. We'll tell you up front.",
@@ -363,7 +363,7 @@ export const services: Service[] = [
       },
       {
         q: "Do I need it for Meta too?",
-        a: "For many restricted categories, yes. Meta uses LegitScript certification for certain prescription drug and telehealth advertisers.",
+        a: "Requirements differ by advertiser and treatment. We verify the platform's current rules; Google and Meta do not use identical certification paths.",
       },
       {
         q: "Can you guarantee approval?",
