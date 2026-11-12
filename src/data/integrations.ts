@@ -78,6 +78,10 @@ export const integrations: Integration[] = [
         title: "Closed-loop reporting",
         body: "Evaluate whether permissible booking events can be matched to campaign attribution without exposing patient clinical data to advertising platforms.",
       },
+      {
+        title: "Contact matching and quality checks",
+        body: "Check how Zenoti and GoHighLevel identify the same person, handle duplicate records and react to a rescheduled or cancelled visit before putting the workflow live.",
+      },
     ],
     syncs: ["Booking changes, when the authorized integration exposes them", "Attendance status when available and appropriate to sync", "Service-specific rebooking signals when available and approved"],
     faqs: [
@@ -110,6 +114,10 @@ export const integrations: Integration[] = [
         title: "Program and membership tracking",
         body: "Only track program or membership status if your OptiMantra configuration explicitly makes that information available for permitted use.",
       },
+      {
+        title: "Webhook testing and appointment times",
+        body: "Validate the actual event payload, contact IDs and timezone conversions before reminders go live. A technically successful webhook is no help if a patient gets the wrong appointment time.",
+      },
     ],
     syncs: ["Appointments and show status", "Contact identifiers when available", "Other event fields only after technical and privacy review"],
     faqs: [
@@ -141,6 +149,10 @@ export const integrations: Integration[] = [
       {
         title: "Offline conversions",
         body: "Consider offline conversions only for permitted, measurable events when consent, privacy requirements and technical matching allow.",
+      },
+      {
+        title: "Intake and lab-status handoffs",
+        body: "Map which permitted status updates can indicate that intake is complete or scheduling is ready, and which staff member owns the next step. Clinical results stay inside the appropriate system.",
       },
     ],
     syncs: ["Appointments and show status", "Membership events when available and authorized", "Offline conversions to Google Ads"],
