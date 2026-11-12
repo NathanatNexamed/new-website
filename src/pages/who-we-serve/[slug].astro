@@ -24,7 +24,7 @@ const ints = liveIntegrations.filter((i) => v.integrations.includes(i.slug));
     lead={v.lead}
     crumbs={[{ label: "Who we serve", href: "/who-we-serve/" }, { label: v.name }]}
     illo={v.illo}
-    primary={{ label: "Check if your market is open", href: "/book/" }}
+    primary={{ label: "Discuss your clinic", href: "/book/" }}
     secondary={{ label: "See results", href: "/case-studies/" }}
   />
 
@@ -49,7 +49,7 @@ const ints = liveIntegrations.filter((i) => v.integrations.includes(i.slug));
         <a href="/services/legitscript-certification/" class="card card--ink card--link on-ink ls">
           <div class="ls-art"><Illo name="compliance-shield" decorative /></div>
           <div>
-            <h2 class="ls-title">You'll likely need <mark>LegitScript</mark> first.</h2>
+            <h2 class="ls-title">Check <mark>ad certification</mark> before launch.</h2>
             <p>{v.legitscript}</p>
           </div>
           <span class="arrow arrow--ink"><Icon name="arrow" /></span>
@@ -71,7 +71,7 @@ const ints = liveIntegrations.filter((i) => v.integrations.includes(i.slug));
       <RelatedCards cols={2} items={svc} />
       {ints.length > 0 && (
         <div class="ints">
-          <p>Connected to:</p>
+          <p>Platforms we work with:</p>
           <ul class="tags" role="list">{ints.map((i) => <li><a class="tag" href={`/integrations/${i.slug}/`}>{i.name}</a></li>)}</ul>
         </div>
       )}
