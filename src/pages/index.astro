@@ -6,7 +6,7 @@ import InlineIllo from "../components/InlineIllo.astro";
 import HeroExperience from "../components/HeroExperience.astro";
 import Icon from "../components/Icon.astro";
 import MedPlus from "../components/MedPlus.astro";
-import ProofStats from "../components/ProofStats.astro";
+import TrustSignals from "../components/TrustSignals.astro";
 import ReportPanel from "../components/ReportPanel.astro";
 import CaseCard from "../components/CaseCard.astro";
 import PostCard from "../components/PostCard.astro";
@@ -32,48 +32,47 @@ const path = [
   <!-- Visual hero: illustrative booking calendar and revenue trend -->
   <HeroExperience />
 
-  <!-- Proof -->
-  <section class="section--white proof-wrap">
-    <div class="container">
-      <ProofStats
-        stats={[
-          { value: "890", label: "Meta leads in Beautiful U case study" },
-          { value: "500", label: "Of those leads who replied" },
-          { value: "12–15%", label: "Avg. conversion rate · Pure Hydration" },
-          { value: "56%", label: "Of leads replied · Beautiful U" },
-        ]}
-      />
-    </div>
-  </section>
+  <!-- Real work and optional verified review/partner credentials -->
+  <TrustSignals />
 
-  <!-- Fit -->
-  <section class="section section--mist">
+  <!-- Differentiation: clinical context + operational understanding -->
+  <section class="section section--mist difference-section">
     <div class="container">
       <div class="section-head section-head--split">
-        <h2>For owners who need more than another <mark>ad dashboard</mark>.</h2>
+        <div>
+          <p class="section-kicker">What makes NexaMed different</p>
+          <h2>We understand the business <mark>behind the treatment</mark>.</h2>
+        </div>
         <p class="lead">
-          You might have plenty of leads but not enough appointments. Or a packed CRM that nobody follows up in. We start by finding where the handoff breaks, then decide whether the answer is better ads, a better offer, or a better process.
+          A great campaign starts with knowing the practice. The services you want to grow, the people providing them,
+          the way patients make decisions, and everything that happens once someone reaches out.
         </p>
       </div>
-      <div class="grid grid--2">
-        <div class="card" data-reveal>
-          <h3>We're a good fit if</h3>
-          <ul class="checks" style="margin-top:1.25rem">
-            <li>You run an established med spa or cash-pay clinic and know which services you want to grow.</li>
-            <li>You're willing to look beyond the ad account at how leads are contacted and booked.</li>
-            <li>You'd rather test a strong service offer than advertise every item on the menu at once.</li>
-            <li>You want clear reporting and candid feedback, including when a campaign isn't ready to scale.</li>
-          </ul>
-        </div>
-        <div class="card" data-reveal>
-          <h3>We're not a fit if</h3>
-          <ul class="checks checks--x" style="margin-top:1.25rem">
-            <li>You're only interested in the lowest cost per form submission.</li>
-            <li>Nobody owns inbound inquiries or is willing to improve follow-up.</li>
-            <li>You expect a guaranteed number of patients before we've seen your market and process.</li>
-            <li>You want to launch restricted medical claims without checking platform policy.</li>
-          </ul>
-        </div>
+      <div class="grid grid--2 difference-grid">
+        <article class="card difference-card" data-reveal>
+          <span class="num">01 / THE SERVICE</span>
+          <h3>We know what you're selling.</h3>
+          <p>Injectables, lasers, IV therapy, and longer-term programs don't share the same patient journey.
+            We look at demand, margins, provider time, and what makes each treatment worth choosing.</p>
+        </article>
+        <article class="card difference-card" data-reveal>
+          <span class="num">02 / THE PATIENT</span>
+          <h3>We understand the decision.</h3>
+          <p>Someone comparing Botox providers needs a different conversation from someone considering a
+            hormone program. Your offer, landing page, and follow-up should make the next step feel obvious.</p>
+        </article>
+        <article class="card difference-card" data-reveal>
+          <span class="num">03 / THE OPERATIONS</span>
+          <h3>We work with how clinics run.</h3>
+          <p>From GoHighLevel to the booking and EMR systems your team uses, we map the handoffs between inquiry,
+            consultation, and follow-up. The process has to make sense for your staff, not just your dashboard.</p>
+        </article>
+        <article class="card difference-card" data-reveal>
+          <span class="num">04 / THE GROWTH</span>
+          <h3>We connect marketing to the business.</h3>
+          <p>Clicks and inquiries are useful signals. Booked consultations, patient experience, and repeat visits
+            tell the bigger story. We use what your practice can actually measure to guide the next decision.</p>
+        </article>
       </div>
     </div>
   </section>
@@ -82,9 +81,10 @@ const path = [
   <section class="section section--white">
     <div class="container">
       <div class="section-head section-head--center">
-        <h2>Marketing only works when the next step <mark>actually happens</mark>.</h2>
+        <p class="section-kicker">One connected growth ecosystem</p>
+        <h2>Marketing is the accelerant. <mark>Your practice is the engine.</mark></h2>
         <p class="lead">
-          Some clinics need better demand. Others need to stop losing the demand they already have. We look at the whole path, then focus on the part holding growth back.
+          Real growth is an ecosystem: the offer, the campaigns, the front desk, the booking experience, and what brings patients back. We connect those pieces so the marketing you invest in strengthens the business you’ve built.
         </p>
       </div>
       <div class="bento">
@@ -254,6 +254,32 @@ const path = [
 </Base>
 
 <style>
+  .section-kicker {
+    margin-bottom: .85rem;
+    color: var(--azure);
+    font: 700 .78rem/1.4 var(--font-body);
+    text-transform: uppercase;
+    letter-spacing: .12em;
+  }
+  .difference-section .section-head { margin-bottom: clamp(2rem, 3vw, 3.5rem); }
+  .difference-card {
+    display: flex;
+    flex-direction: column;
+    padding: clamp(1.65rem, 2.7vw, 2.35rem);
+    min-height: 218px;
+  }
+  .difference-card .num {
+    display: block;
+    margin-bottom: 1.4rem;
+    font: 700 .74rem/1.3 var(--font-body);
+    letter-spacing: .08em;
+    color: var(--azure);
+  }
+  .difference-card h3 { font-size: clamp(1.5rem, 2vw, 2rem); }
+  .difference-card p { margin-top: .85rem; color: var(--text-2); line-height: 1.55; max-width: 60ch; }
+  @media (min-width: 900px) {
+    .difference-card { min-height: 244px; }
+  }
   .proof-wrap {
     padding-top: clamp(1.5rem, 1rem + 2vw, 3rem);
     padding-bottom: var(--section-y);
