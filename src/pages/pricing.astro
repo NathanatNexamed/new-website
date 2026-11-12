@@ -64,7 +64,7 @@ const plans = [
             <p class="plan-for">{p.for}</p>
             <p class="plan-price"><span>{p.price}</span>{p.per}</p>
             <ul class="checks" role="list">{p.includes.map((i) => <li>{i}</li>)}</ul>
-            <a href="/book/" class:list={["btn", { "btn--outline": !p.featured }]}>Book a call</a>
+            <a href="/book/" class:list={["btn", { "btn--outline": !p.featured }]}>Schedule My Call</a>
           </div>
         ))}
       </div>
@@ -98,7 +98,7 @@ const plans = [
         </p>
       </div>
       <div class="btn-row">
-        <a href="/book/" class="btn">Book a strategy call</a>
+        <a href="/book/" class="btn">Schedule My Call</a>
         <a href="/how-it-works/" class="btn btn--outline-light">How it works</a>
       </div>
     </div>
