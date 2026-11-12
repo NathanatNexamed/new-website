@@ -10,27 +10,26 @@ import { site } from "../config";
       <Breadcrumbs items={[{ label: "Book a call" }]} />
       <div class="book-grid">
         <div class="book-copy">
-          <h1>Check if your <mark>market is open</mark>.</h1>
+          <h1>Let's look at what's <mark>holding growth back</mark>.</h1>
           <p class="lead">
-            A 30-minute call with the person who'd run your account. Bring access to your ad accounts if you can, and
-            we'll look at them live.
+            Tell us what you're trying to grow and what you've tried. We'll talk through your services, existing marketing and follow-up process, then tell you where we'd start.
           </p>
           <h2 class="cover">What we'll cover</h2>
           <ul class="checks" role="list">
-            <li>Whether we already work with a practice in your market</li>
-            <li>What your tracking is and isn't counting</li>
+            <li>Which treatments and locations matter most to your business</li>
+            <li>Whether your numbers count inquiries, booked consultations or actual visits</li>
             <li>Where leads are being lost between the ad and the appointment</li>
-            <li>The one change we'd make first, whether or not you hire us</li>
+            <li>The change we'd prioritize and whether NexaMed is a sensible fit</li>
           </ul>
-          <p class="small">Not ready to pick a time? Send the short form below and we'll reply within one business day.</p>
+          <p class="small">Prefer email? Reach us directly at hello@nexamed.us.</p>
         </div>
         <div class="cal card">
           {site.calendarEmbedUrl ? (
             <iframe src={site.calendarEmbedUrl} title="Book a strategy call" loading="lazy" scrolling="no"></iframe>
           ) : (
             <div class="cal-ph">
-              <p><strong>GoHighLevel calendar embed goes here.</strong></p>
-              <p>Set <code>calendarEmbedUrl</code> in <code>src/config.ts</code>, and set the calendar's post-booking redirect to <code>/thank-you/call-booked/</code>.</p>
+              <p><strong>Online scheduling is not connected yet.</strong></p>
+              <p>Reach us at <a href={`mailto:${site.email}`}>{site.email}</a> while the calendar connection is being finalized.</p>
             </div>
           )}
         </div>
