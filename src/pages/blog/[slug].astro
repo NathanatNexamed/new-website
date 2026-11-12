@@ -1,0 +1,102 @@
+---
+import { getCollection, render } from "astro:content";
+import Base from "../../layouts/Base.astro";
+import Breadcrumbs from "../../components/Breadcrumbs.astro";
+import Illo from "../../components/Illo.astro";
+import PostCard from "../../components/PostCard.astro";
+import Icon from "../../components/Icon.astro";
+import { blogCategories, personBySlug } from "../../data/team";
+import { site } from "../../config";
+import type { IlloName } from "../../lib/illustrations";
+
+export async function getStaticPaths() {
+  const posts = await getCollection("blog", ({ data }) => !data.draft);
+  return posts.map((p) => ({ params: { slug: p.id }, props: { p, posts } }));
+}
+const { p, posts } = Astro.props;
+const d = p.data;
+const { Content } = await render(p);
+const author = personBySlug(d.author);
+const cat = blogCategories[d.category];
+const date = d.date.toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric", timeZone: "UTC" });
+const more = posts.filter((x: any) => x.id !== p.id).sort((a: any, b: any) => (a.data.category === d.category ? -1 : 1) - (b.data.category === d.category ? -1 : 1)).slice(0, 3);
+const ld = {
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  headline: d.title,
+  description: d.description,
+  datePublished: d.date.toISOString(),
+  dateModified: (d.updated ?? d.date).toISOString(),
+  author: author ? { "@type": "Person", name: author.name, url: `${site.url}/blog/author/${author.slug}/` } : undefined,
+  publisher: { "@type": "Organization", name: site.name, logo: { "@type": "ImageObject", url: `${site.url}/favicon.svg` } },
+  mainEntityOfPage: `${site.url}/blog/${p.id}/`,
+};
+---
+<Base title={d.title} description={d.description} schema={[ld]} ogType="article">
+  <article>
+    <header class="section--white post-head">
+      <div class="container narrow">
+        <Breadcrumbs items={[{ label: "Blog", href: "/blog/" }, { label: cat?.name ?? d.category, href: `/blog/category/${d.category}/` }, { label: d.title }]} />
+        <h1>{d.title}</h1>
+        <p class="lead">{d.description}</p>
+        <p class="byline">
+          {author && <a href={`/blog/author/${author.slug}/`}>{author.name}</a>}
+          <span aria-hidden="true">·</span>
+          <time datetime={d.date.toISOString()}>{date}</time>
+          <span aria-hidden="true">·</span>
+          <a href={`/blog/category/${d.category}/`}>{cat?.name}</a>
+        </p>
+      </div>
+      {d.illo && (
+        <div class="container post-art-wrap">
+          <div class="post-art"><Illo name={d.illo as IlloName} eager decorative sizes="(min-width: 900px) 820px, 100vw" /></div>
+        </div>
+      )}
+    </header>
+    <div class="section section--white post-body">
+      <div class="container narrow">
+        <div class="prose"><Content /></div>
+        {author && (
+          <aside class="author card card--mist" aria-label="About the author">
+            <p class="a-name"><a href={`/blog/author/${author.slug}/`}>{author.name}</a></p>
+            <p class="a-role">{author.role}, NexaMed</p>
+            <p>{author.short}</p>
+          </aside>
+        )}
+        <aside class="post-cta card card--ink on-ink">
+          <h2>Want us to look at <mark>your account</mark>?</h2>
+          <p>A 30-minute call. We'll look at your tracking, spend and follow-up and tell you what we'd change first.</p>
+          <a class="btn" href="/book/">Book a strategy call</a>
+        </aside>
+      </div>
+    </div>
+  </article>
+  {more.length > 0 && (
+    <section class="section section--mist section--tight">
+      <div class="container">
+        <div class="head-row"><h2>Keep reading</h2><a class="link-arrow" href="/blog/">All articles <Icon name="arrow" class="i16" /></a></div>
+        <div class="grid grid--3">{more.map((m: any) => <PostCard slug={m.id} data={m.data} />)}</div>
+      </div>
+    </section>
+  )}
+</Base>
+<style>
+  .post-head { padding-top: clamp(2.5rem, 2rem + 3vw, 4.5rem); }
+  .post-head h1 { font-size: clamp(2.1rem, 1.5rem + 2.6vw, 3.5rem); }
+  .post-head .lead { margin-top: 1.25rem; }
+  .byline { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1.5rem; font-size: var(--fs-small); color: var(--text-3); }
+  .byline a { color: var(--ink); font-weight: 500; }
+  .post-art-wrap { max-width: calc(980px + var(--gutter) * 2); margin-top: 2.5rem; }
+  .post-art { background: var(--mist); border-radius: var(--radius-lg); padding: clamp(1rem, 3vw, 2.5rem); }
+  .post-art :global(img) { max-height: 420px; width: auto; margin-inline: auto; }
+  .post-body { padding-top: 3rem; }
+  .author { margin-top: 3.5rem; }
+  .a-name { font: 600 1.15rem/1.3 var(--font-head); }
+  .a-name a { text-decoration: none; }
+  .a-role { color: var(--azure); font-size: var(--fs-small); font-weight: 600; margin-bottom: 0.5rem; }
+  .post-cta { margin-top: 1.25rem; display: grid; gap: 1rem; justify-items: start; }
+  .post-cta h2 { font-size: var(--fs-h3); }
+  .head-row { display: flex; justify-content: space-between; align-items: end; gap: 1rem; margin-bottom: 2rem; flex-wrap: wrap; }
+  .head-row h2 { font-size: var(--fs-h3); }
+  :global(.i16) { width: 16px; height: 16px; }
+</style>

@@ -1,0 +1,125 @@
+---
+import Base from "../layouts/Base.astro";
+import PageHero from "../components/PageHero.astro";
+import FaqList from "../components/FaqList.astro";
+import Icon from "../components/Icon.astro";
+import { pricingFaqs } from "../data/faq";
+
+// TODO: replace bracketed numbers with real pricing.
+const plans = [
+  {
+    name: "Paid acquisition",
+    price: "[$X,XXX]",
+    per: "/month",
+    for: "Practices with a working front desk that need a better ad account.",
+    includes: [
+      "Google Ads or Meta Ads (one channel)",
+      "Conversion tracking rebuild",
+      "Landing pages for advertised treatments",
+      "Monthly report and strategy call",
+    ],
+  },
+  {
+    name: "Full funnel",
+    price: "[$X,XXX]",
+    per: "/month",
+    featured: true,
+    for: "Practices that want ads, follow-up and reporting run as one system.",
+    includes: [
+      "Google Ads and Meta Ads",
+      "GoHighLevel build: pipelines, speed to lead, rebooking",
+      "EMR or booking integration",
+      "Offline conversions to Google Ads",
+      "Monthly report and strategy call",
+    ],
+  },
+  {
+    name: "Organic & add-ons",
+    price: "[From $X,XXX]",
+    per: "/month",
+    for: "Added to either plan, or on their own where it makes sense.",
+    includes: ["SEO for treatment and location pages", "AEO for AI answer engines", "LegitScript certification (one-time)", "Additional locations"],
+  },
+];
+---
+<Base title="Pricing" description="How NexaMed pricing works: a flat monthly fee by scope, ad spend paid directly to the platforms, no percentage of spend, and accounts you own.">
+  <PageHero
+    title="A flat fee by scope. [[No percentage]] of spend."
+    lead="You pay the ad platforms directly, in accounts you own. Our fee is based on what we manage, not how much you spend, so we never have a reason to push budget the market won't support."
+    crumbs={[{ label: "Pricing" }]}
+    center
+  />
+
+  <section class="section section--mist">
+    <div class="container">
+      <div class="grid grid--3 plans">
+        {plans.map((p) => (
+          <div class:list={["card plan", { "card--ink on-ink": p.featured }]}>
+            <h2 class="plan-name">{p.name}</h2>
+            <p class="plan-for">{p.for}</p>
+            <p class="plan-price"><span>{p.price}</span>{p.per}</p>
+            <ul class="checks" role="list">{p.includes.map((i) => <li>{i}</li>)}</ul>
+            <a href="/book/" class:list={["btn", { "btn--outline": !p.featured }]}>Book a call</a>
+          </div>
+        ))}
+      </div>
+      <p class="note">
+        Plus a one-time setup fee of [$X,XXX] covering tracking, CRM and landing page builds. Initial term of [X months], then month to month.
+      </p>
+    </div>
+  </section>
+
+  <section class="section section--white">
+    <div class="container split">
+      <div>
+        <h2>What's <mark>not</mark> in the fee</h2>
+        <p class="lead" style="margin-top:1.25rem">So there are no surprises later.</p>
+      </div>
+      <ul class="checks checks--x" role="list">
+        <li>Ad spend. Billed by Google and Meta directly.</li>
+        <li>Software subscriptions: GoHighLevel, your EMR, call tracking.</li>
+        <li>LegitScript's own application and annual fees.</li>
+        <li>Photo and video shoots, if you want more than we can do with what you film.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="section section--ink">
+    <div class="container split">
+      <div>
+        <h2>Not sure which you need?</h2>
+        <p class="lead" style="margin-top:1.25rem">
+          Most practices don't need everything. On the call we'll look at your current accounts and tell you which one
+          change would move the number most. Sometimes that's not ads at all.
+        </p>
+      </div>
+      <div class="btn-row">
+        <a href="/book/" class="btn">Book a strategy call</a>
+        <a href="/how-it-works/" class="btn btn--outline-light">How it works</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--white">
+    <div class="container narrow">
+      <h2 style="margin-bottom:2rem">Pricing questions</h2>
+      <FaqList items={pricingFaqs} schema />
+      <p style="margin-top:2rem"><a class="link-arrow" href="/faq/">More questions <Icon name="arrow" class="i16" /></a></p>
+    </div>
+  </section>
+</Base>
+<style>
+  .plans { align-items: stretch; }
+  .plan { display: flex; flex-direction: column; gap: 1.25rem; padding: 2rem; }
+  .plan-name { font-size: 1.5rem; }
+  .plan-for { min-height: 3.2em; }
+  .plan-price { font-size: var(--fs-small); color: var(--text-3); }
+  .on-ink .plan-price { color: var(--on-ink-2); }
+  .plan-price span { font: 600 2.6rem/1 var(--font-head); letter-spacing: -0.04em; color: var(--ink); margin-right: 0.25rem; }
+  .on-ink .plan-price span { color: #fff; }
+  .plan .checks { flex: 1; }
+  .plan .btn { width: 100%; }
+  .on-ink :global(.checks li) { color: var(--on-ink-2); }
+  .note { margin-top: 1.75rem; text-align: center; color: var(--text-2); font-size: var(--fs-small); }
+  :global(.i16) { width: 16px; height: 16px; }
+</style>

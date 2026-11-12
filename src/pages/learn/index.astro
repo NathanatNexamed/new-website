@@ -1,0 +1,64 @@
+---
+import { getCollection } from "astro:content";
+import Base from "../../layouts/Base.astro";
+import PageHero from "../../components/PageHero.astro";
+import PostCard from "../../components/PostCard.astro";
+import Icon from "../../components/Icon.astro";
+import Illo from "../../components/Illo.astro";
+import { hl } from "../../lib/hl";
+import type { IlloName } from "../../lib/illustrations";
+const posts = (await getCollection("blog", ({ data }) => !data.draft)).sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+const guides = (await getCollection("guides")).sort((a, b) => a.data.order - b.data.order);
+---
+<Base title="Learn" description="Guides, articles and videos on tracking, follow-up and ad policy for medspa and cash-pay practice owners.">
+  <PageHero
+    title="Written by the people [[running the accounts]]."
+    lead="Practical guides on tracking, follow-up and ad policy for practice owners and the people who run their front desk. No gated fluff."
+    crumbs={[{ label: "Learn" }]}
+  />
+  <section class="section section--mist">
+    <div class="container">
+      <div class="head-row"><h2>Guides</h2><a class="link-arrow" href="/guides/">All guides <Icon name="arrow" class="i16" /></a></div>
+      <div class="grid grid--2">
+        {guides.map((g) => (
+          <a href={`/guides/${g.id}/`} class="card card--link gcard">
+            <div class="g-art">{g.data.illo && <Illo name={g.data.illo as IlloName} decorative sizes="300px" />}</div>
+            <div>
+              <span class="tag">{g.data.format}</span>
+              <h3 set:html={hl(g.data.title)} />
+              <p>{g.data.description}</p>
+            </div>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+  <section class="section section--white">
+    <div class="container">
+      <div class="head-row"><h2>From the blog</h2><a class="link-arrow" href="/blog/">All articles <Icon name="arrow" class="i16" /></a></div>
+      <div class="grid grid--3">{posts.slice(0, 6).map((p) => <PostCard slug={p.id} data={p.data} />)}</div>
+    </div>
+  </section>
+  <section class="section section--mist section--tight">
+    <div class="container">
+      <a href="/videos/" class="card card--link vid-link">
+        <h2>Videos</h2>
+        <p>Short walkthroughs of real builds: tracking, GoHighLevel workflows and account audits.</p>
+        <span class="arrow"><Icon name="arrow" /></span>
+      </a>
+    </div>
+  </section>
+</Base>
+<style>
+  .head-row { display: flex; justify-content: space-between; align-items: end; gap: 1rem; margin-bottom: 2rem; flex-wrap: wrap; }
+  .head-row h2 { font-size: var(--fs-h3); }
+  .gcard { display: grid; gap: 1.5rem; align-items: center; }
+  @media (min-width: 640px) { .gcard { grid-template-columns: 200px 1fr; } }
+  .g-art { background: var(--mist); border-radius: 14px; padding: 0.5rem; }
+  .gcard h3 { margin-top: 0.75rem; font-size: 1.35rem; }
+  .gcard p { margin-top: 0.5rem; }
+  .vid-link { display: grid; gap: 1rem; align-items: center; }
+  @media (min-width: 760px) { .vid-link { grid-template-columns: auto 1fr auto; gap: 2rem; } }
+  .vid-link h2 { font-size: var(--fs-h3); }
+  :global(.i16) { width: 16px; height: 16px; }
+</style>

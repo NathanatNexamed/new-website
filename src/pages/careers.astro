@@ -1,0 +1,23 @@
+---
+import Base from "../layouts/Base.astro";
+import PageHero from "../components/PageHero.astro";
+import { site } from "../config";
+---
+<Base title="Careers" description="Work at NexaMed: a small healthcare-only marketing team for cash-pay practices.">
+  <PageHero
+    title="Small team. [[Real accounts]]."
+    lead="We hire people who'd rather fix the tracking than make the report look good. Everyone here works directly on client accounts."
+    crumbs={[{ label: "Careers" }]}
+  />
+  <section class="section section--mist">
+    <div class="container narrow">
+      <div class="card">
+        <h2 style="font-size:var(--fs-h3)">No open roles right now</h2>
+        <p>
+          [List roles here when hiring.] If you're excellent at paid media, GoHighLevel or healthcare marketing and think
+          we should know you, email <a href={`mailto:${site.email}`}>{site.email}</a> with something you've built.
+        </p>
+      </div>
+    </div>
+  </section>
+</Base>

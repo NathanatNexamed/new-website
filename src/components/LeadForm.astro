@@ -1,0 +1,145 @@
+---
+// Short form. POSTs to site.formEndpoint (GHL webhook) and redirects to `redirect` on success.
+import { site } from "../config";
+interface Props { id: string; redirect: string; submitLabel?: string; fields?: "call" | "guide"; source: string }
+const { id, redirect, submitLabel = "Send", fields = "call", source } = Astro.props;
+---
+<form class="lead-form" id={id} data-lead-form data-endpoint={site.formEndpoint} data-redirect={redirect} novalidate>
+  <input type="hidden" name="source" value={source} />
+  <input type="hidden" name="gclid" value="" data-gclid />
+  <div class="row">
+    <div class="field">
+      <label for={`${id}-name`}>Your name</label>
+      <input id={`${id}-name`} name="name" autocomplete="name" required />
+    </div>
+    <div class="field">
+      <label for={`${id}-email`}>Work email</label>
+      <input id={`${id}-email`} name="email" type="email" autocomplete="email" required />
+    </div>
+  </div>
+  <div class="field">
+    <label for={`${id}-practice`}>Practice name</label>
+    <input id={`${id}-practice`} name="practice" autocomplete="organization" required />
+  </div>
+  {fields === "call" && (
+    <>
+      <div class="field">
+        <label for={`${id}-site`}>Website</label>
+        <input id={`${id}-site`} name="website" type="url" inputmode="url" placeholder="https://" autocomplete="url" />
+      </div>
+      <div class="row">
+        <div class="field">
+          <label for={`${id}-spend`}>Monthly ad spend</label>
+          <select id={`${id}-spend`} name="spend" required>
+            <option value="">Select one</option>
+            <option>Not running ads yet</option>
+            <option>Under $5k</option>
+            <option>$5k–$15k</option>
+            <option>$15k–$50k</option>
+            <option>$50k+</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for={`${id}-locations`}>Locations</label>
+          <select id={`${id}-locations`} name="locations" required>
+            <option value="">Select one</option>
+            <option>1</option>
+            <option>2–3</option>
+            <option>4+</option>
+          </select>
+        </div>
+      </div>
+      <div class="field">
+        <label for={`${id}-msg`}>What's not working right now? <span class="opt">Optional</span></label>
+        <textarea id={`${id}-msg`} name="message" rows="3"></textarea>
+      </div>
+    </>
+  )}
+  <button class="btn" type="submit">{submitLabel}</button>
+  <p class="status" role="status" aria-live="polite"></p>
+</form>
+
+<script>
+  // Capture gclid from the URL (or a stored one) so forms can be matched back to the ad click.
+  const params = new URLSearchParams(location.search);
+  let gclid = params.get("gclid");
+  try {
+    if (gclid) localStorage.setItem("nx_gclid", gclid);
+    else gclid = localStorage.getItem("nx_gclid");
+  } catch {}
+  document.querySelectorAll<HTMLInputElement>("[data-gclid]").forEach((i) => (i.value = gclid ?? ""));
+
+  document.querySelectorAll<HTMLFormElement>("[data-lead-form]").forEach((form) => {
+    const status = form.querySelector<HTMLElement>(".status")!;
+    const btn = form.querySelector<HTMLButtonElement>("button[type=submit]")!;
+    const fieldsEls = Array.from(form.querySelectorAll<HTMLInputElement | HTMLSelectElement>("input[required], select[required]"));
+    const showError = (el: HTMLInputElement | HTMLSelectElement) => {
+      const wrap = el.closest(".field")!;
+      let msg = wrap.querySelector<HTMLElement>(".err");
+      if (!el.validity.valid) {
+        if (!msg) {
+          msg = document.createElement("p");
+          msg.className = "err";
+          msg.id = el.id + "-err";
+          wrap.appendChild(msg);
+        }
+        msg.textContent = el.validity.typeMismatch ? "Enter a valid email." : "Required.";
+        el.setAttribute("aria-invalid", "true");
+        el.setAttribute("aria-describedby", msg.id);
+      } else {
+        msg?.remove();
+        el.removeAttribute("aria-invalid");
+        el.removeAttribute("aria-describedby");
+      }
+    };
+    fieldsEls.forEach((el) => el.addEventListener("blur", () => showError(el)));
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      fieldsEls.forEach(showError);
+      const firstBad = fieldsEls.find((el) => !el.validity.valid);
+      if (firstBad) {
+        firstBad.focus();
+        return;
+      }
+      const endpoint = form.dataset.endpoint;
+      if (!endpoint) {
+        status.textContent = "Form endpoint isn't configured yet (set formEndpoint in src/config.ts).";
+        return;
+      }
+      btn.disabled = true;
+      btn.textContent = "Sending…";
+      try {
+        const res = await fetch(endpoint, { method: "POST", body: new FormData(form) });
+        if (!res.ok) throw new Error(String(res.status));
+        location.href = form.dataset.redirect!;
+      } catch {
+        status.textContent = "That didn't go through. Try again, or email us directly.";
+        btn.disabled = false;
+        btn.textContent = "Try again";
+      }
+    });
+  });
+</script>
+
+<style>
+  .lead-form { display: grid; gap: 1rem; }
+  .row { display: grid; gap: 1rem; }
+  @media (min-width: 600px) { .row { grid-template-columns: 1fr 1fr; } }
+  .field { display: grid; gap: 0.4rem; }
+  label { font-size: var(--fs-small); font-weight: 600; }
+  .opt { font-weight: 400; color: var(--text-3); }
+  input, select, textarea {
+    width: 100%; min-height: 48px; padding: 0.7rem 0.85rem;
+    border: 1.5px solid var(--steel); border-radius: var(--radius-btn);
+    background: var(--white); color: var(--ink); font: 400 1rem/1.4 var(--font-body);
+    transition: border-color 150ms var(--ease), box-shadow 150ms var(--ease);
+  }
+  textarea { resize: vertical; }
+  input:focus, select:focus, textarea:focus { outline: none; border-color: var(--azure); box-shadow: 0 0 0 3px rgb(29 111 224 / 0.2); }
+  [aria-invalid="true"] { border-color: #b91c1c; }
+  .lead-form :global(.err) { font-size: var(--fs-xs); color: #b91c1c; }
+  .btn { justify-self: start; margin-top: 0.25rem; }
+  .btn:disabled { opacity: 0.7; cursor: progress; }
+  .status { font-size: var(--fs-small); color: var(--text-2); }
+  .status:empty { display: none; }
+</style>

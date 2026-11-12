@@ -1,0 +1,55 @@
+---
+// Example of the monthly report layout (placeholder values in brackets, per the brand kit).
+import DataPanel from "./DataPanel.astro";
+import Metric from "./Metric.astro";
+const leads = [52, 54, 44, 58, 50, 70, 64, 92];
+const booked = [22, 23, 25, 20, 26, 23, 30, 44];
+const W = 460, H = 150, max = 100;
+const pt = (arr: number[]) => arr.map((v, i) => [(i / (arr.length - 1)) * W, H - (v / max) * H]);
+const smooth = (p: number[][]) =>
+  p.reduce((d, [x, y], i, a) => {
+    if (i === 0) return `M${x},${y}`;
+    const [px, py] = a[i - 1];
+    const cx = (px + x) / 2;
+    return `${d} C${cx},${py} ${cx},${y} ${x},${y}`;
+  }, "");
+const lp = pt(leads), bp = pt(booked);
+const area = (p: number[][]) => `${smooth(p)} L${W},${H} L0,${H} Z`;
+---
+<DataPanel>
+  <div class="rp-metrics">
+    <Metric label="Lead-to-consult" value="[X.X%]" delta="[+X%]" note="vs last month" />
+    <Metric label="Cost per booked patient" value="[$XXX]" delta="[+X%]" note="vs last month" />
+  </div>
+  <div class="rp-chart">
+    <div class="rp-head">
+      <p class="rp-title">Leads & booked consults</p>
+      <ul class="rp-legend" role="list">
+        <li><span class="sw sw-l"></span>Leads</li>
+        <li><span class="sw sw-b"></span>Booked</li>
+      </ul>
+    </div>
+    <svg viewBox={`-6 -8 ${W + 12} ${H + 14}`} role="img" aria-label="Example chart: leads and booked consults both trending up over eight months">
+      {[0.25, 0.5, 0.75].map((f) => <line x1="0" x2={W} y1={H * f} y2={H * f} stroke="#E3E9F2" stroke-width="1" />)}
+      <path d={area(lp)} fill="#DCE8FB" />
+      <path d={area(bp)} fill="#B3CDF4" />
+      <path d={smooth(lp)} fill="none" stroke="#6FA0EA" stroke-width="2.5" />
+      <path d={smooth(bp)} fill="none" stroke="#1D6FE0" stroke-width="2.5" />
+      {lp.map(([x, y]) => <circle cx={x} cy={y} r="3.5" fill="#6FA0EA" stroke="#fff" stroke-width="1.5" />)}
+      {bp.map(([x, y]) => <circle cx={x} cy={y} r="3.5" fill="#1D6FE0" stroke="#fff" stroke-width="1.5" />)}
+    </svg>
+  </div>
+</DataPanel>
+<style>
+  .rp-metrics { display: grid; gap: 0.75rem; grid-template-columns: 1fr 1fr; }
+  .rp-metrics :global(.m-value) { font-size: clamp(1.6rem, 1.2rem + 1.6vw, 2.6rem); }
+  .rp-chart { margin-top: 1.25rem; }
+  .rp-head { display: flex; justify-content: space-between; align-items: center; gap: 1rem; flex-wrap: wrap; margin-bottom: 0.75rem; }
+  .rp-title { font: 600 1.05rem/1.2 var(--font-head); letter-spacing: -0.02em; }
+  .rp-legend { display: flex; gap: 1rem; list-style: none; margin: 0; padding: 0; font-size: var(--fs-xs); color: var(--text-2); }
+  .rp-legend li { display: flex; align-items: center; gap: 0.4rem; }
+  .sw { width: 8px; height: 8px; border-radius: 99px; }
+  .sw-l { background: #6FA0EA; }
+  .sw-b { background: var(--azure); }
+  svg { width: 100%; height: auto; }
+</style>

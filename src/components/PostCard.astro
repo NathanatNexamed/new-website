@@ -1,0 +1,30 @@
+---
+import Illo from "./Illo.astro";
+import { blogCategories, personBySlug } from "../data/team";
+import type { IlloName } from "../lib/illustrations";
+interface Props { slug: string; data: any }
+const { slug, data } = Astro.props;
+const cat = blogCategories[data.category];
+const author = personBySlug(data.author);
+const date = data.date.toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric", timeZone: "UTC" });
+---
+<article class="card card--link post">
+  <div class="thumb">{data.illo ? <Illo name={data.illo as IlloName} decorative sizes="400px" /> : null}</div>
+  <div class="tags"><span class="tag">{cat?.name ?? data.category}</span></div>
+  <h3><a href={`/blog/${slug}/`} class="stretched">{data.title}</a></h3>
+  <p>{data.description}</p>
+  <p class="meta">{author?.name} · <time datetime={data.date.toISOString()}>{date}</time></p>
+</article>
+<style>
+  .post { display: flex; flex-direction: column; gap: 0.9rem; padding: 1rem 1rem 1.5rem; }
+  .thumb {
+    aspect-ratio: 16 / 10; border-radius: 14px; background: var(--mist);
+    overflow: hidden; padding: 0.75rem;
+  }
+  .thumb :global(img) { width: 100%; height: 100%; object-fit: contain; }
+  .post > :not(.thumb) { margin-inline: 0.5rem; }
+  h3 { font-size: 1.25rem; }
+  h3 a { text-decoration: none; }
+  .stretched::after { content: ""; position: absolute; inset: 0; border-radius: inherit; }
+  .meta { margin-top: auto; font-size: var(--fs-xs); color: var(--text-3); }
+</style>

@@ -1,0 +1,39 @@
+---
+import { getCollection } from "astro:content";
+import Base from "../../layouts/Base.astro";
+import CaseCard from "../../components/CaseCard.astro";
+const cases = (await getCollection("caseStudies")).sort((a, b) => a.data.order - b.data.order);
+---
+<Base title="You're booked" noindex hideFooterCta>
+  <!-- Conversion fires here. GTM listens for the call_booked event. -->
+  <script is:inline slot="head">
+    window.dataLayer = window.dataLayer || [];
+    window.dataLayer.push({ event: "call_booked" });
+  </script>
+  <section class="section section--mist">
+    <div class="container narrow ty">
+      <h1>You're <mark>booked</mark>.</h1>
+      <p class="lead">
+        You'll get a calendar invite and a confirmation email in the next few minutes. To make the call useful, have
+        access to your Google Ads, Meta and CRM ready if you can.
+      </p>
+      <h2>Before we talk</h2>
+      <ul class="checks" role="list">
+        <li>Roughly what you spend per month, and on which channels</li>
+        <li>Which treatments you most want to grow</li>
+        <li>How leads are followed up today, and by whom</li>
+      </ul>
+    </div>
+  </section>
+  <section class="section section--white">
+    <div class="container">
+      <h2 class="sub">Read one of these before we talk</h2>
+      <div class="grid grid--2">{cases.map((c) => <CaseCard slug={c.id} data={c.data} />)}</div>
+    </div>
+  </section>
+</Base>
+<style>
+  .ty .lead { margin-top: 1.25rem; }
+  .ty h2 { font-size: 1.3rem; margin: 2.5rem 0 0.75rem; }
+  .sub { font-size: var(--fs-h3); margin-bottom: 1.5rem; }
+</style>

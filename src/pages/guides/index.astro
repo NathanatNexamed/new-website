@@ -1,0 +1,47 @@
+---
+import { getCollection } from "astro:content";
+import Base from "../../layouts/Base.astro";
+import PageHero from "../../components/PageHero.astro";
+import Illo from "../../components/Illo.astro";
+import Icon from "../../components/Icon.astro";
+import { hl } from "../../lib/hl";
+import type { IlloName } from "../../lib/illustrations";
+const guides = (await getCollection("guides")).sort((a, b) => a.data.order - b.data.order);
+---
+<Base title="Guides" description="Free step-by-step guides for practice owners: offline conversions, ad policy, LegitScript and follow-up.">
+  <PageHero
+    title="Guides for [[practice owners]]."
+    lead="Step-by-step walkthroughs of the setups we build for clients. Use them yourself, hand them to your team, or send them to your current agency."
+    crumbs={[{ label: "Learn", href: "/learn/" }, { label: "Guides" }]}
+  />
+  <section class="section section--mist">
+    <div class="container">
+      <ul class="glist" role="list">
+        {guides.map((g, i) => (
+          <li class:list={["card gl", { "card--ink on-ink": i % 2 === 1 }]}>
+            <div class="gl-art">{g.data.illo && <Illo name={g.data.illo as IlloName} decorative sizes="420px" />}</div>
+            <div>
+              <span class="tag">{g.data.format}</span>
+              <h2><a href={`/guides/${g.id}/`} set:html={hl(g.data.title)} /></h2>
+              <p>{g.data.description}</p>
+              <span class="link-arrow">Get the guide <Icon name="arrow" class="i16" /></span>
+            </div>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+</Base>
+<style>
+  .glist { list-style: none; margin: 0; padding: 0; display: grid; gap: 1.25rem; }
+  .gl { display: grid; gap: 2rem; align-items: center; position: relative; }
+  @media (min-width: 860px) { .gl { grid-template-columns: 380px 1fr; padding: 2rem 3rem 2rem 2rem; } }
+  .gl-art { background: var(--mist); border-radius: 16px; padding: 1rem; }
+  .gl h2 { font-size: var(--fs-h3); margin-top: 0.85rem; }
+  .gl h2 a { text-decoration: none; }
+  .gl h2 a::after { content: ""; position: absolute; inset: 0; border-radius: inherit; }
+  .gl p { margin-top: 0.75rem; max-width: 60ch; }
+  .gl .link-arrow { margin-top: 1.25rem; }
+  .gl:hover { box-shadow: var(--shadow-card); }
+  :global(.i16) { width: 16px; height: 16px; }
+</style>

@@ -1,0 +1,80 @@
+---
+// Interior page hero. Headline uses [[phrase]] for the highlighter.
+import Breadcrumbs from "./Breadcrumbs.astro";
+import Illo from "./Illo.astro";
+import { hl } from "../lib/hl";
+import type { IlloName } from "../lib/illustrations";
+interface Props {
+  title: string;
+  lead?: string;
+  crumbs?: { label: string; href?: string }[];
+  illo?: IlloName;
+  primary?: { label: string; href: string };
+  secondary?: { label: string; href: string };
+  tone?: "white" | "mist";
+  center?: boolean;
+}
+const { title, lead, crumbs, illo, primary, secondary, tone = "white", center = false } = Astro.props;
+---
+<section class:list={["hero", `section--${tone}`, { center, "has-illo": !!illo }]}>
+  <div class="container">
+    {crumbs && <Breadcrumbs items={crumbs} />}
+    <div class="hero-grid">
+      <div class="hero-copy">
+        <h1 set:html={hl(title)} />
+        {lead && <p class="lead">{lead}</p>}
+        <slot name="after-lead" />
+        {(primary || secondary) && (
+          <div class:list={["btn-row", { "btn-row--center": center }]}>
+            {primary && <a class="btn" href={primary.href}>{primary.label}</a>}
+            {secondary && <a class="btn btn--outline" href={secondary.href}>{secondary.label}</a>}
+          </div>
+        )}
+      </div>
+      {illo && (
+        <div class="hero-art">
+          <Illo name={illo} eager />
+        </div>
+      )}
+    </div>
+    <slot />
+  </div>
+</section>
+<style>
+  .hero {
+    padding-block: clamp(2.5rem, 2rem + 3vw, 5rem) clamp(3.5rem, 2.5rem + 4vw, 6.5rem);
+  }
+  .hero-grid {
+    display: grid;
+    gap: 3rem;
+    align-items: center;
+  }
+  @media (min-width: 960px) {
+    .has-illo .hero-grid {
+      grid-template-columns: 1.05fr 0.95fr;
+    }
+  }
+  .hero-copy {
+    max-width: 820px;
+  }
+  .hero-copy .lead {
+    margin-top: 1.5rem;
+    max-width: 62ch;
+  }
+  .hero-copy .btn-row {
+    margin-top: 2.25rem;
+  }
+  .center .hero-copy {
+    margin-inline: auto;
+    text-align: center;
+  }
+  .center .hero-copy .lead {
+    margin-inline: auto;
+  }
+  .center :global(.crumbs ol) {
+    justify-content: center;
+  }
+  .hero-art :global(img) {
+    width: 100%;
+  }
+</style>

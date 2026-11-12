@@ -1,0 +1,13 @@
+---
+import { getCollection } from "astro:content";
+import BlogIndex from "../../components/BlogIndex.astro";
+const posts = (await getCollection("blog", ({ data }) => !data.draft)).sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+---
+<BlogIndex
+  title="Blog"
+  description="Articles on Google Ads, Meta, CRM and practice operations for medspas and cash-pay clinics."
+  heading="Notes from [[live accounts]]."
+  lead="What we're seeing in practice ad accounts, CRMs and front desks, written up for owners and operators."
+  crumbs={[{ label: "Learn", href: "/learn/" }, { label: "Blog" }]}
+  posts={posts}
+/>

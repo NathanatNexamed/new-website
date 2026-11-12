@@ -1,0 +1,93 @@
+---
+import Base from "../../layouts/Base.astro";
+import PageHero from "../../components/PageHero.astro";
+import Icon from "../../components/Icon.astro";
+import Illo from "../../components/Illo.astro";
+import PlatformStrip from "../../components/PlatformStrip.astro";
+import { services } from "../../data/services";
+const top = services.filter((s) => !s.parent);
+---
+<Base title="Services" description="Google Ads, Meta Ads, SEO & AEO, CRM & automations, and LegitScript certification for medspas and cash-pay clinics.">
+  <PageHero
+    title="Everything between the click and the [[booked patient]]."
+    lead="Each service works on its own, but they're built to connect, so nothing falls through between your ads and your front desk. Most practices start with one or two."
+    crumbs={[{ label: "Services" }]}
+    center
+    primary={{ label: "Book a strategy call", href: "/book/" }}
+    secondary={{ label: "How it works", href: "/how-it-works/" }}
+  />
+
+  <section class="section section--mist">
+    <div class="container">
+      <ul class="svc-list" role="list">
+        {top.map((s, i) => {
+          const kids = services.filter((k) => k.parent === s.slug);
+          return (
+            <li class:list={["card", "svc", { "card--ink on-ink": i % 3 === 1 }]} data-reveal>
+              <div class="svc-copy">
+                <span class="num">{String(i + 1).padStart(2, "0")}</span>
+                <h2 class="svc-name"><a href={`/services/${s.slug}/`}>{s.name}</a></h2>
+                <p>{s.short}</p>
+                <ul class="svc-points" role="list">
+                  {s.work.slice(0, 3).map((w) => <li>{w.title}</li>)}
+                </ul>
+                {kids.map((k) => (
+                  <p class="kid"><a href={`/services/${k.slug}/`} class="link-arrow">Includes {k.name}: {k.short} <Icon name="arrow" class="i16" /></a></p>
+                ))}
+              </div>
+              <div class="svc-art"><Illo name={s.illo} decorative sizes="420px" /></div>
+              <span class:list={["arrow", { "arrow--ink": i % 3 === 1 }]} aria-hidden="true"><Icon name="arrow" /></span>
+            </li>
+          );
+        })}
+      </ul>
+    </div>
+  </section>
+
+  <section class="section section--white">
+    <div class="container split">
+      <div>
+        <h2>One practice per market, so <mark>your account</mark> gets the attention.</h2>
+        <p class="lead" style="margin-top:1.25rem">
+          We don't run competing practices in the same area. That means we can share what's working in your category
+          without worrying about whose campaign it came from, and you never bid against another of our clients.
+        </p>
+        <div class="btn-row" style="margin-top:2rem"><a class="btn" href="/book/">Check if your market is open</a></div>
+      </div>
+      <Illo name="connected-stack" />
+    </div>
+  </section>
+
+  <section class="section section--white section--tight" style="padding-top:0">
+    <div class="container"><PlatformStrip /></div>
+  </section>
+</Base>
+
+<style>
+  .svc-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 1.25rem; }
+  .svc {
+    display: grid;
+    gap: 2rem;
+    align-items: center;
+    position: relative;
+  }
+  @media (min-width: 900px) {
+    .svc { grid-template-columns: 1.4fr 1fr; padding: 2.5rem 3rem; }
+  }
+  .svc-name { font-size: var(--fs-h3); margin-top: 0.5rem; }
+  .svc-name a { text-decoration: none; }
+  .svc-name a::after { content: ""; position: absolute; inset: 0; border-radius: inherit; }
+  .svc-copy > p { margin-top: 0.75rem; max-width: 55ch; }
+  .svc-points { list-style: none; padding: 0; margin: 1.25rem 0 0; display: flex; flex-wrap: wrap; gap: 0.5rem; }
+  .svc-points li {
+    font-size: var(--fs-xs); font-weight: 500; padding: 0.3rem 0.65rem;
+    border: 1px solid var(--line); border-radius: 6px; color: var(--text-2);
+  }
+  .on-ink .svc-points li { border-color: var(--ink-line); color: var(--on-ink-2); }
+  .kid { position: relative; z-index: 1; margin-top: 1.25rem; font-size: var(--fs-small); }
+  .svc-art :global(img) { max-height: 240px; width: auto; margin-inline: auto; }
+  .on-ink .svc-art { background: var(--mist); border-radius: 16px; padding: 1rem; }
+  .svc > .arrow { position: absolute; top: 1.5rem; right: 1.5rem; }
+  .svc:hover > .arrow { background: var(--azure); border-color: var(--azure); color: #fff; }
+  :global(.i16) { width: 16px; height: 16px; flex: none; }
+</style>

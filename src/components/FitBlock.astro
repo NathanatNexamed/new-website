@@ -1,0 +1,20 @@
+---
+// Two-column "what we report / not a fit" block for ink sections.
+interface Props { measureTitle: string; measure: string[]; notFit: string[] }
+const { measureTitle, measure, notFit } = Astro.props;
+---
+<div class="grid grid--2 fit">
+  <div class="fit-col">
+    <h3>{measureTitle}</h3>
+    <ul class="checks" role="list">{measure.map((m) => <li>{m}</li>)}</ul>
+  </div>
+  <div class="fit-col">
+    <h3>Probably not a fit if</h3>
+    <ul class="checks checks--x" role="list">{notFit.map((m) => <li>{m}</li>)}</ul>
+  </div>
+</div>
+<style>
+  .fit { --grid-gap: 2.5rem 4rem; }
+  .fit-col h3 { margin-bottom: 1.25rem; }
+  .fit-col :global(li) { color: var(--on-ink-2); }
+</style>

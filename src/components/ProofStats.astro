@@ -1,0 +1,52 @@
+---
+// Dark proof bar from the brand kit.
+interface Props { stats: { value: string; label: string }[] }
+const { stats } = Astro.props;
+---
+<div class="proof">
+  <dl>
+    {stats.map((s) => (
+      <div>
+        <dt>{s.label}</dt>
+        <dd>{s.value}</dd>
+      </div>
+    ))}
+  </dl>
+</div>
+<style>
+  .proof {
+    background:
+      radial-gradient(70% 120% at 0% 0%, rgb(29 111 224 / 0.35), transparent 60%),
+      var(--ink);
+    color: var(--white);
+    border-radius: var(--radius-lg);
+    padding: clamp(1.75rem, 1.2rem + 2vw, 2.75rem);
+  }
+  dl {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 2rem 1.5rem;
+    margin: 0;
+  }
+  @media (min-width: 900px) {
+    dl {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+  }
+  dl > div {
+    display: flex;
+    flex-direction: column-reverse;
+    justify-content: flex-end;
+  }
+  dd {
+    margin: 0;
+    font: 600 clamp(2.2rem, 1.6rem + 2.2vw, 3.4rem)/1 var(--font-head);
+    letter-spacing: -0.04em;
+  }
+  dt {
+    margin-top: 0.75rem;
+    color: var(--on-ink-2);
+    font-size: var(--fs-small);
+    line-height: 1.4;
+  }
+</style>

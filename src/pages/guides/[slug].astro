@@ -1,0 +1,52 @@
+---
+import { getCollection, render } from "astro:content";
+import Base from "../../layouts/Base.astro";
+import Breadcrumbs from "../../components/Breadcrumbs.astro";
+import Illo from "../../components/Illo.astro";
+import LeadForm from "../../components/LeadForm.astro";
+import { hl, plain } from "../../lib/hl";
+import type { IlloName } from "../../lib/illustrations";
+
+export async function getStaticPaths() {
+  const guides = await getCollection("guides");
+  return guides.map((g) => ({ params: { slug: g.id }, props: { g } }));
+}
+const { g } = Astro.props;
+const d = g.data;
+const { Content } = await render(g);
+---
+<Base title={plain(d.title)} description={d.description} hideFooterCta>
+  <section class="section--mist g-hero">
+    <div class="container">
+      <Breadcrumbs items={[{ label: "Guides", href: "/guides/" }, { label: plain(d.title) }]} />
+      <div class="split split--wide-left g-grid">
+        <div>
+          <span class="tag">{d.format}</span>
+          <h1 set:html={hl(d.title)} />
+          <div class="prose g-intro"><Content /></div>
+          <h2 class="inside">What's inside</h2>
+          <ul class="checks" role="list">{d.bullets.map((b: string) => <li>{b}</li>)}</ul>
+        </div>
+        <div class="g-side">
+          {d.illo && <div class="g-art"><Illo name={d.illo as IlloName} eager decorative sizes="480px" /></div>}
+          <div class="card g-form">
+            <h2>Get the guide</h2>
+            <p>We'll email it to you. No sequence of ten follow-ups.</p>
+            <LeadForm id="guide-form" fields="guide" source={`guide:${g.id}`} redirect={`/thank-you/${g.id}/`} submitLabel="Send me the guide" />
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</Base>
+<style>
+  .g-hero { padding-block: clamp(2.5rem, 2rem + 3vw, 5rem); }
+  .g-grid { align-items: start; }
+  .g-hero h1 { margin-top: 1rem; font-size: clamp(2.2rem, 1.5rem + 2.8vw, 3.75rem); }
+  .g-intro { margin-top: 1.5rem; font-size: var(--fs-lead); color: var(--text-2); }
+  .inside { font-size: 1.25rem; margin: 2.25rem 0 0.75rem; }
+  .g-art { margin-bottom: 1.25rem; }
+  .g-form { box-shadow: var(--shadow-card); }
+  .g-form h2 { font-size: 1.5rem; }
+  .g-form > p { margin: 0.5rem 0 1.25rem; }
+</style>

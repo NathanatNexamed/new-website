@@ -1,0 +1,20 @@
+---
+import Base from "../layouts/Base.astro";
+import { site } from "../config";
+---
+<Base title="Privacy policy" description="How NexaMed collects and uses information on this website." hideFooterCta>
+  <section class="section section--white">
+    <div class="container narrow prose">
+      <h1>Privacy policy</h1>
+      <p><em>[Placeholder. Have counsel review before launch.] Last updated: [date].</em></p>
+      <h2>What we collect</h2>
+      <p>When you fill out a form or book a call, we collect the details you provide (name, email, practice name, website and anything you write). We also collect standard analytics data and advertising click identifiers (such as Google's GCLID) to measure which campaigns bring visitors to the site.</p>
+      <h2>How we use it</h2>
+      <p>To respond to you, schedule calls, send guides you've requested, and understand how visitors find us. We don't sell your information.</p>
+      <h2>Third parties</h2>
+      <p>We use [GoHighLevel, Google Analytics, Google Ads, Meta] to run forms, scheduling and measurement. Each processes data under its own privacy policy.</p>
+      <h2>Contact</h2>
+      <p>Questions or requests to delete your data: <a href={`mailto:${site.email}`}>{site.email}</a>.</p>
+    </div>
+  </section>
+</Base>

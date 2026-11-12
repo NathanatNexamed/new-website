@@ -1,0 +1,35 @@
+---
+interface Props { label: string; value: string; note?: string; delta?: string }
+const { label, value, note, delta } = Astro.props;
+---
+<div class="metric">
+  <p class="m-label">{label}</p>
+  <p class="m-value">{value}</p>
+  {(note || delta) && <p class="m-note">{delta && <span class="delta">{delta}</span>} {note}</p>}
+</div>
+<style>
+  .metric {
+    background: var(--mist);
+    border-radius: 14px;
+    padding: 1.1rem 1.2rem;
+  }
+  .m-label {
+    font-size: var(--fs-small);
+    font-weight: 500;
+    color: var(--ink);
+  }
+  .m-value {
+    margin-top: 0.35rem;
+    font: 600 clamp(2.2rem, 1.8rem + 1.6vw, 3.2rem)/1 var(--font-head);
+    letter-spacing: -0.04em;
+  }
+  .m-note {
+    margin-top: 0.6rem;
+    font-size: var(--fs-xs);
+    color: var(--text-3);
+  }
+  .delta {
+    color: var(--success);
+    font-weight: 700;
+  }
+</style>

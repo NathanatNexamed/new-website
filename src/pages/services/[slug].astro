@@ -1,0 +1,174 @@
+---
+import { getCollection } from "astro:content";
+import Base from "../../layouts/Base.astro";
+import PageHero from "../../components/PageHero.astro";
+import FaqList from "../../components/FaqList.astro";
+import FitBlock from "../../components/FitBlock.astro";
+import RelatedCards from "../../components/RelatedCards.astro";
+import CaseCard from "../../components/CaseCard.astro";
+import Icon from "../../components/Icon.astro";
+import { services, serviceBySlug, type Service } from "../../data/services";
+import { liveIntegrations } from "../../data/integrations";
+import { hl, plain } from "../../lib/hl";
+import { site } from "../../config";
+
+export function getStaticPaths() {
+  return services.map((s) => ({ params: { slug: s.slug }, props: { s } }));
+}
+const { s } = Astro.props as { s: Service };
+const parent = s.parent ? serviceBySlug(s.parent) : undefined;
+const child = services.find((x) => x.parent === s.slug);
+const crumbs = [
+  { label: "Services", href: "/services/" },
+  ...(parent ? [{ label: parent.name, href: `/services/${parent.slug}/` }] : []),
+  { label: s.name },
+];
+const cases = (await getCollection("caseStudies", ({ data }) => data.services.includes(s.slug))).sort(
+  (a, b) => a.data.order - b.data.order,
+);
+const related = s.related
+  .map(serviceBySlug)
+  .filter(Boolean)
+  .map((r) => ({ title: r!.name, body: r!.short, href: `/services/${r!.slug}/` }));
+
+const schema = [
+  {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    name: s.name,
+    serviceType: s.name,
+    description: s.metaDescription,
+    provider: { "@type": "Organization", name: site.name, url: site.url },
+    audience: { "@type": "Audience", audienceType: "Medspas and cash-pay medical practices" },
+    url: `${site.url}/services/${s.slug}/`,
+  },
+];
+---
+<Base title={`${s.name} for medspas & cash-pay clinics`} description={s.metaDescription} schema={schema}>
+  <PageHero
+    title={s.title}
+    lead={s.lead}
+    crumbs={crumbs}
+    illo={s.illo}
+    primary={{ label: "Book a strategy call", href: "/book/" }}
+    secondary={{ label: "How it works", href: "/how-it-works/" }}
+  />
+
+  <section class="section section--mist">
+    <div class="container split split--wide-left">
+      <div>
+        <h2>{s.problemTitle}</h2>
+      </div>
+      <ul class="checks checks--x problems" role="list">
+        {s.problem.map((p) => <li>{p}</li>)}
+      </ul>
+    </div>
+  </section>
+
+  <section class="section section--white">
+    <div class="container">
+      <div class="section-head">
+        <h2>What we <mark>actually do</mark>.</h2>
+      </div>
+      <div class="grid grid--2">
+        {s.work.map((w, i) => (
+          <div class="card" data-reveal>
+            <span class="num">{String(i + 1).padStart(2, "0")}</span>
+            <h3 style="margin-top:0.75rem">{w.title}</h3>
+            <p>{w.body}</p>
+          </div>
+        ))}
+      </div>
+
+      {s.crossLinks?.map((c) => (
+        <a href={c.href} class="card card--ink card--link xlink on-ink">
+          <div>
+            <h3>{c.label}</h3>
+            <p>{c.body}</p>
+          </div>
+          <span class="arrow arrow--ink"><Icon name="arrow" /></span>
+        </a>
+      ))}
+
+      {child && (
+        <a href={`/services/${child.slug}/`} class="card card--mist card--link xlink">
+          <div>
+            <h3>{child.name}: {plain(child.title)}</h3>
+            <p>{child.short}</p>
+          </div>
+          <span class="arrow"><Icon name="arrow" /></span>
+        </a>
+      )}
+      {parent && (
+        <a href={`/services/${parent.slug}/`} class="card card--mist card--link xlink">
+          <div>
+            <h3>AEO is built on {parent.name}</h3>
+            <p>{parent.short}</p>
+          </div>
+          <span class="arrow"><Icon name="arrow" /></span>
+        </a>
+      )}
+    </div>
+  </section>
+
+  {s.slug === "crm-automations" && (
+    <section class="section section--mist">
+      <div class="container">
+        <div class="section-head section-head--split">
+          <h2>Connected to the software <mark>you already run</mark>.</h2>
+          <div>
+            <p class="lead">We build in GoHighLevel and connect it to your booking and EMR, so the pipeline updates itself.</p>
+            <p style="margin-top:1rem"><a class="link-arrow" href="/integrations/">All integrations <Icon name="arrow" class="i16" /></a></p>
+          </div>
+        </div>
+        <RelatedCards cols={4} items={liveIntegrations.map((i) => ({ title: i.name, body: i.short, href: `/integrations/${i.slug}/` }))} />
+      </div>
+    </section>
+  )}
+
+  <section class="section section--ink">
+    <div class="container">
+      <FitBlock measureTitle={s.measureTitle} measure={s.measure} notFit={s.notFit} />
+    </div>
+  </section>
+
+  {cases.length > 0 && (
+    <section class="section section--mist">
+      <div class="container">
+        <div class="section-head"><h2>{s.name} <mark>results</mark>.</h2></div>
+        <div class="grid grid--2">{cases.map((c) => <CaseCard slug={c.id} data={c.data} />)}</div>
+      </div>
+    </section>
+  )}
+
+  <section class="section section--white">
+    <div class="container narrow">
+      <h2 style="margin-bottom:2rem">Questions we get about {s.name}</h2>
+      <FaqList items={s.faqs} />
+      <p style="margin-top:2rem"><a class="link-arrow" href="/pricing/">Pricing and more FAQs <Icon name="arrow" class="i16" /></a></p>
+    </div>
+  </section>
+
+  {related.length > 0 && (
+    <section class="section section--mist section--tight">
+      <div class="container">
+        <h2 class="rel-title">Works well with</h2>
+        <RelatedCards items={related} />
+      </div>
+    </section>
+  )}
+</Base>
+
+<style>
+  .problems { max-width: 640px; }
+  .xlink {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 2rem;
+    margin-top: 1.25rem;
+  }
+  .xlink p { margin-top: 0.5rem; max-width: 70ch; }
+  .rel-title { font-size: var(--fs-h3); margin-bottom: 1.5rem; }
+  :global(.i16) { width: 16px; height: 16px; }
+</style>

@@ -1,0 +1,38 @@
+---
+// Shared list layout for /blog/, category and author pages.
+import Base from "../layouts/Base.astro";
+import PageHero from "./PageHero.astro";
+import PostCard from "./PostCard.astro";
+import { blogCategories } from "../data/team";
+interface Props { title: string; heading: string; lead: string; posts: any[]; crumbs: { label: string; href?: string }[]; active?: string; description: string }
+const { title, heading, lead, posts, crumbs, active, description } = Astro.props;
+---
+<Base title={title} description={description}>
+  <PageHero title={heading} lead={lead} crumbs={crumbs}>
+    <slot />
+  </PageHero>
+  <section class="section section--mist">
+    <div class="container">
+      <nav class="cats" aria-label="Blog categories">
+        <a href="/blog/" aria-current={!active ? "page" : undefined}>All</a>
+        {Object.entries(blogCategories).map(([slug, c]) => (
+          <a href={`/blog/category/${slug}/`} aria-current={active === slug ? "page" : undefined}>{c.name}</a>
+        ))}
+      </nav>
+      {posts.length ? (
+        <div class="grid grid--3">{posts.map((p) => <PostCard slug={p.id} data={p.data} />)}</div>
+      ) : (
+        <p>Nothing here yet.</p>
+      )}
+    </div>
+  </section>
+</Base>
+<style>
+  .cats { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 2rem; }
+  .cats a {
+    display: inline-flex; align-items: center; min-height: 40px; padding: 0.4rem 0.95rem; border-radius: 6px;
+    border: 1.5px solid var(--steel); background: var(--white); font-size: 0.9rem; font-weight: 500; text-decoration: none;
+  }
+  .cats a:hover { border-color: var(--ink); }
+  .cats a[aria-current] { background: var(--ink); border-color: var(--ink); color: var(--white); }
+</style>

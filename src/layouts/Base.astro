@@ -1,0 +1,95 @@
+---
+import "@fontsource/inter/400.css";
+import "@fontsource/inter/500.css";
+import "@fontsource/inter/600.css";
+import "@fontsource/inter/700.css";
+import "../styles/global.css";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import { site } from "../config";
+
+interface Props {
+  title: string;
+  description?: string;
+  noindex?: boolean;
+  schema?: Record<string, unknown>[];
+  ogImage?: string;
+  ogType?: "website" | "article";
+  hideFooterCta?: boolean;
+}
+
+const {
+  title,
+  description = site.description,
+  noindex = false,
+  schema = [],
+  ogImage = "/og-default.png",
+  ogType = "website",
+  hideFooterCta = false,
+} = Astro.props;
+
+const fullTitle = title === site.name ? `${site.name} | Marketing for cash-pay practices` : `${title} | ${site.name}`;
+const canonical = new URL(Astro.url.pathname, site.url).href;
+
+const org = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  name: site.name,
+  url: site.url,
+  logo: `${site.url}/favicon.svg`,
+  description: site.description,
+  sameAs: [site.social.linkedin],
+};
+const jsonLd = [org, ...schema];
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{fullTitle}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    {noindex && <meta name="robots" content="noindex, nofollow" />}
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="preload" href="/fonts/switzer-latin-600-normal.woff2" as="font" type="font/woff2" crossorigin />
+    <meta name="theme-color" content="#0B1220" />
+    <meta property="og:site_name" content={site.name} />
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content={ogType} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={new URL(ogImage, site.url).href} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <script is:inline>document.documentElement.classList.add("js");</script>
+    {jsonLd.map((s) => <script type="application/ld+json" set:html={JSON.stringify(s)} />)}
+    <slot name="head" />
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <Header />
+    <main id="main">
+      <slot />
+    </main>
+    <Footer hideCta={hideFooterCta} />
+    <script>
+      const els = document.querySelectorAll("[data-reveal]");
+      if ("IntersectionObserver" in window) {
+        const io = new IntersectionObserver(
+          (entries) => {
+            for (const e of entries) {
+              if (e.isIntersecting) {
+                e.target.classList.add("is-in");
+                io.unobserve(e.target);
+              }
+            }
+          },
+          { rootMargin: "0px 0px -8% 0px" },
+        );
+        els.forEach((el) => io.observe(el));
+      } else {
+        els.forEach((el) => el.classList.add("is-in"));
+      }
+    </script>
+  </body>
+</html>

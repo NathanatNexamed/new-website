@@ -1,0 +1,99 @@
+---
+import { getCollection } from "astro:content";
+import Base from "../../layouts/Base.astro";
+import PageHero from "../../components/PageHero.astro";
+import RelatedCards from "../../components/RelatedCards.astro";
+import CaseCard from "../../components/CaseCard.astro";
+import Icon from "../../components/Icon.astro";
+import Illo from "../../components/Illo.astro";
+import { verticals, type Vertical } from "../../data/verticals";
+import { serviceBySlug } from "../../data/services";
+import { liveIntegrations } from "../../data/integrations";
+
+export function getStaticPaths() {
+  return verticals.map((v) => ({ params: { slug: v.slug }, props: { v } }));
+}
+const { v } = Astro.props as { v: Vertical };
+const cases = await getCollection("caseStudies", ({ data }) => data.vertical === v.slug);
+const svc = v.services.map(serviceBySlug).filter(Boolean).map((s) => ({ title: s!.name, body: s!.short, href: `/services/${s!.slug}/` }));
+const ints = liveIntegrations.filter((i) => v.integrations.includes(i.slug));
+---
+<Base title={`Marketing for ${v.name.toLowerCase()}`} description={v.metaDescription}>
+  <PageHero
+    title={v.title}
+    lead={v.lead}
+    crumbs={[{ label: "Who we serve", href: "/who-we-serve/" }, { label: v.name }]}
+    illo={v.illo}
+    primary={{ label: "Check if your market is open", href: "/book/" }}
+    secondary={{ label: "See results", href: "/case-studies/" }}
+  />
+
+  <section class="section section--mist">
+    <div class="container">
+      <div class="section-head"><h2>What's different about {v.name.toLowerCase()}</h2></div>
+      <div class="grid grid--3">
+        {v.realities.map((r, n) => (
+          <div class="card" data-reveal>
+            <span class="num">{String(n + 1).padStart(2, "0")}</span>
+            <h3 style="margin-top:0.75rem">{r.title}</h3>
+            <p>{r.body}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  {v.legitscript && (
+    <section class="section section--white section--tight">
+      <div class="container">
+        <a href="/services/legitscript-certification/" class="card card--ink card--link on-ink ls">
+          <div class="ls-art"><Illo name="compliance-shield" decorative sizes="240px" /></div>
+          <div>
+            <h2 class="ls-title">You'll likely need <mark>LegitScript</mark> first.</h2>
+            <p>{v.legitscript}</p>
+          </div>
+          <span class="arrow arrow--ink"><Icon name="arrow" /></span>
+        </a>
+      </div>
+    </section>
+  )}
+
+  <section class="section section--ink">
+    <div class="container split">
+      <h2>Where we'd <mark>focus first</mark>.</h2>
+      <ul class="checks" role="list">{v.focus.map((f) => <li>{f}</li>)}</ul>
+    </div>
+  </section>
+
+  <section class="section section--white">
+    <div class="container">
+      <div class="section-head"><h2>Services for {v.name.toLowerCase()}</h2></div>
+      <RelatedCards cols={2} items={svc} />
+      {ints.length > 0 && (
+        <div class="ints">
+          <p>Connected to:</p>
+          <ul class="tags" role="list">{ints.map((i) => <li><a class="tag" href={`/integrations/${i.slug}/`}>{i.name}</a></li>)}</ul>
+        </div>
+      )}
+    </div>
+  </section>
+
+  {cases.length > 0 && (
+    <section class="section section--mist">
+      <div class="container">
+        <div class="section-head"><h2>Results from {v.name.toLowerCase()}</h2></div>
+        <div class="grid grid--2">{cases.map((c) => <CaseCard slug={c.id} data={c.data} />)}</div>
+      </div>
+    </section>
+  )}
+</Base>
+<style>
+  .ls { display: grid; gap: 1.5rem; align-items: center; }
+  @media (min-width: 860px) { .ls { grid-template-columns: 220px 1fr auto; gap: 2.5rem; } }
+  .ls-art { background: var(--mist); border-radius: 16px; padding: 0.75rem; }
+  .ls-title { font-size: var(--fs-h3); }
+  .ls p { margin-top: 0.75rem; max-width: 60ch; }
+  .ints { display: flex; flex-wrap: wrap; align-items: center; gap: 0.75rem; margin-top: 1.75rem; color: var(--text-2); font-size: var(--fs-small); }
+  .ints ul { list-style: none; margin: 0; padding: 0; }
+  .ints a { text-decoration: none; }
+</style>

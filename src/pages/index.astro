@@ -1,0 +1,506 @@
+---
+import { getCollection } from "astro:content";
+import Base from "../layouts/Base.astro";
+import Illo from "../components/Illo.astro";
+import Icon from "../components/Icon.astro";
+import MedPlus from "../components/MedPlus.astro";
+import ProofStats from "../components/ProofStats.astro";
+import ReportPanel from "../components/ReportPanel.astro";
+import CaseCard from "../components/CaseCard.astro";
+import PostCard from "../components/PostCard.astro";
+import PlatformStrip from "../components/PlatformStrip.astro";
+import Testimonial from "../components/Testimonial.astro";
+import { services } from "../data/services";
+import { verticals } from "../data/verticals";
+
+const cases = (await getCollection("caseStudies")).sort((a, b) => a.data.order - b.data.order);
+const posts = (await getCollection("blog", ({ data }) => !data.draft))
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
+  .slice(0, 3);
+
+const svc = Object.fromEntries(services.map((s) => [s.slug, s]));
+const path = [
+  { n: "01", t: "Ad click", b: "Google, Meta or organic. The GCLID and source are captured on every form, so the click is never lost." },
+  { n: "02", t: "Answered in minutes", b: "An instant text in your voice, a call task for the front desk, and escalation if nobody picks it up." },
+  { n: "03", t: "Consult booked", b: "Booked straight into Zenoti, Cerbo, OptiMantra or your calendar, and the CRM stage updates itself." },
+  { n: "04", t: "Patient, reported", b: "Show and close data goes back to Google Ads and into a monthly report with context, not a raw dashboard." },
+];
+---
+<Base title="NexaMed">
+  <!-- Hero -->
+  <section class="home-hero section--white">
+    <div class="container">
+      <div class="hh-copy">
+        <h1 class="display">More <mark>booked patients</mark>.<br /> One practice per market.</h1>
+        <p class="lead">
+          Google Ads, Meta, SEO, and the CRM follow-up that turns leads into booked consults. Built for medspas and
+          cash-pay clinics by a team that started inside one.
+        </p>
+        <div class="btn-row btn-row--center">
+          <a href="/book/" class="btn">Book a strategy call</a>
+          <a href="/book/" class="btn btn--outline">Check if your market is open</a>
+        </div>
+      </div>
+      <div class="hh-art">
+        <Illo name="owner-leads" eager sizes="(min-width: 1100px) 1100px, 100vw" />
+      </div>
+    </div>
+  </section>
+
+  <!-- Proof -->
+  <section class="section--white proof-wrap">
+    <div class="container">
+      <ProofStats
+        stats={[
+          { value: "1", label: "Practice per market" },
+          { value: "$1M+", label: "Practices we partner with" },
+          { value: "12–15%", label: "Avg. conversion rate · Pure Hydration" },
+          { value: "56%", label: "Of leads replied · Beautiful U" },
+        ]}
+      />
+    </div>
+  </section>
+
+  <!-- Fit -->
+  <section class="section section--mist">
+    <div class="container">
+      <div class="section-head section-head--split">
+        <h2>Built for owners who already know <mark>what's broken</mark>.</h2>
+        <p class="lead">
+          You've worked with an agency before. You know what a GCLID is, or at least that your old reports didn't add
+          up. You want a partner who'll talk in booked patients and cost per consult, and who'll tell you when
+          something isn't working.
+        </p>
+      </div>
+      <div class="grid grid--2">
+        <div class="card" data-reveal>
+          <h3>We're a good fit if</h3>
+          <ul class="checks" style="margin-top:1.25rem">
+            <li>You're an established cash-pay practice with a real front desk and providers with open time.</li>
+            <li>You'll share CRM and booking data so we can report on patients, not leads.</li>
+            <li>You want a small number of things done properly over a long list of deliverables.</li>
+            <li>You make decisions on numbers and expect us to do the same.</li>
+          </ul>
+        </div>
+        <div class="card" data-reveal>
+          <h3>We're not a fit if</h3>
+          <ul class="checks checks--x" style="margin-top:1.25rem">
+            <li>You're looking for the cheapest cost per lead and will judge us on it.</li>
+            <li>Nobody can follow up with a lead the same day.</li>
+            <li>You want guaranteed numbers before we've seen your account.</li>
+            <li>A practice in your market already works with us.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Services bento -->
+  <section class="section section--white">
+    <div class="container">
+      <div class="section-head section-head--center">
+        <h2>Everything between the click and the <mark>booked patient</mark>.</h2>
+        <p class="lead">
+          Each service works on its own, but they're built to connect, so nothing falls through between your ads and
+          your front desk.
+        </p>
+      </div>
+      <div class="bento">
+        <a href="/services/crm-automations/" class="card card--link b-crm" data-reveal>
+          <div class="b-top">
+            <span class="tag">GoHighLevel</span>
+            <span class="arrow"><Icon name="arrow" /></span>
+          </div>
+          <h3 class="b-title-lg">CRM &amp; automations</h3>
+          <p>{svc["crm-automations"].short}</p>
+          <div class="b-art"><Illo name="front-desk" /></div>
+        </a>
+        <a href="/services/google-ads/" class="card card--ink card--link b-sm" data-reveal>
+          <div class="b-top"><h3>Google Ads</h3><span class="arrow arrow--ink"><Icon name="arrow" /></span></div>
+          <p>{svc["google-ads"].short}</p>
+        </a>
+        <a href="/services/meta-ads/" class="card card--link b-sm" data-reveal>
+          <div class="b-top"><h3>Meta Ads</h3><span class="arrow"><Icon name="arrow" /></span></div>
+          <p>{svc["meta-ads"].short}</p>
+        </a>
+        <a href="/services/seo/" class="card card--link b-sm" data-reveal>
+          <div class="b-top"><h3>SEO &amp; AEO</h3><span class="arrow"><Icon name="arrow" /></span></div>
+          <p>Rank in Google and get cited by AI answer engines for the treatments you most want to sell.</p>
+        </a>
+        <a href="/services/legitscript-certification/" class="card card--ink card--link b-sm" data-reveal>
+          <div class="b-top"><h3>LegitScript certification</h3><span class="arrow arrow--ink"><Icon name="arrow" /></span></div>
+          <p>{svc["legitscript-certification"].short}</p>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Reporting -->
+  <section class="section section--ink">
+    <div class="container split split--wide-right">
+      <div>
+        <h2>Every lead, tracked to a <mark>booked patient</mark>.</h2>
+        <p class="lead" style="margin-top:1.25rem">
+          We connect your ads, CRM and EMR so every lead is tracked from first click to closed treatment.
+        </p>
+        <ul class="feature-rows" role="list">
+          <li>
+            <span class="arrow fr-on"><Icon name="arrow-up-right" /></span>
+            <div>
+              <h3>See which ads book patients</h3>
+              <p>Leads, consults and closed treatments tie back to the campaign, keyword and ad that drove them.</p>
+            </div>
+          </li>
+          <li>
+            <span class="arrow arrow--ink"><Icon name="arrow-up-right" /></span>
+            <div>
+              <h3>Conversions sent back to Google Ads</h3>
+              <p>Booked and closed patients imported as offline conversions, so bidding learns from real outcomes.</p>
+            </div>
+          </li>
+          <li>
+            <span class="arrow arrow--ink"><Icon name="arrow-up-right" /></span>
+            <div>
+              <h3>Monthly context, not a raw dashboard</h3>
+              <p>What changed, what it cost, what we're doing next. Written by the person running your account.</p>
+            </div>
+          </li>
+        </ul>
+      </div>
+      <div data-reveal>
+        <ReportPanel />
+        <p class="caption">Example report layout. Your numbers go here.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Path -->
+  <section class="section section--white">
+    <div class="container">
+      <div class="section-head section-head--center">
+        <h2>One path from ad click to <mark>booked patient</mark>.</h2>
+        <p class="lead">We run the ads, follow up with every lead, book the consult, and report on who actually showed up.</p>
+      </div>
+      <div class="path-art"><Illo name="patient-path" sizes="(min-width: 1100px) 1100px, 100vw" /></div>
+      <ol class="steps" role="list">
+        {path.map((s) => (
+          <li class="card" data-reveal>
+            <span class="num">{s.n}</span>
+            <h3>{s.t}</h3>
+            <p>{s.b}</p>
+          </li>
+        ))}
+      </ol>
+      <div class="center-link"><a class="link-arrow" href="/how-it-works/">How the first 90 days work <Icon name="arrow" class="i16" /></a></div>
+    </div>
+  </section>
+
+  <!-- Results -->
+  <section class="section section--mist">
+    <div class="container">
+      <div class="section-head section-head--split">
+        <h2>Results from <mark>live accounts</mark>.</h2>
+        <p class="lead">Numbers from client accounts, shared with permission. Each one says exactly what was counted.</p>
+      </div>
+      <div class="grid grid--2">
+        {cases.map((c, i) => <CaseCard slug={c.id} data={c.data} dark={i === 0} />)}
+      </div>
+      <div class="results-foot">
+        <Testimonial
+          quote="[One-sentence quote about results, from Todd Smith or Dr. Houlis.]"
+          name="Todd Smith"
+          role="CEO, Evolve Health"
+        />
+        <div class="btn-row">
+          <a href="/case-studies/" class="btn btn--outline">See case studies</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Who we serve -->
+  <section class="section section--white">
+    <div class="container">
+      <div class="section-head">
+        <h2>Healthcare only. <mark>Cash-pay</mark> only.</h2>
+        <p class="lead">
+          If most of your revenue runs through insurance, we're not the right agency. Staying narrow is how we know
+          what a good cost per consult looks like in your category.
+        </p>
+      </div>
+      <div class="grid grid--4">
+        {verticals.map((v) => (
+          <a href={`/who-we-serve/${v.slug}/`} class="card card--link vcard" data-reveal>
+            <h3>{v.name}</h3>
+            <p>{v.short}</p>
+            <span class="arrow"><Icon name="arrow" /></span>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Founder -->
+  <section class="section dots-ink founder">
+    <div class="container">
+      <MedPlus size={88} flat class="f-plus" />
+      <figure class="on-ink">
+        <span class="qmark" aria-hidden="true">“</span>
+        <blockquote>
+          <p class="display">We'd rather tell you we're <mark>not a fit</mark> than take a retainer we can't earn.</p>
+        </blockquote>
+        <figcaption><strong>Nathan Smith</strong><span>Founder &amp; CEO, NexaMed</span></figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- Platforms -->
+  <section class="section section--white section--tight">
+    <div class="container"><PlatformStrip /></div>
+  </section>
+
+  <!-- Learn -->
+  <section class="section section--mist">
+    <div class="container">
+      <div class="section-head section-head--split">
+        <h2>Written by the people <mark>running the accounts</mark>.</h2>
+        <div>
+          <p class="lead">Guides on tracking, follow-up and ad policy for practice owners and their teams.</p>
+          <p style="margin-top:1rem"><a class="link-arrow" href="/learn/">Everything in Learn <Icon name="arrow" class="i16" /></a></p>
+        </div>
+      </div>
+      <div class="grid grid--3">
+        {posts.map((p) => <PostCard slug={p.id} data={p.data} />)}
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .home-hero {
+    padding-top: clamp(2.5rem, 1.5rem + 4vw, 5.5rem);
+    text-align: center;
+  }
+  .hh-copy {
+    max-width: 1000px;
+    margin-inline: auto;
+  }
+  .hh-copy .lead {
+    max-width: 640px;
+    margin: 1.75rem auto 0;
+  }
+  .hh-copy .btn-row {
+    margin-top: 2.25rem;
+  }
+  .hh-art {
+    max-width: 1100px;
+    margin: clamp(2.5rem, 2rem + 3vw, 4.5rem) auto 0;
+  }
+  .hh-art :global(img) {
+    width: 100%;
+  }
+  .proof-wrap {
+    padding-top: clamp(1.5rem, 1rem + 2vw, 3rem);
+    padding-bottom: var(--section-y);
+  }
+
+  .bento {
+    display: grid;
+    gap: 1.25rem;
+  }
+  @media (min-width: 760px) {
+    .bento {
+      grid-template-columns: 1fr 1fr;
+    }
+    .b-crm {
+      grid-column: 1 / -1;
+    }
+  }
+  @media (min-width: 1100px) {
+    .bento {
+      grid-template-columns: 1.35fr 1fr 1fr;
+      grid-template-rows: auto auto;
+    }
+    .b-crm {
+      grid-column: 1;
+      grid-row: 1 / span 2;
+    }
+  }
+  .bento .card {
+    display: flex;
+    flex-direction: column;
+  }
+  .b-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+  .b-sm {
+    min-height: 260px;
+  }
+  .b-sm p {
+    margin-top: auto;
+    padding-top: 2.5rem;
+  }
+  .b-title-lg {
+    font-size: clamp(2rem, 1.5rem + 2vw, 3rem);
+    margin-top: 2rem;
+    letter-spacing: -0.035em;
+  }
+  .b-crm p {
+    margin-top: 1rem;
+    max-width: 40ch;
+  }
+  .b-art {
+    margin-top: auto;
+    padding-top: 2rem;
+  }
+
+  .feature-rows {
+    list-style: none;
+    padding: 0;
+    margin: 2.5rem 0 0;
+  }
+  .feature-rows li {
+    display: flex;
+    gap: 1.1rem;
+    padding: 1.4rem 0;
+    border-top: 1px solid var(--ink-line);
+  }
+  .feature-rows li:last-child {
+    border-bottom: 1px solid var(--ink-line);
+  }
+  .feature-rows h3 {
+    font-size: 1.3rem;
+  }
+  .feature-rows p {
+    margin-top: 0.4rem;
+    color: var(--on-ink-2);
+  }
+  .feature-rows .arrow {
+    border-radius: 8px;
+    width: 40px;
+    height: 40px;
+  }
+  .fr-on {
+    background: var(--azure);
+    border-color: var(--azure);
+    color: var(--white);
+  }
+  .caption {
+    margin-top: 0.85rem;
+    font-size: var(--fs-xs);
+    color: var(--on-ink-2);
+    text-align: center;
+  }
+
+  .path-art :global(img) {
+    width: 100%;
+  }
+  .path-art {
+    max-width: 1100px;
+    margin-inline: auto;
+  }
+  .steps {
+    list-style: none;
+    padding: 0;
+    margin: 2.5rem 0 0;
+    display: grid;
+    gap: 1rem;
+  }
+  @media (min-width: 720px) {
+    .steps {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  @media (min-width: 1100px) {
+    .steps {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+  .steps h3 {
+    margin-top: 0.75rem;
+    font-size: 1.25rem;
+  }
+  .center-link {
+    text-align: center;
+    margin-top: 2.5rem;
+  }
+  :global(.i16) {
+    width: 16px;
+    height: 16px;
+  }
+
+  .results-foot {
+    display: grid;
+    gap: 1.5rem;
+    margin-top: 1.25rem;
+    align-items: center;
+  }
+  @media (min-width: 900px) {
+    .results-foot {
+      grid-template-columns: 1fr auto;
+      gap: 3rem;
+    }
+  }
+
+  .vcard {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    min-height: 240px;
+  }
+  .vcard .arrow {
+    margin-top: auto;
+  }
+
+  .founder {
+    color: var(--white);
+    overflow: hidden;
+  }
+  .founder .container {
+    position: relative;
+  }
+  .founder :global(.f-plus) {
+    position: absolute;
+    right: var(--gutter);
+    top: -1rem;
+  }
+  .founder figure {
+    margin: 0;
+    max-width: 980px;
+  }
+  .qmark {
+    display: block;
+    font: 700 7rem/0.6 var(--font-head);
+    color: var(--azure);
+    height: 3.5rem;
+  }
+  .founder blockquote {
+    margin: 1.5rem 0 0;
+  }
+  .founder blockquote p {
+    font-family: var(--font-head);
+    font-weight: 600;
+    letter-spacing: -0.03em;
+    font-size: clamp(2.2rem, 1.4rem + 3.4vw, 4.5rem);
+    line-height: 1.05;
+    text-wrap: balance;
+  }
+  .founder figcaption {
+    margin-top: 2.5rem;
+  }
+  .founder figcaption strong {
+    display: block;
+    font: 600 1.2rem/1.3 var(--font-head);
+  }
+  .founder figcaption span {
+    color: var(--on-ink-2);
+  }
+  @media (max-width: 700px) {
+    .founder :global(.f-plus) {
+      display: none;
+    }
+  }
+</style>

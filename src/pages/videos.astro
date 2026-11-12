@@ -1,0 +1,42 @@
+---
+import Base from "../layouts/Base.astro";
+import PageHero from "../components/PageHero.astro";
+import Icon from "../components/Icon.astro";
+// TODO: replace with real videos (YouTube IDs or hosted files).
+const videos = [
+  { title: "Auditing a medspa Google Ads account in 15 minutes", length: "[15:00]", topic: "Google Ads" },
+  { title: "Setting up GCLID capture in GoHighLevel forms", length: "[8:00]", topic: "CRM & Automation" },
+  { title: "The speed-to-lead workflow we build for every client", length: "[11:00]", topic: "CRM & Automation" },
+  { title: "Primary vs. secondary conversions, explained", length: "[6:00]", topic: "Google Ads" },
+];
+---
+<Base title="Videos" description="Short walkthroughs of real builds: Google Ads audits, GoHighLevel workflows and conversion tracking for medical practices.">
+  <PageHero
+    title="Watch the [[actual builds]]."
+    lead="Short screen recordings of the setups we run for clients. No intros, no hype."
+    crumbs={[{ label: "Learn", href: "/learn/" }, { label: "Videos" }]}
+  />
+  <section class="section section--mist">
+    <div class="container">
+      <div class="grid grid--2">
+        {videos.map((v) => (
+          <article class="card vid">
+            <div class="thumb dots-azure" aria-hidden="true"><span class="play"><Icon name="play" /></span></div>
+            <span class="tag">{v.topic} · {v.length}</span>
+            <h2>{v.title}</h2>
+            <p class="soon">Coming soon</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+</Base>
+<style>
+  .vid { display: grid; gap: 0.85rem; padding: 1rem 1rem 1.5rem; }
+  .vid > :not(.thumb) { margin-inline: 0.5rem; justify-self: start; }
+  .thumb { aspect-ratio: 16 / 9; border-radius: 14px; display: grid; place-items: center; }
+  .play { display: grid; place-items: center; width: 64px; height: 64px; border-radius: 999px; background: #fff; color: var(--azure); box-shadow: var(--shadow-panel); }
+  .play :global(.icon) { width: 26px; height: 26px; margin-left: 3px; }
+  .vid h2 { font-size: 1.3rem; }
+  .soon { font-size: var(--fs-small); color: var(--text-3); }
+</style>

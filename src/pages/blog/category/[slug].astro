@@ -1,0 +1,22 @@
+---
+import { getCollection } from "astro:content";
+import BlogIndex from "../../../components/BlogIndex.astro";
+import { blogCategories } from "../../../data/team";
+export async function getStaticPaths() {
+  const posts = await getCollection("blog", ({ data }) => !data.draft);
+  return Object.entries(blogCategories).map(([slug, cat]) => ({
+    params: { slug },
+    props: { cat, slug, posts: posts.filter((p) => p.data.category === slug).sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf()) },
+  }));
+}
+const { cat, slug, posts } = Astro.props;
+---
+<BlogIndex
+  title={`${cat.name} articles`}
+  description={cat.description}
+  heading={cat.name}
+  lead={cat.description}
+  crumbs={[{ label: "Learn", href: "/learn/" }, { label: "Blog", href: "/blog/" }, { label: cat.name }]}
+  posts={posts}
+  active={slug}
+/>

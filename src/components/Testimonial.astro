@@ -1,0 +1,55 @@
+---
+import Icon from "./Icon.astro";
+interface Props { quote: string; name: string; role: string; source?: string }
+const { quote, name, role, source = "Google review" } = Astro.props;
+---
+<figure class="quote">
+  <div class="q-top">
+    <span class="stars" aria-label="5 out of 5 stars">{[1, 2, 3, 4, 5].map(() => <Icon name="star" />)}</span>
+    <span class="src">{source}</span>
+  </div>
+  <blockquote><p>{quote}</p></blockquote>
+  <figcaption><strong>{name}</strong><span>{role}</span></figcaption>
+</figure>
+<style>
+  .quote {
+    margin: 0;
+    background: var(--white);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 1.5rem 1.75rem;
+    box-shadow: var(--shadow-card);
+  }
+  .q-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .stars {
+    display: flex;
+    gap: 2px;
+    color: var(--azure);
+  }
+  .stars :global(.icon) {
+    width: 18px;
+    height: 18px;
+  }
+  .src {
+    font-size: var(--fs-xs);
+    color: var(--text-3);
+  }
+  blockquote {
+    margin: 1rem 0 1.25rem;
+    font-size: 1.2rem;
+    line-height: 1.5;
+    color: var(--ink);
+  }
+  figcaption strong {
+    display: block;
+    font-weight: 600;
+  }
+  figcaption span {
+    font-size: var(--fs-small);
+    color: var(--text-3);
+  }
+</style>

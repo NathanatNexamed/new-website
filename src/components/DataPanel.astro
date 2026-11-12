@@ -1,0 +1,24 @@
+---
+// Azure dot-grid panel with a white card on top. Put metrics or a chart in the slot.
+interface Props { class?: string; pad?: "md" | "lg" }
+const { class: cls = "", pad = "lg" } = Astro.props;
+---
+<div class:list={["data-panel dots-azure", `pad-${pad}`, cls]}>
+  <div class="dp-card"><slot /></div>
+</div>
+<style>
+  .data-panel {
+    border-radius: var(--radius-lg);
+    padding: clamp(1.25rem, 0.5rem + 4vw, 4rem);
+  }
+  .pad-md {
+    padding: clamp(1rem, 0.5rem + 2.5vw, 2.5rem);
+  }
+  .dp-card {
+    background: var(--white);
+    color: var(--ink);
+    border-radius: 20px;
+    padding: clamp(1rem, 0.75rem + 1vw, 1.6rem);
+    box-shadow: var(--shadow-panel);
+  }
+</style>

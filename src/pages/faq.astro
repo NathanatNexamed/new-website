@@ -1,0 +1,17 @@
+---
+import Base from "../layouts/Base.astro";
+import PageHero from "../components/PageHero.astro";
+import FaqList from "../components/FaqList.astro";
+import Icon from "../components/Icon.astro";
+import { generalFaqs } from "../data/faq";
+---
+<Base title="FAQ" description="Common questions about working with NexaMed: who we work with, onboarding, HIPAA, CRMs and websites.">
+  <PageHero title="Questions, [[answered plainly]]." lead="If yours isn't here, ask on the call." crumbs={[{ label: "FAQ" }]} />
+  <section class="section section--mist">
+    <div class="container narrow">
+      <FaqList items={generalFaqs} schema />
+      <p style="margin-top:2rem"><a class="link-arrow" href="/pricing/">Pricing questions <Icon name="arrow" class="i16" /></a></p>
+    </div>
+  </section>
+</Base>
+<style>:global(.i16) { width: 16px; height: 16px; }</style>

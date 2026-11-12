@@ -1,0 +1,38 @@
+---
+import Base from "../../layouts/Base.astro";
+import PageHero from "../../components/PageHero.astro";
+import RelatedCards from "../../components/RelatedCards.astro";
+import Illo from "../../components/Illo.astro";
+import { liveIntegrations } from "../../data/integrations";
+---
+<Base title="Integrations" description="GoHighLevel connected to Zenoti, OptiMantra, Cerbo and the rest of your practice stack, so leads, bookings and visits flow into one pipeline.">
+  <PageHero
+    title="Your ads, CRM and EMR, [[connected]]."
+    lead="We build in GoHighLevel and connect it to the booking and EMR software you already run. Bookings and visits flow back into the pipeline automatically, and booked patients flow back to Google Ads."
+    crumbs={[{ label: "Services", href: "/services/" }, { label: "CRM & Automations", href: "/services/crm-automations/" }, { label: "Integrations" }]}
+    illo="connected-stack"
+    primary={{ label: "Book a strategy call", href: "/book/" }}
+  />
+  <section class="section section--mist">
+    <div class="container">
+      <div class="section-head"><h2>Platforms we build on</h2></div>
+      <RelatedCards cols={2} items={liveIntegrations.map((i) => ({ title: i.name, body: `${i.category}. ${i.short}`, href: `/integrations/${i.slug}/` }))} />
+      <p class="note">Running something else? Most practice software exposes enough to connect booking and show status. Ask us on the call.</p>
+    </div>
+  </section>
+  <section class="section section--white">
+    <div class="container split">
+      <div>
+        <h2>What a connected stack <mark>actually changes</mark>.</h2>
+        <ul class="checks" style="margin-top:2rem" role="list">
+          <li>The front desk works from one inbox instead of three.</li>
+          <li>Pipeline stages update when patients book and show, not when someone remembers.</li>
+          <li>Google Ads learns from booked and closed patients, not form fills.</li>
+          <li>Clinical information stays in the EMR. Only what marketing needs moves across.</li>
+        </ul>
+      </div>
+      <Illo name="front-desk" />
+    </div>
+  </section>
+</Base>
+<style>.note { margin-top: 1.5rem; color: var(--text-2); }</style>

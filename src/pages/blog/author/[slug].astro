@@ -1,0 +1,27 @@
+---
+import { getCollection } from "astro:content";
+import BlogIndex from "../../../components/BlogIndex.astro";
+import { team } from "../../../data/team";
+import { site } from "../../../config";
+export async function getStaticPaths() {
+  const posts = await getCollection("blog", ({ data }) => !data.draft);
+  return team
+    .filter((p) => posts.some((x) => x.data.author === p.slug))
+    .map((person) => ({
+      params: { slug: person.slug },
+      props: { person, posts: posts.filter((x) => x.data.author === person.slug).sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf()) },
+    }));
+}
+const { person, posts } = Astro.props;
+const ld = { "@context": "https://schema.org", "@type": "Person", name: person.name, jobTitle: person.role, worksFor: { "@type": "Organization", name: site.name, url: site.url }, description: person.bio };
+---
+<BlogIndex
+  title={`${person.name}, ${person.role}`}
+  description={person.bio}
+  heading={person.name}
+  lead={`${person.role}, NexaMed. ${person.bio}`}
+  crumbs={[{ label: "Learn", href: "/learn/" }, { label: "Blog", href: "/blog/" }, { label: person.name }]}
+  posts={posts}
+>
+  <script type="application/ld+json" set:html={JSON.stringify(ld)} />
+</BlogIndex>

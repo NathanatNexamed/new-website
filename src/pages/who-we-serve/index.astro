@@ -1,0 +1,49 @@
+---
+import Base from "../../layouts/Base.astro";
+import PageHero from "../../components/PageHero.astro";
+import Icon from "../../components/Icon.astro";
+import Illo from "../../components/Illo.astro";
+import { verticals } from "../../data/verticals";
+---
+<Base title="Who we serve" description="NexaMed works with medspas, longevity clinics, telehealth providers and aesthetic surgeons. Cash-pay healthcare only, one practice per market.">
+  <PageHero
+    title="Healthcare only. [[Cash-pay]] only."
+    lead="We work with four kinds of practice. Staying narrow is how we know what a good cost per consult looks like in your category, which treatments are restricted, and what your front desk is up against."
+    crumbs={[{ label: "Who we serve" }]}
+    center
+  />
+  <section class="section section--mist">
+    <div class="container">
+      <div class="grid grid--2">
+        {verticals.map((v, n) => (
+          <a href={`/who-we-serve/${v.slug}/`} class:list={["card card--link vc", { "card--ink on-ink": n === 1 || n === 2 }]} data-reveal>
+            <div class="vc-top"><h2>{v.name}</h2><span class:list={["arrow", { "arrow--ink": n === 1 || n === 2 }]}><Icon name="arrow" /></span></div>
+            <p>{v.short}</p>
+            <ul class="vc-focus" role="list">{v.focus.slice(0, 3).map((f) => <li>{f}</li>)}</ul>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+  <section class="section section--white">
+    <div class="container split">
+      <div>
+        <h2>Not on the list?</h2>
+        <p class="lead" style="margin-top:1.25rem">
+          If you run a cash-pay practice that isn't one of these, like IV and wellness, men's health or functional
+          medicine, the playbook is usually close. Book a call and we'll tell you honestly whether it carries over.
+        </p>
+        <div class="btn-row" style="margin-top:2rem"><a href="/book/" class="btn">Book a strategy call</a></div>
+      </div>
+      <Illo name="owner-leads" />
+    </div>
+  </section>
+</Base>
+<style>
+  .vc { display: flex; flex-direction: column; gap: 1rem; min-height: 300px; }
+  .vc-top { display: flex; justify-content: space-between; gap: 1rem; }
+  .vc h2 { font-size: var(--fs-h3); }
+  .vc-focus { list-style: none; padding: 0; margin: auto 0 0; display: grid; gap: 0.5rem; font-size: var(--fs-small); }
+  .vc-focus li { padding-top: 0.5rem; border-top: 1px solid var(--line); color: var(--text-2); }
+  .on-ink .vc-focus li { border-color: var(--ink-line); color: var(--on-ink-2); }
+</style>

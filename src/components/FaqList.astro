@@ -1,0 +1,82 @@
+---
+// Accordion FAQ. Set schema to emit FAQPage JSON-LD (use once per page).
+interface Props { items: { q: string; a: string }[]; schema?: boolean }
+const { items, schema = false } = Astro.props;
+const ld = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: items.map((i) => ({ "@type": "Question", name: i.q, acceptedAnswer: { "@type": "Answer", text: i.a } })),
+};
+---
+<div class="faq">
+  {items.map((i) => (
+    <details>
+      <summary><span>{i.q}</span><span class="pm" aria-hidden="true"></span></summary>
+      <div class="ans"><p>{i.a}</p></div>
+    </details>
+  ))}
+</div>
+{schema && <script type="application/ld+json" set:html={JSON.stringify(ld)} />}
+<style>
+  .faq {
+    border-top: 1px solid var(--steel);
+  }
+  details {
+    border-bottom: 1px solid var(--steel);
+  }
+  summary {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1.5rem;
+    min-height: 64px;
+    padding-block: 1.1rem;
+    cursor: pointer;
+    list-style: none;
+    font: 600 1.15rem/1.35 var(--font-head);
+    letter-spacing: -0.015em;
+  }
+  summary::-webkit-details-marker {
+    display: none;
+  }
+  .pm {
+    position: relative;
+    flex: none;
+    width: 32px;
+    height: 32px;
+    border-radius: 999px;
+    border: 1.5px solid var(--steel);
+    background: var(--white);
+  }
+  .pm::before,
+  .pm::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 12px;
+    height: 2px;
+    background: var(--ink);
+    transform: translate(-50%, -50%);
+    transition: transform 200ms var(--ease);
+  }
+  .pm::after {
+    transform: translate(-50%, -50%) rotate(90deg);
+  }
+  details[open] .pm::after {
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+  details[open] .pm {
+    background: var(--azure);
+    border-color: var(--azure);
+  }
+  details[open] .pm::before,
+  details[open] .pm::after {
+    background: var(--white);
+  }
+  .ans {
+    padding: 0 3.5rem 1.5rem 0;
+    color: var(--text-2);
+    max-width: 75ch;
+  }
+</style>

@@ -1,0 +1,60 @@
+---
+import Base from "../layouts/Base.astro";
+import Breadcrumbs from "../components/Breadcrumbs.astro";
+import LeadForm from "../components/LeadForm.astro";
+import { site } from "../config";
+---
+<Base title="Book a call" description="Book a 30-minute strategy call with NexaMed. We'll look at your spend, tracking and follow-up and tell you whether we can move the number." hideFooterCta>
+  <section class="section--mist book">
+    <div class="container">
+      <Breadcrumbs items={[{ label: "Book a call" }]} />
+      <div class="book-grid">
+        <div class="book-copy">
+          <h1>Check if your <mark>market is open</mark>.</h1>
+          <p class="lead">
+            A 30-minute call with the person who'd run your account. Bring access to your ad accounts if you can, and
+            we'll look at them live.
+          </p>
+          <h2 class="cover">What we'll cover</h2>
+          <ul class="checks" role="list">
+            <li>Whether we already work with a practice in your market</li>
+            <li>What your tracking is and isn't counting</li>
+            <li>Where leads are being lost between the ad and the appointment</li>
+            <li>The one change we'd make first, whether or not you hire us</li>
+          </ul>
+          <p class="small">Not ready to pick a time? Send the short form below and we'll reply within one business day.</p>
+        </div>
+        <div class="cal card">
+          {site.calendarEmbedUrl ? (
+            <iframe src={site.calendarEmbedUrl} title="Book a strategy call" loading="lazy" scrolling="no"></iframe>
+          ) : (
+            <div class="cal-ph">
+              <p><strong>GoHighLevel calendar embed goes here.</strong></p>
+              <p>Set <code>calendarEmbedUrl</code> in <code>src/config.ts</code>, and set the calendar's post-booking redirect to <code>/thank-you/call-booked/</code>.</p>
+            </div>
+          )}
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="section section--white">
+    <div class="container narrow">
+      <h2 class="form-h">Or send us a few details</h2>
+      <LeadForm id="book-form" source="book-page" redirect="/thank-you/call-booked/" submitLabel="Send" />
+    </div>
+  </section>
+</Base>
+<style>
+  .book { padding-block: clamp(2.5rem, 2rem + 3vw, 5rem); }
+  .book-grid { display: grid; gap: 2.5rem; align-items: start; }
+  @media (min-width: 1000px) { .book-grid { grid-template-columns: 0.9fr 1.1fr; gap: 4rem; } }
+  .book-copy .lead { margin-top: 1.25rem; }
+  .cover { font-size: 1.25rem; margin: 2.25rem 0 0.75rem; }
+  .small { margin-top: 1.5rem; font-size: var(--fs-small); color: var(--text-2); }
+  .cal { padding: 0; overflow: hidden; min-height: 640px; box-shadow: var(--shadow-card); }
+  .cal iframe { width: 100%; min-height: 720px; border: 0; }
+  .cal-ph { display: grid; place-content: center; gap: 0.75rem; min-height: 640px; padding: 2rem; text-align: center; background: repeating-linear-gradient(45deg, var(--mist), var(--mist) 12px, #fff 12px, #fff 24px); }
+  .cal-ph p { max-width: 42ch; margin-inline: auto; }
+  .cal-ph code { background: var(--ice); padding: 0.1em 0.35em; border-radius: 4px; font-size: 0.9em; }
+  .form-h { font-size: var(--fs-h3); margin-bottom: 1.5rem; }
+</style>

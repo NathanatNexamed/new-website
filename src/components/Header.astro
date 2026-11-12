@@ -1,0 +1,384 @@
+---
+import Logo from "./Logo.astro";
+import Icon from "./Icon.astro";
+import { nav } from "../config";
+const path = Astro.url.pathname;
+const isActive = (href: string) => path === href || (href !== "/" && path.startsWith(href));
+const sectionActive = (item: (typeof nav)[number]) =>
+  isActive(item.href) || (item.children ?? []).some((c) => isActive(c.href)) ||
+  (item.label === "Services" && path.startsWith("/integrations/")) ||
+  (item.label === "Learn" && (path.startsWith("/blog/") || path.startsWith("/guides/") || path.startsWith("/videos/")));
+---
+<header class="site-header">
+  <div class="container">
+    <div class="bar">
+      <a href="/" class="brand" aria-label="NexaMed home"><Logo /></a>
+
+      <nav class="desktop-nav" aria-label="Main">
+        <ul role="list">
+          {nav.map((item) => (
+            <li class="nav-item" data-nav-item>
+              {item.children ? (
+                <>
+                  <button class:list={["nav-link", { active: sectionActive(item) }]} aria-expanded="false" aria-controls={`dd-${item.label.replace(/\W+/g, "")}`} data-dd-toggle>
+                    {item.label}
+                    <Icon name="chevron" class="chev" />
+                  </button>
+                  <div class="dropdown" id={`dd-${item.label.replace(/\W+/g, "")}`}>
+                    <ul role="list" class:list={["dd-list", { "dd-list--rich": item.children.some((c) => c.note) }]}>
+                      {item.children.map((c) => (
+                        <li class:list={{ indent: c.indent }}>
+                          <a href={c.href} aria-current={path === c.href ? "page" : undefined}>
+                            <span class="dd-label">{c.label}</span>
+                            {c.note && <span class="dd-note">{c.note}</span>}
+                          </a>
+                        </li>
+                      ))}
+                    </ul>
+                    <a class="dd-all" href={item.href}>
+                      {item.label === "Services" ? "All services" : item.label === "Learn" ? "Everything in Learn" : `All of ${item.label.toLowerCase()}`}
+                      <Icon name="arrow" />
+                    </a>
+                  </div>
+                </>
+              ) : (
+                <a href={item.href} class:list={["nav-link", { active: isActive(item.href) }]} aria-current={path === item.href ? "page" : undefined}>{item.label}</a>
+              )}
+            </li>
+          ))}
+        </ul>
+      </nav>
+
+      <div class="actions">
+        <a href="/book/" class="btn btn--sm book-btn">Book a call</a>
+        <button class="menu-btn" aria-expanded="false" aria-controls="mobile-nav" data-menu-toggle>
+          <span class="sr-only">Menu</span>
+          <Icon name="menu" class="i-open" />
+          <Icon name="close" class="i-close" />
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="mobile-nav" id="mobile-nav" hidden>
+    <div class="container">
+      <ul role="list">
+        {nav.map((item) => (
+          <li>
+            {item.children ? (
+              <details>
+                <summary>{item.label}<Icon name="chevron" class="chev" /></summary>
+                <ul role="list">
+                  <li><a href={item.href}>{item.label === "Learn" ? "Learn hub" : `All ${item.label.toLowerCase()}`}</a></li>
+                  {item.children.map((c) => (
+                    <li class:list={{ indent: c.indent }}><a href={c.href}>{c.label}</a></li>
+                  ))}
+                </ul>
+              </details>
+            ) : (
+              <a href={item.href} class="m-top">{item.label}</a>
+            )}
+          </li>
+        ))}
+      </ul>
+      <a href="/book/" class="btn" style="width:100%;margin-top:1.5rem">Book a call</a>
+    </div>
+  </div>
+</header>
+
+<script>
+  const items = document.querySelectorAll<HTMLElement>("[data-nav-item]");
+  const closeAll = (except?: Element) =>
+    items.forEach((it) => {
+      if (it === except) return;
+      it.classList.remove("open");
+      it.querySelector("[data-dd-toggle]")?.setAttribute("aria-expanded", "false");
+    });
+  items.forEach((it) => {
+    const btn = it.querySelector<HTMLButtonElement>("[data-dd-toggle]");
+    if (!btn) return;
+    btn.addEventListener("click", () => {
+      const open = !it.classList.contains("open");
+      closeAll(it);
+      it.classList.toggle("open", open);
+      btn.setAttribute("aria-expanded", String(open));
+    });
+    if (window.matchMedia("(hover: hover)").matches) {
+      let t: number | undefined;
+      it.addEventListener("mouseenter", () => {
+        clearTimeout(t);
+        closeAll(it);
+        it.classList.add("open");
+        btn.setAttribute("aria-expanded", "true");
+      });
+      it.addEventListener("mouseleave", () => {
+        t = window.setTimeout(() => {
+          it.classList.remove("open");
+          btn.setAttribute("aria-expanded", "false");
+        }, 140);
+      });
+    }
+  });
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") closeAll();
+  });
+  document.addEventListener("click", (e) => {
+    if (!(e.target as Element).closest("[data-nav-item]")) closeAll();
+  });
+
+  const menuBtn = document.querySelector<HTMLButtonElement>("[data-menu-toggle]");
+  const panel = document.getElementById("mobile-nav");
+  menuBtn?.addEventListener("click", () => {
+    const open = menuBtn.getAttribute("aria-expanded") !== "true";
+    menuBtn.setAttribute("aria-expanded", String(open));
+    if (panel) panel.hidden = !open;
+    document.body.style.overflow = open ? "hidden" : "";
+  });
+</script>
+
+<style>
+  .site-header {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    padding-top: 12px;
+    background: linear-gradient(to bottom, rgb(255 255 255 / 0.96) 60%, rgb(255 255 255 / 0));
+  }
+  .bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    min-height: 68px;
+    padding: 0.5rem 0.6rem 0.5rem 1.25rem;
+    background: var(--white);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    box-shadow: 0 6px 24px -18px rgb(11 18 32 / 0.35);
+  }
+  .brand {
+    display: inline-flex;
+    flex: none;
+    color: var(--ink);
+  }
+  .brand :global(.logo) {
+    height: 24px;
+    width: auto;
+  }
+  .desktop-nav {
+    display: none;
+  }
+  .desktop-nav > ul {
+    display: flex;
+    gap: 0.15rem;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .nav-item {
+    position: relative;
+  }
+  .nav-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+    min-height: 44px;
+    padding: 0.5rem 0.8rem;
+    border: 0;
+    background: none;
+    border-radius: 8px;
+    font: 500 0.95rem/1 var(--font-body);
+    color: var(--ink);
+    text-decoration: none;
+    cursor: pointer;
+    transition: background-color 150ms var(--ease);
+  }
+  .nav-link:hover,
+  .nav-item.open .nav-link {
+    background: var(--mist);
+  }
+  .nav-link.active {
+    color: var(--azure);
+  }
+  .nav-link :global(.chev) {
+    width: 15px;
+    height: 15px;
+    transition: transform 200ms var(--ease);
+  }
+  .nav-item.open .nav-link :global(.chev) {
+    transform: rotate(180deg);
+  }
+  .dropdown {
+    position: absolute;
+    top: calc(100% + 10px);
+    left: 50%;
+    min-width: 280px;
+    padding: 0.6rem;
+    background: var(--white);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    box-shadow: 0 24px 48px -24px rgb(11 18 32 / 0.3);
+    opacity: 0;
+    visibility: hidden;
+    transform: translate(-50%, 6px);
+    transition:
+      opacity 160ms var(--ease),
+      transform 160ms var(--ease),
+      visibility 0s linear 160ms;
+  }
+  .dropdown::before {
+    content: "";
+    position: absolute;
+    inset: -12px 0 auto;
+    height: 12px;
+  }
+  .nav-item.open .dropdown {
+    opacity: 1;
+    visibility: visible;
+    transform: translate(-50%, 0);
+    transition-delay: 0s;
+  }
+  .dd-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .dd-list--rich {
+    min-width: 340px;
+  }
+  .dd-list a {
+    display: block;
+    padding: 0.6rem 0.75rem;
+    border-radius: 8px;
+    text-decoration: none;
+  }
+  .dd-list a:hover,
+  .dd-list a[aria-current] {
+    background: var(--mist);
+  }
+  .dd-list li.indent a {
+    margin-left: 1rem;
+    padding-left: 0.9rem;
+    border-left: 2px solid var(--steel);
+    border-radius: 0 8px 8px 0;
+  }
+  .dd-label {
+    display: block;
+    font-weight: 600;
+    font-size: 0.95rem;
+  }
+  .dd-note {
+    display: block;
+    font-size: var(--fs-xs);
+    color: var(--text-3);
+    margin-top: 2px;
+  }
+  .dd-all {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 0.4rem;
+    padding: 0.7rem 0.75rem;
+    border-top: 1px solid var(--line);
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--azure);
+    text-decoration: none;
+  }
+  .dd-all :global(.icon) {
+    width: 16px;
+    height: 16px;
+  }
+  .actions {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  .menu-btn {
+    display: inline-grid;
+    place-items: center;
+    width: 44px;
+    height: 44px;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    background: var(--white);
+    color: var(--ink);
+    cursor: pointer;
+  }
+  .menu-btn :global(.icon) {
+    width: 22px;
+    height: 22px;
+  }
+  .menu-btn :global(.i-close),
+  .menu-btn[aria-expanded="true"] :global(.i-open) {
+    display: none;
+  }
+  .menu-btn[aria-expanded="true"] :global(.i-close) {
+    display: block;
+  }
+  .mobile-nav {
+    position: fixed;
+    inset: 92px 0 0;
+    overflow-y: auto;
+    background: var(--white);
+    padding-block: 1rem 2rem;
+    border-top: 1px solid var(--line);
+  }
+  .mobile-nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .mobile-nav > .container > ul > li {
+    border-bottom: 1px solid var(--line);
+  }
+  .mobile-nav summary,
+  .mobile-nav .m-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    min-height: 56px;
+    font: 600 1.15rem/1.2 var(--font-head);
+    letter-spacing: -0.01em;
+    text-decoration: none;
+    cursor: pointer;
+    list-style: none;
+  }
+  .mobile-nav summary::-webkit-details-marker {
+    display: none;
+  }
+  .mobile-nav summary :global(.chev) {
+    width: 20px;
+    height: 20px;
+    transition: transform 200ms var(--ease);
+  }
+  .mobile-nav details[open] summary :global(.chev) {
+    transform: rotate(180deg);
+  }
+  .mobile-nav details ul {
+    padding-bottom: 0.75rem;
+  }
+  .mobile-nav details a {
+    display: block;
+    padding: 0.65rem 0;
+    color: var(--text-2);
+    text-decoration: none;
+  }
+  .mobile-nav details li.indent a {
+    padding-left: 1rem;
+  }
+  @media (max-width: 400px) {
+    .book-btn {
+      display: none;
+    }
+  }
+  @media (min-width: 1080px) {
+    .desktop-nav {
+      display: block;
+    }
+    .menu-btn,
+    .mobile-nav {
+      display: none !important;
+    }
+  }
+</style>

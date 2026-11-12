@@ -1,0 +1,18 @@
+---
+import Icon from "./Icon.astro";
+interface Props { items: { title: string; body: string; href: string }[]; cols?: 2 | 3 | 4 }
+const { items, cols = 3 } = Astro.props;
+---
+<div class:list={["grid", `grid--${cols}`]}>
+  {items.map((i) => (
+    <a href={i.href} class="card card--link rc">
+      <div class="rc-top"><h3>{i.title}</h3><span class="arrow"><Icon name="arrow" /></span></div>
+      <p>{i.body}</p>
+    </a>
+  ))}
+</div>
+<style>
+  .rc { display: flex; flex-direction: column; gap: 0.9rem; }
+  .rc-top { display: flex; justify-content: space-between; gap: 1rem; align-items: flex-start; }
+  .rc h3 { font-size: 1.3rem; }
+</style>

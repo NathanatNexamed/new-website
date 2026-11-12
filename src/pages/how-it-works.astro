@@ -1,0 +1,132 @@
+---
+import Base from "../layouts/Base.astro";
+import PageHero from "../components/PageHero.astro";
+import Illo from "../components/Illo.astro";
+
+const phases = [
+  {
+    when: "Week 1",
+    title: "Onboarding",
+    items: [
+      "Kickoff call with the owner and whoever runs the front desk",
+      "Access to ad accounts, CRM, EMR or booking, Google Business Profile and analytics",
+      "Audit of tracking, campaigns, follow-up and the last 90 days of leads",
+      "Agreement on the two or three numbers we'll be judged on",
+    ],
+  },
+  {
+    when: "Days 1–30",
+    title: "Fix the foundation",
+    items: [
+      "Conversion tracking rebuilt: one or two primary actions that mean something",
+      "GCLID capture on every form, CRM pipeline stages defined",
+      "Speed-to-lead automation live, in your voice",
+      "Landing pages for the treatments we're advertising",
+      "Campaigns restructured or launched",
+    ],
+  },
+  {
+    when: "Days 31–60",
+    title: "Learn and tighten",
+    items: [
+      "Offline conversions flowing from CRM back to Google Ads",
+      "Search terms, audiences and placements cut back to what books",
+      "First creative tests on Meta judged on booked consults, not clicks",
+      "Front desk feedback loop: which leads were real, which weren't",
+    ],
+  },
+  {
+    when: "Days 61–90",
+    title: "Scale what works",
+    items: [
+      "Budget moved to the campaigns and offers with the lowest cost per booked patient",
+      "Rebooking and reactivation campaigns switched on",
+      "Bidding moved to Target CPA or ROAS once data supports it",
+      "A 90-day review: what worked, what didn't, the plan for the next quarter",
+    ],
+  },
+];
+
+const cadence = [
+  { t: "Weekly", b: "A short written update: what changed, anything that needs your input. No call unless there's something to discuss." },
+  { t: "Monthly", b: "A report with context: cost per booked patient, lead-to-consult rate, what we changed and why, and what's next. Plus a 30-minute call." },
+  { t: "Quarterly", b: "A strategy review with the owner. Treatments to push, offers to retire, budget for the next quarter." },
+  { t: "Always", b: "Direct access to the people running your account, in a shared channel. Not a ticket queue." },
+];
+---
+<Base title="How it works" description="How working with NexaMed works: onboarding, the first 30, 60 and 90 days, reporting cadence, and who we're not a fit for.">
+  <PageHero
+    title="One path from ad click to [[booked patient]]."
+    lead="We run the ads, follow up with every lead, book the consult, and report on who actually showed up. Here's what the first 90 days look like, and how we'll keep you informed after that."
+    crumbs={[{ label: "How it works" }]}
+    center
+    primary={{ label: "Book a strategy call", href: "/book/" }}
+    secondary={{ label: "See pricing", href: "/pricing/" }}
+  >
+    <div class="hiw-art"><Illo name="patient-path" eager sizes="(min-width: 1100px) 1100px, 100vw" /></div>
+  </PageHero>
+
+  <section class="section section--mist">
+    <div class="container">
+      <div class="section-head"><h2>The first <mark>90 days</mark>.</h2></div>
+      <ol class="timeline" role="list">
+        {phases.map((p) => (
+          <li class="card" data-reveal>
+            <span class="num">{p.when}</span>
+            <h3>{p.title}</h3>
+            <ul class="checks" role="list">{p.items.map((i) => <li>{i}</li>)}</ul>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </section>
+
+  <section class="section section--white">
+    <div class="container split split--wide-right">
+      <div>
+        <h2>Reporting you'll <mark>actually read</mark>.</h2>
+        <p class="lead" style="margin-top:1.25rem">Written by the person running your account, in plain language, tied to booked patients.</p>
+      </div>
+      <dl class="cadence">
+        {cadence.map((c) => (
+          <div><dt>{c.t}</dt><dd>{c.b}</dd></div>
+        ))}
+      </dl>
+    </div>
+  </section>
+
+  <section class="section section--ink" id="not-a-fit">
+    <div class="container split">
+      <div>
+        <h2>Who we're <mark>not a fit</mark> for.</h2>
+        <p class="lead" style="margin-top:1.25rem">
+          We'd rather say this now than six months into a retainer.
+        </p>
+      </div>
+      <ul class="checks checks--x" role="list">
+        <li>Practices whose revenue runs mostly through insurance.</li>
+        <li>Anyone judging success on cost per lead alone.</li>
+        <li>Practices where nobody can follow up with a lead the same day.</li>
+        <li>Owners who want guaranteed numbers before we've seen the account.</li>
+        <li>Treatments or claims that won't pass ad policy or LegitScript review.</li>
+        <li>A practice in a market where we already work with a direct competitor.</li>
+      </ul>
+    </div>
+  </section>
+</Base>
+<style>
+  .hiw-art { max-width: 1100px; margin: 3rem auto 0; }
+  .hiw-art :global(img) { width: 100%; }
+  .timeline { list-style: none; margin: 0; padding: 0; display: grid; gap: 1.25rem; }
+  @media (min-width: 900px) { .timeline { grid-template-columns: repeat(2, 1fr); } }
+  @media (min-width: 1200px) { .timeline { grid-template-columns: repeat(4, 1fr); } }
+  .timeline h3 { margin: 0.5rem 0 1rem; }
+  .timeline :global(.checks li) { font-size: var(--fs-small); }
+  .cadence { margin: 0; display: grid; gap: 0; }
+  .cadence > div { display: grid; gap: 0.35rem; padding: 1.25rem 0; border-top: 1px solid var(--line); }
+  .cadence > div:last-child { border-bottom: 1px solid var(--line); }
+  @media (min-width: 640px) { .cadence > div { grid-template-columns: 140px 1fr; gap: 1.5rem; } }
+  dt { font: 600 1.15rem/1.3 var(--font-head); letter-spacing: -0.015em; }
+  dd { margin: 0; color: var(--text-2); }
+  .section--ink :global(.checks li) { color: var(--on-ink-2); }
+</style>

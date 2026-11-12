@@ -1,0 +1,177 @@
+---
+import Logo from "./Logo.astro";
+import MedPlus from "./MedPlus.astro";
+import { footerNav, site } from "../config";
+interface Props { hideCta?: boolean }
+const { hideCta = false } = Astro.props;
+const year = new Date().getFullYear();
+---
+{!hideCta && (
+  <section class="section section--glow cta-band" aria-labelledby="cta-band-title">
+    <div class="container cta-inner">
+      <MedPlus size={64} flat class="cta-plus" />
+      <div class="cta-copy">
+        <h2 id="cta-band-title">We take <mark>one practice</mark> per market.</h2>
+        <p class="lead">
+          A 30-minute call. We look at your current spend, your tracking and your follow-up, and tell you straight
+          whether we can move the number. If your market is already taken, we'll say so.
+        </p>
+      </div>
+      <div class="btn-row">
+        <a href="/book/" class="btn">Check if your market is open</a>
+        <a href="/how-it-works/" class="btn btn--outline-light">See how it works</a>
+      </div>
+    </div>
+  </section>
+)}
+<footer class="site-footer">
+  <div class="container">
+    <div class="top">
+      <div class="about">
+        <a href="/" class="f-brand" aria-label="NexaMed home"><Logo /></a>
+        <p>
+          Paid acquisition, SEO and CRM for medspas and cash-pay clinics. Healthcare only, one practice per market.
+        </p>
+        <a class="f-mail" href={`mailto:${site.email}`}>{site.email}</a>
+      </div>
+      <div class="cols">
+        {footerNav.map((col) => (
+          <nav aria-label={col.heading}>
+            <h2 class="f-head">{col.heading}</h2>
+            <ul role="list">
+              {col.links.map((l) => (
+                <li><a href={l.href}>{l.label}</a></li>
+              ))}
+            </ul>
+          </nav>
+        ))}
+      </div>
+    </div>
+    <div class="bottom">
+      <p>© {year} NexaMed. All rights reserved.</p>
+      <ul role="list">
+        <li><a href="/privacy/">Privacy</a></li>
+        <li><a href="/terms/">Terms</a></li>
+        <li><a href={site.social.linkedin} rel="noopener">LinkedIn</a></li>
+      </ul>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .cta-band {
+    overflow: hidden;
+  }
+  .cta-inner {
+    display: grid;
+    gap: 2rem;
+    align-items: end;
+    position: relative;
+  }
+  .cta-copy {
+    max-width: 760px;
+  }
+  .cta-copy .lead {
+    margin-top: 1.25rem;
+  }
+  .cta-band :global(.cta-plus) {
+    position: absolute;
+    right: var(--gutter);
+    top: -1rem;
+    opacity: 0.9;
+  }
+  @media (min-width: 1000px) {
+    .cta-inner {
+      grid-template-columns: 1fr auto;
+    }
+  }
+  @media (max-width: 700px) {
+    .cta-band :global(.cta-plus) {
+      display: none;
+    }
+  }
+  .site-footer {
+    background: var(--ink);
+    color: var(--on-ink-2);
+    padding-block: 4.5rem 2rem;
+    border-top: 1px solid var(--ink-line);
+    font-size: var(--fs-small);
+  }
+  .top {
+    display: grid;
+    gap: 3rem;
+  }
+  @media (min-width: 1000px) {
+    .top {
+      grid-template-columns: 1fr 2.2fr;
+      gap: 4rem;
+    }
+  }
+  .f-brand {
+    display: inline-flex;
+    color: var(--white);
+  }
+  .f-brand :global(.logo) {
+    height: 26px;
+    width: auto;
+  }
+  .about p {
+    margin-top: 1.25rem;
+    max-width: 34ch;
+  }
+  .f-mail {
+    display: inline-block;
+    margin-top: 1rem;
+    color: var(--white);
+  }
+  .cols {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 2rem;
+  }
+  @media (min-width: 720px) {
+    .cols {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+  }
+  .f-head {
+    font: 600 0.95rem/1.2 var(--font-head);
+    letter-spacing: -0.01em;
+    color: var(--white);
+    margin-bottom: 1rem;
+  }
+  .cols ul,
+  .bottom ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .cols li + li {
+    margin-top: 0.15rem;
+  }
+  .cols a,
+  .bottom a {
+    display: inline-block;
+    padding-block: 0.3rem;
+    color: var(--on-ink-2);
+    text-decoration: none;
+  }
+  .cols a:hover,
+  .bottom a:hover {
+    color: var(--white);
+    text-decoration: underline;
+  }
+  .bottom {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-top: 4rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--ink-line);
+  }
+  .bottom ul {
+    display: flex;
+    gap: 1.25rem;
+  }
+</style>
