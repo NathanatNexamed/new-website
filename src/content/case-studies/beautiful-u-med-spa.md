@@ -27,13 +27,11 @@ Beautiful U wanted leads that turned into conversations, because a conversation 
 
 ## What we changed
 
-- **A specific new-patient offer.** A Dysport offer built for first-time patients, priced so the practice makes its money on the second visit.
+- **A specific new-patient offer.** A Dysport offer aimed at first-time patients, evaluated against the economics of an initial appointment and potential repeat visits.
 - **Messaging ads tested against landing pages.** In their market, conversations in Messenger and Instagram started faster than form fills. We kept both running and moved budget to what booked.
 - **Pre-filled prompts removed.** Meta's suggested opening messages make it easy to tap without meaning it, and they attract bots. Removing them lowered volume slightly and raised quality a lot.
 - **Question-first follow-up.** The first message asks something a real person can answer in a word. Replies route straight to the front desk.
 
 ## The result
 
-Of 890 leads from Meta, 500 replied and started a two-way conversation: a 56% response rate. For context, a lot of practices we audit see well under a quarter of Meta leads ever respond.
-
-[Add: consults booked from those conversations, show rate, and a quote from the owner.]
+The reported lead sample contained 890 Meta inquiries, of which 500 replied: about 56%. That is a measured response rate, not a booked-appointment or revenue conversion rate. Consult and show counts are not published here because they have not been verified for this study.
