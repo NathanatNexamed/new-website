@@ -43,7 +43,7 @@ export const integrations: Integration[] = [
         body: "Treatment-interval reminders and win-back campaigns that run without someone remembering to send them.",
       },
     ],
-    syncs: ["Leads from Google, Meta and your website", "Appointments and show status", "Offline conversions to Google Ads", "Reviews requests after visits"],
+    syncs: ["Leads from Google, Meta and your website", "Supported appointment events and booking status", "Offline conversion signals where appropriate and technically possible", "Reviews requests after visits"],
     faqs: [
       {
         q: "We already have GoHighLevel. Do you rebuild it?",
@@ -60,26 +60,26 @@ export const integrations: Integration[] = [
     name: "Zenoti",
     category: "Medspa booking & POS",
     published: true,
-    short: "Appointments, show status and sales from Zenoti flowing into GoHighLevel and your reporting.",
-    title: "Zenoti and your CRM, [[finally talking]].",
+    short: "Explore Zenoti booking and CRM connections based on available access and data.",
+    title: "Make Zenoti and your CRM [[work together where they can]].",
     metaDescription:
       "Connect Zenoti to GoHighLevel so appointments, show status and sales flow into your CRM, automations and Google Ads conversions.",
-    lead: "Zenoti runs the schedule and the register. Your marketing runs in the CRM. When the two don't talk, nobody can tell which ads produced patients. We connect them so bookings and visits flow back without double entry.",
+    lead: "Zenoti may hold the appointment details while your marketing conversations live in GoHighLevel. We map what information your account can share, what can be automated and where a staff handoff is more dependable. We confirm access before quoting a build.",
     flows: [
       {
         title: "Bookings into the pipeline",
-        body: "When a lead books in Zenoti, their CRM record moves to consult booked automatically.",
+        body: "Where an authorized interface exposes booking events, update the corresponding CRM record and keep duplicates under control.",
       },
       {
         title: "Show status and sales",
-        body: "Completed visits and services update the CRM, which drives rebooking reminders and reporting.",
+        body: "If completion and service details are available for permitted marketing use, map them to rebooking logic; otherwise establish a practical staff workflow.",
       },
       {
         title: "Closed-loop reporting",
-        body: "Visits tie back to the campaign that produced the lead, and feed offline conversions to Google.",
+        body: "Evaluate whether permissible booking events can be matched to campaign attribution without exposing patient clinical data to advertising platforms.",
       },
     ],
-    syncs: ["Appointments booked, rescheduled and cancelled", "Show and no-show status", "Services performed for rebooking intervals"],
+    syncs: ["Booking changes, when the authorized integration exposes them", "Attendance status when available and appropriate to sync", "Service-specific rebooking signals when available and approved"],
     faqs: [
       {
         q: "Is this a native integration?",
@@ -92,26 +92,26 @@ export const integrations: Integration[] = [
     name: "Providi (OptiMantra)",
     category: "EMR & practice management",
     published: true,
-    short: "OptiMantra and other Providi platforms connected to your CRM for booking and patient status.",
-    title: "Your EMR data, in [[your marketing reporting]].",
+    short: "OptiMantra CRM workflows using supported event fields and webhook data.",
+    title: "Connect OptiMantra events to [[a useful CRM workflow]].",
     metaDescription:
       "Connect OptiMantra and Providi platforms to GoHighLevel for appointment sync, patient status and closed-loop marketing reporting.",
-    lead: "Integrative, functional and longevity practices often run on OptiMantra. We connect appointments and patient status to your CRM, while keeping clinical information where it belongs, in the EMR.",
+    lead: "We've worked with OptiMantra appointment webhooks and GoHighLevel workflows. That doesn't imply unrestricted access to OptiMantra records: the available fields and event types determine what can trigger a CRM update.",
     flows: [
       {
         title: "Appointment sync",
-        body: "New and completed appointments update the patient's CRM record and pipeline stage.",
+        body: "Map supported appointment events to the correct CRM contact, including booked and cancelled status where those events are available.",
       },
       {
         title: "Status without PHI",
-        body: "Only what marketing needs (booked, showed, active) flows across. Clinical detail stays in the EMR.",
+        body: "Use the minimum permitted identifiers and status fields. Don't treat an appointment webhook as access to the patient's full record.",
       },
       {
         title: "Program and membership tracking",
-        body: "Patients who start a program are tagged so reporting reflects real revenue, not just first visits.",
+        body: "Only track program or membership status if your OptiMantra configuration explicitly makes that information available for permitted use.",
       },
     ],
-    syncs: ["Appointments and show status", "New patient vs. returning", "Program or membership start"],
+    syncs: ["Appointments and show status", "Contact identifiers when available", "Other event fields only after technical and privacy review"],
     faqs: [
       {
         q: "Does this include Cerbo?",
@@ -124,30 +124,30 @@ export const integrations: Integration[] = [
     name: "Cerbo",
     category: "EMR for direct care & functional medicine",
     published: true,
-    short: "Cerbo appointments and patient status connected to GoHighLevel and your ad reporting.",
-    title: "Cerbo, connected to [[the rest of your stack]].",
+    short: "Cerbo automation and CRM handoffs designed around its available API.",
+    title: "Use Cerbo to improve [[the handoff after an inquiry]].",
     metaDescription:
       "Connect Cerbo EHR to GoHighLevel for appointment sync, membership tracking and closed-loop reporting on your marketing.",
-    lead: "Cerbo is common in direct primary care, functional and longevity medicine. We connect it to your CRM so marketing can see who booked, who showed and who became a member, without moving clinical data into marketing tools.",
+    lead: "Cerbo gives practices a more extensive integration surface than many EMRs, but the right build depends on the workflow. For example, an appointment may be booked while intake or lab results are still pending. We map the specific events and staff responsibilities before automating messages.",
     flows: [
       {
         title: "Booked and showed, automatically",
-        body: "Appointments in Cerbo move the CRM record through the pipeline with no manual updates.",
+        body: "Where authorized API events and matching IDs support it, use Cerbo appointment changes to update the correct CRM stage.",
       },
       {
         title: "Membership tracking",
-        body: "Membership starts and renewals tagged in the CRM, so reporting reflects lifetime value.",
+        body: "Review membership and renewal availability before using those events in CRM reporting; the clinical record stays in Cerbo.",
       },
       {
         title: "Offline conversions",
-        body: "Showed and enrolled patients sent back to Google Ads as conversions, so bidding learns from real outcomes.",
+        body: "Consider offline conversions only for permitted, measurable events when consent, privacy requirements and technical matching allow.",
       },
     ],
-    syncs: ["Appointments and show status", "Membership start and renewal", "Offline conversions to Google Ads"],
+    syncs: ["Appointments and show status", "Membership events when available and authorized", "Offline conversions to Google Ads"],
     faqs: [
       {
         q: "What do you need from us to connect Cerbo?",
-        a: "Admin access or an API key from your Cerbo account, and a short call to map your appointment types to pipeline stages.",
+        a: "We start with an approved integration method and a workflow-mapping call. Required permissions depend on the Cerbo features and events we're connecting.",
       },
     ],
   },
