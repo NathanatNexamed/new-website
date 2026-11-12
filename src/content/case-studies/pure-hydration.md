@@ -6,7 +6,7 @@ location: Jacksonville, FL
 vertical: medspas
 verticalLabel: IV & wellness
 services: [google-ads]
-headline: { value: "12–15%", label: "Average conversion rate on calls and form fills, six months running" }
+headline: { value: "12–15%", label: "Average conversion rate on calls and form fills, over the documented six-month period" }
 metrics:
   - { label: "Average conversion rate", value: "12–15%", note: "Calls and form fills from Google Ads" }
   - { label: "Months running", value: "6", note: "Of consistent month-over-month results" }
@@ -24,7 +24,7 @@ footnote: "Results from a NexaMed client account. Conversion rate counts calls a
 order: 1
 ---
 
-## Their old agency's reports showed conversion rates over 100%
+## When the report looked better than the lead quality
 
 Pure Hydration came to us with two locations, a reasonable budget, and reports that couldn't be right. Every conversion action in the account was set to primary: page views, button clicks, calls, form fills. Some leads were counted three or four times. On paper the account was converting at over 100%. In practice nobody knew which campaigns were producing patients.
 
@@ -43,6 +43,4 @@ Then we rebuilt the structure:
 
 ## The result
 
-Within the first full month the account was converting at 12–15% on calls and form fills, and it has held there for six months running. More importantly, the owners can now see which service and which location each lead came from.
-
-[Add: cost per lead before and after, booked consults per month, and a quote from the owner.]
+The documented account results show a 12–15% conversion rate for calls and form fills over a six-month period. That is an advertising conversion metric, not the percentage of clicks that became paying patients. We do not publish a cost-per-patient or appointment lift here because those figures have not been verified for this case study.
