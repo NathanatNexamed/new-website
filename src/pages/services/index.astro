@@ -44,7 +44,7 @@ const top = services.filter((s) => !s.parent);
     </div>
   </section>
 
-  <section class="section section--white">
+  <section class="section section--white service-outro">
     <div class="container split">
       <div>
         <h2>Start with the <mark>constraint</mark>, not the service list.</h2>
@@ -53,7 +53,7 @@ const top = services.filter((s) => !s.parent);
         </p>
         <div class="btn-row" style="margin-top:2rem"><a class="btn" href="/book/">Schedule My Call</a></div>
       </div>
-      <Illo name="connected-stack" />
+      <div class="service-outro-art"><Illo name="connected-stack" /></div>
     </div>
   </section>
 
@@ -66,12 +66,12 @@ const top = services.filter((s) => !s.parent);
   .svc-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 1.25rem; }
   .svc {
     display: grid;
-    gap: 2rem;
+    gap: clamp(2.5rem, 4vw, 4.75rem);
     align-items: center;
     position: relative;
   }
   @media (min-width: 900px) {
-    .svc { grid-template-columns: 1.4fr 1fr; padding: 2.5rem 3rem; }
+    .svc { grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); padding: 2.5rem 3rem; }
   }
   .svc-name { font-size: var(--fs-h3); margin-top: 0.5rem; }
   .svc-name a { text-decoration: none; }
@@ -84,9 +84,16 @@ const top = services.filter((s) => !s.parent);
   }
   .on-ink .svc-points li { border-color: var(--ink-line); color: var(--on-ink-2); }
   .kid { position: relative; z-index: 1; margin-top: 1.25rem; font-size: var(--fs-small); }
-  .svc-art :global(img) { max-height: 240px; width: auto; margin-inline: auto; }
+  .svc-art { min-width: 0; }
+  .svc-art :global(img) { max-height: 310px; width: 100%; max-width: 480px; object-fit: contain; margin-inline: auto; }
   .on-ink .svc-art { background: var(--mist); border-radius: 16px; padding: 1rem; }
   .svc > .arrow { position: absolute; top: 1.5rem; right: 1.5rem; }
   .svc:hover > .arrow { background: var(--azure); border-color: var(--azure); color: #fff; }
+  .service-outro-art { min-width: 0; width: 100%; }
+  .service-outro-art :global(img) { width: 100%; max-width: 620px; margin-inline: auto; }
+  @media (min-width: 960px) {
+    .service-outro .split { grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr); gap: clamp(3.5rem, 6vw, 7rem); }
+    .service-outro-art :global(img) { transform: scale(1.06); }
+  }
   :global(.i16) { width: 16px; height: 16px; flex: none; }
 </style>
