@@ -20,6 +20,7 @@ const ints = liveIntegrations.filter((i) => v.integrations.includes(i.slug));
 ---
 <Base title={`Marketing for ${v.name.toLowerCase()}`} description={v.metaDescription}>
   <PageHero
+    roomy
     title={v.title}
     lead={v.lead}
     crumbs={[{ label: "Who we serve", href: "/who-we-serve/" }, { label: v.name }]}
