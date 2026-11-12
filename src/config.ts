@@ -4,7 +4,7 @@ export const site = {
   name: "NexaMed",
   url: "https://nexamed.us",
   description:
-    "Google Ads, Meta, SEO, and the CRM follow-up that turns leads into booked consults. Built for medspas and cash-pay clinics by a team that started inside one.",
+    "NexaMed helps med spas and cash-pay clinics improve Google Ads, Meta Ads, SEO, CRM follow-up and the handoff from inquiry to appointment.",
   email: "hello@nexamed.us", // TODO: confirm public contact address
   // GoHighLevel calendar embed. Set the calendar's post-booking redirect to /thank-you/call-booked/
   calendarEmbedUrl: "", // e.g. "https://api.leadconnectorhq.com/widget/booking/XXXXXXXX"
@@ -23,12 +23,12 @@ export const nav: NavItem[] = [
     label: "Services",
     href: "/services/",
     children: [
-      { label: "Google Ads", href: "/services/google-ads/", note: "Search built around booked patients" },
-      { label: "Meta Ads", href: "/services/meta-ads/", note: "Offers and creative that get replies" },
+      { label: "Google Ads", href: "/services/google-ads/", note: "High-intent treatment searches and clean tracking" },
+      { label: "Meta Ads", href: "/services/meta-ads/", note: "Creative, offers and useful follow-up" },
       { label: "SEO", href: "/services/seo/", note: "Treatment pages that rank" },
-      { label: "AEO", href: "/services/aeo/", indent: true, note: "Get cited by AI answer engines" },
+      { label: "AEO", href: "/services/aeo/", indent: true, note: "Clear treatment answers for AI search" },
       { label: "CRM & Automations", href: "/services/crm-automations/", note: "Speed to lead, rebooking, reactivation" },
-      { label: "LegitScript Certification", href: "/services/legitscript-certification/", note: "Advertise restricted treatments" },
+      { label: "LegitScript Certification", href: "/services/legitscript-certification/", note: "Certification and ad policy guidance" },
     ],
   },
   {
