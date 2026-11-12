@@ -22,10 +22,10 @@ const posts = (await getCollection("blog", ({ data }) => !data.draft))
 
 const svc = Object.fromEntries(services.map((s) => [s.slug, s]));
 const path = [
-  { n: "01", t: "The right offer", b: "We choose a treatment patients actually want and a page that answers the question behind the ad. Not the same generic booking page for every service." },
-  { n: "02", t: "A useful first reply", b: "When a lead asks about price or availability, your team should answer that question, not paste a calendar link and hope." },
-  { n: "03", t: "Appointment recorded", b: "We map the booking handoff. Where integrations permit, status updates the CRM; otherwise we design a reliable process for staff." },
-  { n: "04", t: "Learn from outcomes", b: "We compare lead quality and booked visits with spend. If the data supports offline conversions, we use them to improve bidding." },
+  { n: "01", t: "Start with the right service", b: "Choose a treatment worth promoting and an offer that works for the practice, not just one that generates clicks." },
+  { n: "02", t: "Reply while interest is high", b: "Give the front desk the inquiry, the treatment and an appropriate next step. Send a useful response instead of a generic reminder." },
+  { n: "03", t: "Make it easy to book", b: "Connect the conversation to your scheduling process, and stop asking people to book once they already have." },
+  { n: "04", t: "Improve the next campaign", b: "Compare inquiries with bookings and attendance where the data allows. Use that feedback to refine offers, follow-up and budget." },
 ];
 ---
 <Base title="NexaMed">
@@ -40,38 +40,37 @@ const path = [
     <div class="container">
       <div class="section-head section-head--split">
         <div>
-          <p class="section-kicker">What makes NexaMed different</p>
-          <h2>We understand the business <mark>behind the treatment</mark>.</h2>
+                    <h2>The details that decide whether a campaign <mark>pays off</mark>.</h2>
         </div>
         <p class="lead">
-          A great campaign starts with knowing the practice. The services you want to grow, the people providing them,
-          the way patients make decisions, and everything that happens once someone reaches out.
+          Advertising creates an opportunity. Your offer, the patient experience and the way your team handles inquiries
+          determine what that opportunity is worth. We plan for all three before asking you to increase spend.
         </p>
       </div>
       <div class="grid grid--2 difference-grid">
         <article class="card difference-card" data-reveal>
-          <span class="num">01 / THE SERVICE</span>
-          <h3>We know what you're selling.</h3>
-          <p>Injectables, lasers, IV therapy, and longer-term programs don't share the same patient journey.
-            We look at demand, margins, provider time, and what makes each treatment worth choosing.</p>
+          <span class="num">01 / WHAT TO PROMOTE</span>
+          <h3>Put budget behind services worth growing.</h3>
+          <p>Filling a provider's schedule only helps if the treatment makes business sense. We weigh demand,
+            margins, appointment capacity and repeat-visit potential before choosing where to focus.</p>
         </article>
         <article class="card difference-card" data-reveal>
-          <span class="num">02 / THE PATIENT</span>
-          <h3>We understand the decision.</h3>
-          <p>Someone comparing Botox providers needs a different conversation from someone considering a
-            hormone program. Your offer, landing page, and follow-up should make the next step feel obvious.</p>
+          <span class="num">02 / WHY THEY CHOOSE YOU</span>
+          <h3>Give patients a reason to choose your clinic.</h3>
+          <p>Someone comparing Botox providers wants to see who is injecting, what the visit costs and why they
+            can trust you. A hormone consultation raises different questions. The message should answer the ones that matter.</p>
         </article>
         <article class="card difference-card" data-reveal>
-          <span class="num">03 / THE OPERATIONS</span>
-          <h3>We work with how clinics run.</h3>
-          <p>From GoHighLevel to the booking and EMR systems your team uses, we map the handoffs between inquiry,
-            consultation, and follow-up. The process has to make sense for your staff, not just your dashboard.</p>
+          <span class="num">03 / FROM INQUIRY TO BOOKING</span>
+          <h3>Keep good inquiries from getting lost.</h3>
+          <p>A new lead arrives during a busy treatment, a callback gets missed, or a patient books in Zenoti
+            while GoHighLevel keeps sending reminders. We build clearer handoffs around your staff and software.</p>
         </article>
         <article class="card difference-card" data-reveal>
-          <span class="num">04 / THE GROWTH</span>
-          <h3>We connect marketing to the business.</h3>
-          <p>Clicks and inquiries are useful signals. Booked consultations, patient experience, and repeat visits
-            tell the bigger story. We use what your practice can actually measure to guide the next decision.</p>
+          <span class="num">04 / WHERE TO INVEST NEXT</span>
+          <h3>See what deserves more of your budget.</h3>
+          <p>Ten cheap leads aren't automatically better than three serious consultations. We compare campaign
+            spending with lead quality, booked visits and available outcome data so budget decisions have context.</p>
         </article>
       </div>
     </div>
@@ -121,30 +120,30 @@ const path = [
   <section class="section section--ink">
     <div class="container split split--wide-right">
       <div>
-        <h2>Know which marketing brings in <mark>real appointments</mark>.</h2>
+        <h2>See which campaigns deserve <mark>more of your budget</mark>.</h2>
         <p class="lead" style="margin-top:1.25rem">
-          An ad platform might call a page view a conversion. Your front desk calls a booked consultation a conversion. We work to reconcile those numbers using data your systems can safely share.
+          A campaign can produce plenty of leads while very few make it onto the schedule. We bring together the ad data and the booking information your systems can safely share, so you can invest in what is working.
         </p>
         <ul class="feature-rows" role="list">
           <li>
             <span class="arrow fr-on"><Icon name="arrow-up-right" /></span>
             <div>
-              <h3>See which ads book patients</h3>
+              <h3>Connect campaign spend to booked consults</h3>
               <p>Where tracking and booking records allow it, we connect a lead source with the consultation it produced. When they do not, we explain the gap.</p>
             </div>
           </li>
           <li>
             <span class="arrow arrow--ink"><Icon name="arrow-up-right" /></span>
             <div>
-              <h3>Conversions sent back to Google Ads</h3>
+              <h3>Help Google optimize for better signals</h3>
               <p>When clean matching is possible and data is appropriate to share, offline conversion events can help Google optimize beyond form submissions.</p>
             </div>
           </li>
           <li>
             <span class="arrow arrow--ink"><Icon name="arrow-up-right" /></span>
             <div>
-              <h3>Monthly context, not a raw dashboard</h3>
-              <p>What changed, what it cost, what we're doing next. Written by the person running your account.</p>
+              <h3>Know what to scale, change or stop</h3>
+              <p>A clear view of what drove inquiries, where patients dropped out and which campaigns warrant another dollar.</p>
             </div>
           </li>
         </ul>
@@ -160,8 +159,8 @@ const path = [
   <section class="section section--white">
     <div class="container">
       <div class="section-head section-head--center">
-        <h2>What happens after the <mark>click matters</mark>.</h2>
-        <p class="lead">Good campaigns need a clear offer, useful replies, a booking handoff and feedback from the people answering the phone.</p>
+        <h2>Turn more inquiries into <mark>scheduled visits</mark>.</h2>
+        <p class="lead">Make the next step easier at every point: a relevant offer, a prompt answer, a straightforward way to book and follow-up that stops when an appointment is confirmed.</p>
       </div>
       <div class="path-art"><InlineIllo name="patient-path" /></div>
       <ol class="steps" role="list">

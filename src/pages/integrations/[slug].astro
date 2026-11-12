@@ -13,6 +13,7 @@ const others = liveIntegrations.filter((x) => x.slug !== i.slug);
 ---
 <Base title={`${i.name} integration`} description={i.metaDescription}>
   <PageHero
+    roomy
     title={i.title}
     lead={i.lead}
     crumbs={[{ label: "Integrations", href: "/integrations/" }, { label: i.name }]}

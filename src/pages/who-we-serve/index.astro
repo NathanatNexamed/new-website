@@ -25,7 +25,7 @@ import { verticals } from "../../data/verticals";
       </div>
     </div>
   </section>
-  <section class="section section--white">
+  <section class="section section--white serve-outro">
     <div class="container split">
       <div>
         <h2>Not on the list?</h2>
@@ -35,7 +35,7 @@ import { verticals } from "../../data/verticals";
         </p>
         <div class="btn-row" style="margin-top:2rem"><a href="/book/" class="btn">Schedule My Call</a></div>
       </div>
-      <Illo name="owner-leads" />
+      <div class="serve-outro-art illustration-drift"><Illo name="owner-leads" /></div>
     </div>
   </section>
 </Base>
@@ -46,4 +46,10 @@ import { verticals } from "../../data/verticals";
   .vc-focus { list-style: none; padding: 0; margin: auto 0 0; display: grid; gap: 0.5rem; font-size: var(--fs-small); }
   .vc-focus li { padding-top: 0.5rem; border-top: 1px solid var(--line); color: var(--text-2); }
   .on-ink .vc-focus li { border-color: var(--ink-line); color: var(--on-ink-2); }
+  .serve-outro-art { min-width: 0; width: 100%; }
+  .serve-outro-art :global(img) { width: 100%; max-width: 670px; margin-inline: auto; }
+  @media (min-width: 960px) {
+    .serve-outro .split { grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr); gap: clamp(3.5rem, 6vw, 7.5rem); }
+    .serve-outro-art :global(img) { transform: scale(1.08); transform-origin: center; }
+  }
 </style>

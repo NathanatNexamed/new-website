@@ -7,6 +7,7 @@ import { liveIntegrations } from "../../data/integrations";
 ---
 <Base title="Integrations" description="How NexaMed evaluates CRM and EMR connections for Cerbo, OptiMantra, Zenoti and GoHighLevel, including field availability and workflow design.">
   <PageHero
+    roomy
     title="Connect the systems behind [[each patient inquiry]]."
     lead="The first question is not whether two platforms have logos on an integration diagram. It is whether your staff can reliably see who inquired, who booked and who needs a follow-up. We assess supported webhooks, APIs and consent before promising any specific sync."
     crumbs={[{ label: "Services", href: "/services/" }, { label: "CRM & Automations", href: "/services/crm-automations/" }, { label: "Integrations" }]}
@@ -20,7 +21,7 @@ import { liveIntegrations } from "../../data/integrations";
       <p class="note">Running something else? We can review what your platform makes available. Not every EMR supports the same events or access methods.</p>
     </div>
   </section>
-  <section class="section section--white">
+  <section class="section section--white integration-outro">
     <div class="container split">
       <div>
         <h2>What a connected stack <mark>actually changes</mark>.</h2>
@@ -31,8 +32,16 @@ import { liveIntegrations } from "../../data/integrations";
           <li>Keep clinical data in the appropriate systems and review every field before it reaches marketing tools.</li>
         </ul>
       </div>
-      <Illo name="front-desk" />
+      <div class="integration-outro-art illustration-drift"><Illo name="front-desk" /></div>
     </div>
   </section>
 </Base>
-<style>.note { margin-top: 1.5rem; color: var(--text-2); }</style>
+<style>
+  .note { margin-top: 1.5rem; color: var(--text-2); }
+  .integration-outro-art { min-width: 0; width: 100%; }
+  .integration-outro-art :global(img) { width: 100%; max-width: 640px; margin-inline: auto; }
+  @media (min-width: 960px) {
+    .integration-outro .split { grid-template-columns: minmax(0, .92fr) minmax(0, 1.08fr); gap: clamp(3.5rem, 6vw, 7rem); }
+    .integration-outro-art :global(img) { transform: scale(1.06); }
+  }
+</style>
