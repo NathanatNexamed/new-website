@@ -5,47 +5,52 @@ import FaqList from "../components/FaqList.astro";
 import Icon from "../components/Icon.astro";
 import { pricingFaqs } from "../data/faq";
 
-// TODO: replace bracketed numbers with real pricing.
+// Scopes are examples, not published packages or blanket promises.
 const plans = [
   {
-    name: "Paid acquisition",
-    price: "[$X,XXX]",
-    per: "/month",
-    for: "Practices with a working front desk that need a better ad account.",
+    name: "Patient acquisition",
+    price: "Custom scope",
+    per: "",
+    for: "For clinics that need better search or social acquisition, without paying for services they don't need.",
     includes: [
-      "Google Ads or Meta Ads (one channel)",
-      "Conversion tracking rebuild",
-      "Landing pages for advertised treatments",
-      "Monthly report and strategy call",
+      "Google Ads or Meta Ads strategy and management",
+      "Service-specific offers and landing page recommendations",
+      "Campaign measurement and lead-quality reviews",
+      "Reporting tied to available booking data",
     ],
   },
   {
-    name: "Full funnel",
-    price: "[$X,XXX]",
-    per: "/month",
+    name: "Acquisition + follow-up",
+    price: "Custom scope",
+    per: "",
     featured: true,
-    for: "Practices that want ads, follow-up and reporting run as one system.",
+    for: "For practices where inquiries are coming in but the booking and follow-up process needs attention.",
     includes: [
-      "Google Ads and Meta Ads",
-      "GoHighLevel build: pipelines, speed to lead, rebooking",
-      "EMR or booking integration",
-      "Offline conversions to Google Ads",
-      "Monthly report and strategy call",
+      "Paid acquisition strategy and management",
+      "GoHighLevel pipelines, messaging and follow-up workflows",
+      "Booking or EMR integration discovery and implementation, where supported",
+      "Conversion and operational reporting",
+      "Ongoing testing based on patient and staff feedback",
     ],
   },
   {
-    name: "Organic & add-ons",
-    price: "[From $X,XXX]",
-    per: "/month",
-    for: "Added to either plan, or on their own where it makes sense.",
-    includes: ["SEO for treatment and location pages", "AEO for AI answer engines", "LegitScript certification (one-time)", "Additional locations"],
+    name: "Search visibility & specialist projects",
+    price: "Quoted separately",
+    per: "",
+    for: "For practices improving local search, treatment content or a specific operational bottleneck.",
+    includes: [
+      "SEO for priority treatment and location pages",
+      "AEO and content structure",
+      "LegitScript application assistance when applicable",
+      "CRM audits, reactivation and integration projects",
+    ],
   },
 ];
 ---
 <Base title="Pricing" description="How NexaMed pricing works: a flat monthly fee by scope, ad spend paid directly to the platforms, no percentage of spend, and accounts you own.">
   <PageHero
-    title="A flat fee by scope. [[No percentage]] of spend."
-    lead="You pay the ad platforms directly, in accounts you own. Our fee is based on what we manage, not how much you spend, so we never have a reason to push budget the market won't support."
+    title="Pricing based on [[what your practice needs]]."
+    lead="There is a big difference between managing an ad account and rebuilding the way a clinic responds to leads. We scope the work based on your services, markets, systems and existing team. Ad spend and third-party software costs are separate."
     crumbs={[{ label: "Pricing" }]}
     center
   />
@@ -64,7 +69,7 @@ const plans = [
         ))}
       </div>
       <p class="note">
-        Plus a one-time setup fee of [$X,XXX] covering tracking, CRM and landing page builds. Initial term of [X months], then month to month.
+        Our typical ongoing engagements start at $5,000 per month. Setup work, software, advertising budgets and any project-specific fees are itemized in the proposal. Terms depend on the agreed scope.
       </p>
     </div>
   </section>
@@ -89,8 +94,7 @@ const plans = [
       <div>
         <h2>Not sure which you need?</h2>
         <p class="lead" style="margin-top:1.25rem">
-          Most practices don't need everything. On the call we'll look at your current accounts and tell you which one
-          change would move the number most. Sometimes that's not ads at all.
+          Most practices don't need every service. We'll ask about your most important treatments, current lead volume, booking process and software before recommending work. Sometimes the first fix isn't another ad.
         </p>
       </div>
       <div class="btn-row">
