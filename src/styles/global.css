@@ -722,6 +722,22 @@ mark,
   will-change: transform;
 }
 
+/* Artwork: tiny independent vertical drift, not a bounce. The image's GSAP
+   scroll parallax is separate, so nested transforms do not compete. */
+@keyframes nx-illustration-drift {
+  0%, 100% { transform: translate3d(0, 0, 0); }
+  50% { transform: translate3d(0, -6px, 0); }
+}
+.motion .illustration-drift {
+  animation: nx-illustration-drift 8.5s ease-in-out infinite;
+}
+.motion .svc-list li:nth-child(2n) .illustration-drift {
+  animation-delay: -3.2s;
+}
+@media (prefers-reduced-motion: reduce) {
+  .illustration-drift { animation: none !important; }
+}
+
 /* Micro-interactions */
 .btn {
   will-change: transform;
