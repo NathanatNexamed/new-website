@@ -5,10 +5,10 @@ import RelatedCards from "../../components/RelatedCards.astro";
 import Illo from "../../components/Illo.astro";
 import { liveIntegrations } from "../../data/integrations";
 ---
-<Base title="Integrations" description="GoHighLevel connected to Zenoti, OptiMantra, Cerbo and the rest of your practice stack, so leads, bookings and visits flow into one pipeline.">
+<Base title="Integrations" description="How NexaMed evaluates CRM and EMR connections for Cerbo, OptiMantra, Zenoti and GoHighLevel, including field availability and workflow design.">
   <PageHero
-    title="Your ads, CRM and EMR, [[connected]]."
-    lead="We build in GoHighLevel and connect it to the booking and EMR software you already run. Bookings and visits flow back into the pipeline automatically, and booked patients flow back to Google Ads."
+    title="Connect the systems behind [[each patient inquiry]]."
+    lead="The first question is not whether two platforms have logos on an integration diagram. It is whether your staff can reliably see who inquired, who booked and who needs a follow-up. We assess supported webhooks, APIs and consent before promising any specific sync."
     crumbs={[{ label: "Services", href: "/services/" }, { label: "CRM & Automations", href: "/services/crm-automations/" }, { label: "Integrations" }]}
     illo="connected-stack"
     primary={{ label: "Book a strategy call", href: "/book/" }}
@@ -17,7 +17,7 @@ import { liveIntegrations } from "../../data/integrations";
     <div class="container">
       <div class="section-head"><h2>Platforms we build on</h2></div>
       <RelatedCards cols={2} items={liveIntegrations.map((i) => ({ title: i.name, body: `${i.category}. ${i.short}`, href: `/integrations/${i.slug}/` }))} />
-      <p class="note">Running something else? Most practice software exposes enough to connect booking and show status. Ask us on the call.</p>
+      <p class="note">Running something else? We can review what your platform makes available. Not every EMR supports the same events or access methods.</p>
     </div>
   </section>
   <section class="section section--white">
@@ -25,10 +25,10 @@ import { liveIntegrations } from "../../data/integrations";
       <div>
         <h2>What a connected stack <mark>actually changes</mark>.</h2>
         <ul class="checks" style="margin-top:2rem" role="list">
-          <li>The front desk works from one inbox instead of three.</li>
-          <li>Pipeline stages update when patients book and show, not when someone remembers.</li>
-          <li>Google Ads learns from booked and closed patients, not form fills.</li>
-          <li>Clinical information stays in the EMR. Only what marketing needs moves across.</li>
+          <li>Give the front desk a clear place to manage marketing inquiries and conversations.</li>
+          <li>Update pipeline stages from supported appointment events where technically possible.</li>
+          <li>Improve attribution using permitted downstream events when clean matching is available.</li>
+          <li>Keep clinical data in the appropriate systems and review every field before it reaches marketing tools.</li>
         </ul>
       </div>
       <Illo name="front-desk" />
